@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.TextFormatter?>
+<?import java.util.regex.*?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.util.converter.NumberStringConverter?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.tooltracker.controller.NewToolController"
+            prefHeight="400.0" prefWidth="600.0">
+
+
+
+    <GridPane xmlns:fx="http://javafx.com/fxml" alignment="CENTER" hgap="10" vgap="10">
+        <padding>
+            <Insets top="20" right="20" bottom="20" left="20"/>
+        </padding>
+
+        <Label text="Numer indeks:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+        <TextField fx:id="indexTextField" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+        <Label text="Nazwa narzędzia" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+        <TextField fx:id="nameTextField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+        <Label text="Wybierz typ narzędzia:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+        <ComboBox fx:id="typeComboBox" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="Noże tokarskie" />
+                    <String fx:value="Wiertła" />
+                    <String fx:value="Gwintowniki" />
+                    <String fx:value="Frezy" />
+                    <String fx:value="Głowice" />
+                </FXCollections>
+            </items>
+        </ComboBox>
+        <Label text="Średnica" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+        <TextField fx:id="diamTextField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+
+
+
+        <Label text="Wybierz pasujące płytki" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+        <ComboBox fx:id="insertTypeComboBox" GridPane.columnIndex="1" GridPane.rowIndex="4">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="CI-P-0003" />
+                    <String fx:value="CILT-P-0222" />
+                    <String fx:value="CILT-U-0009" />
+                    <String fx:value="CILT-P-3000" />
+                </FXCollections>
+            </items>
+        </ComboBox>
+
+
+
+
+        <Label text="Ilość" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+        <TextField fx:id="qtyTextField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+
+
+
+
+        <VBox spacing="10" alignment="CENTER" GridPane.columnIndex="0" GridPane.rowIndex="6" GridPane.columnSpan="2">
+            <Button text="Zatwierdź" fx:id="confirmButton" onAction="#handleConfirmButton" />
+            <Button text="Anuluj"  fx:id="cancelButton" onAction="#handleCancelButton"/>
+        </VBox>
+    </GridPane>
+</AnchorPane>

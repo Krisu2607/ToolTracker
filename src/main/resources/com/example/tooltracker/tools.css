@@ -1,0 +1,140 @@
+
+
+
+.table-view {
+
+
+
+        -fx-padding: 0 0 0 0 ; /* Dodaj margines 10px u góry (wartości: top, right, bottom, left) */
+
+
+    /* Opcjonalnie, ustawić konkretny rozmiar */
+    /* -fx-width: 300px;*/
+    /* -fx-height: 400px;*/
+}
+
+#toolUsageTable {
+    -fx-padding: 50 0 0 0 ;
+}
+
+
+
+
+.button {
+    -fx-background-color: #439990; /* Zielony kolor tła dla przycisku */
+    -fx-text-fill: white; /* Biały kolor tekstu */
+    -fx-spacing: 2;
+}
+
+.button:hover {
+    -fx-background-color: #2EB2A4; /* Kolor podświetlenia po najechaniu */
+}
+
+.button:hover {
+    -fx-cursor: hand; /* Zmiana kształtu kursora po najechaniu */
+}
+
+.button:pressed {
+    -fx-background-color: darkgray; /* Kolor podświetlenia po naciśnięciu */
+}
+
+
+#insertTab {
+    -fx-background-color: #9900FF;
+}
+
+* {
+    -fx-primary-color: #007acc;
+    -fx-secondary-color: #4B6EAF;
+    -fx-focus-color: -fx-secondary-color;
+}
+
+#insertTab:selected {
+    -fx-background-color: #9966FF;
+}
+
+
+
+* {
+    -fx-primary-color: #007acc;
+    -fx-secondary-color: #4B6EAF;
+
+    -fx-focus-color: -fx-secondary-color;
+}
+
+.tab-header-area .tab-header-background {
+    -fx-background-color: -fx-primary-color;
+}
+.tab-pane .tab:selected {
+    -fx-background-color: -fx-secondary-color;
+    -fx-background-insets: 0 0 0 0;
+    -fx-background-radius: 0 0 0 0;
+}
+.tab .tab-label {
+    -fx-alignment: CENTER;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 0 10 0 10;
+}
+.tab-pane:top *.tab-header-area {
+    -fx-padding: 0 0 0 30;
+
+    /* NO SPACE LEFT OF FIRST TAB */
+    /* -fx-padding: 0 0 0 30; */
+}
+.tab-pane {
+    -fx-background-color: transparent;
+    -fx-tab-min-width: 100px;
+    -fx-tab-min-height: 25px;
+    -fx-tab-max-height: 25px;
+}
+.tab-pane .tab {
+    -fx-background-color: transparent;
+}
+.tab-pane:focused .tab-header-area .headers-region .tab:selected .focus-indicator {
+    -fx-border-width: 0;
+    -fx-border-insets: 0 0 0 0;
+    -fx-border-radius: 0;
+}
+
+#types {
+    -fx-padding: 0 0 0 0 ;
+}
+#mainTypes {
+    -fx-padding: 0 0 0 20 ;
+
+}
+
+#mainContainer {
+    -fx-padding: 0,0,0,50;
+}
+
+#toolSearch{
+    -fx-pref-width: 0;
+}
+
+#newToolBtn, #newInsertBtn, #dressedBtn, #editTool, #editInsert, #addInsertsToPart {
+
+-fx-background-color: blue;
+
+    }
+
+
+#newToolBtn:hover, #newInsertBtn:hover, #dressedBtn:hover, #editTool:hover, #editInsert:hover, #addInsertsToPart:hover {
+    -fx-background-color: lightblue;
+
+    -fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.8) , 0, 0.0 , 0 , 1);
+}
+
+#backButton {
+    -fx-background-color: white;
+    -fx-text-fill: black;
+}
+
+
+
+
+
+
+
+

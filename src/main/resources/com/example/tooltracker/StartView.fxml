@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane style="-fx-background-color: white" stylesheets="@start.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.2-ea" fx:controller="com.example.tooltracker.controller.StartController">
+    <top>
+        <Pane prefHeight="214.0" prefWidth="707.0" style="-fx-background-color: #383658;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+
+                <Label layoutX="136.0" layoutY="105.0" text="Tools Menagment System " textFill="WHITE">
+                    <font>
+                        <Font size="15.0" />
+                    </font>
+                </Label>
+                <HBox fx:id="log" prefHeight="55.0" prefWidth="707.0" spacing="3">
+                    <Button prefHeight="25.0" prefWidth="85.0">Zaloguj</Button>
+                    <Button prefHeight="25.0" prefWidth="110.0">Dodaj Użytkownika</Button>
+                </HBox>
+
+
+            </children>
+
+        </Pane>
+
+    </top>
+    <center>
+        <VBox fx:id="butts">
+            <!-- Górne przyciski -->
+<!--            <HBox fx:id="buttTop" spacing="10">-->
+<!--                <Button styleClass="custom-button" fx:id="tokarka" onAction="#showLatheView" />-->
+<!--                <Button styleClass="custom-button"   fx:id="frezarka" onAction="#showMillView" />-->
+<!--            </HBox>-->
+
+            <!-- Dolne przyciski -->
+            <HBox fx:id="buttBottom" spacing="20">
+                <Button fx:id="narzedzia" onAction="#showToolsView" prefHeight="50.0" prefWidth="50.0" styleClass="custom-button" />
+                <Button fx:id="statystyka" onAction="#showUsageView" styleClass="custom-button" />
+                <Button fx:id="calculator" onAction="#showCalcView" styleClass="custom-button" />
+                <Button fx:id="LiveTools" onAction="#showLiveTools" styleClass="custom-button" />
+            </HBox>
+        </VBox>
+    </center>
+
+
+    <bottom>
+        <Pane prefHeight="20.0" prefWidth="500.0" style="-fx-background-color: #383658;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+
+                <Label layoutX="300.0" layoutY="0" text="Created by kris" textFill="WHITE">
+                    <font>
+                        <Font size="10.0" />
+                    </font>
+                </Label>
+
+
+
+            </children>
+
+        </Pane>
+
+    </bottom>
+
+
+
+
+
+
+</BorderPane>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
+
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.util.Callback?>
+<?import com.example.tooltracker.model.tools.Tool?>
+<?import javafx.scene.image.ImageView?>
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.tooltracker.controller.ToolInfoController"
+            stylesheets="@tools.css" style="-fx-background-color: #555555" >
+<center>
+
+
+
+
+        <TabPane tabClosingPolicy="UNAVAILABLE">
+            <Tab text="Narzedzie">
+                <HBox>
+                    <children>
+                        <ImageView fx:id="toolImage"></ImageView>
+                    </children>
+                </HBox>
+
+            </Tab>
+            <Tab text="Historia">
+                <TableView fx:id="actionTable">
+                    <columns>
+                        <TableColumn text="Użytkownik"  fx:id="userColumn" />
+                        <TableColumn text="Czynność" fx:id="actionMadeColumn" />
+                        <TableColumn text="Czas" fx:id="actionTimeColumn" />
+                    </columns>
+                </TableView>
+            </Tab>
+        </TabPane>
+
+    </center>
+
+
+</BorderPane>

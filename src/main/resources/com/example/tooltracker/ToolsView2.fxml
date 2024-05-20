@@ -1,0 +1,603 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
+
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.util.Callback?>
+<?import com.example.tooltracker.model.tools.Tool?>
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.tooltracker.controller.ToolsController"
+            stylesheets="@tools.css" style="-fx-background-color: #555555" >
+    <center>
+
+
+
+
+
+
+
+
+        <TabPane fx:id="outerToolPane1" tabClosingPolicy="UNAVAILABLE">
+            <Tab text="Frezy">
+                <TabPane fx:id="innerEMpane" tabClosingPolicy="UNAVAILABLE">
+                    <Tab text="Frezy Stal">
+                        <VBox fx:id="mainContainer" alignment="CENTER" >
+                            <TextField promptText="Search" fx:id="toolSearch" />
+                            <!-- Przyciski na górze -->
+
+
+                            <Pane prefHeight="2.0" prefWidth="300.0" style="-fx-background-color: #383658;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+
+                            </Pane>
+
+
+
+
+
+
+
+                            <!-- Tabela na środku -->
+
+
+                            <TableView fx:id="EmMetTable">
+                                <columns>
+                                    <TableColumn text="info" fx:id="EmMetinfoColumn" />
+                                    <TableColumn text="Nazwa" fx:id="EMMetnameColumn" />
+                                    <TableColumn text="Indeks" fx:id="EMMetindexColumn" />
+                                    <TableColumn text="L1"  prefWidth="50" fx:id="EMMetL1"/>
+                                    <TableColumn text="L2"  prefWidth="50" fx:id="EMMetL2"/>
+                                    <TableColumn text="D1"  prefWidth="50" fx:id="EMMetD1"/>
+                                    <TableColumn text="D2"  prefWidth="50" fx:id="EMMetD2"/>
+                                    <TableColumn text="Tooths"  prefWidth="50" fx:id="EMMettooths"/>
+                                    <TableColumn text="Mat"  prefWidth="50" fx:id="EMMetmat"/>
+                                    <TableColumn text="Status" fx:id="EMMetstatus" />
+                                    <TableColumn text="Uwagi" fx:id="EMMetcomment" prefWidth="460"/>
+
+
+
+                                </columns>
+                            </TableView>
+
+
+
+
+                        </VBox>
+                    </Tab>
+                    <Tab text="Frezy ALU">
+                        <VBox fx:id="mainContainer2" alignment="CENTER" >
+                            <!-- Przyciski na górze -->
+
+                            <TableView fx:id="EmAluTable">
+                                <columns>
+                                    <TableColumn text="info" fx:id="EMAluinfoColumn" />
+                                    <TableColumn text="Nazwa" fx:id="EMAlunameColumn" />
+                                    <TableColumn text="Indeks" fx:id="EMAluindexColumn" />
+                                    <TableColumn text="L1"  prefWidth="50" fx:id="EMAluL1"/>
+                                    <TableColumn text="L2"  prefWidth="50" fx:id="EMAluL2"/>
+                                    <TableColumn text="D1"  prefWidth="50" fx:id="EMAluD1"/>
+                                    <TableColumn text="D2"  prefWidth="50" fx:id="EMAluD2"/>
+                                    <TableColumn text="Tooths"  prefWidth="50" fx:id="EMAlutooths"/>
+                                    <TableColumn text="Mat"  prefWidth="50" fx:id="EMAlumat"/>
+                                    <TableColumn text="Status" fx:id="EMAlustatus" />
+                                    <TableColumn text="Uwagi" fx:id="EMAlucomment" prefWidth="460"/>
+
+
+
+                                </columns>
+                            </TableView>
+                            <!-- Tabela na środku -->
+
+                        </VBox>
+                    </Tab>
+
+
+                    <Tab text="Frezy z R">
+                        <VBox fx:id="mainContainer3" alignment="CENTER" >
+                            <!-- Przyciski na górze -->
+
+                            <TableView fx:id="EmRTable">
+                                <columns>
+                                    <TableColumn text="info" fx:id="EmRinfoColumn" />
+                                    <TableColumn text="Nazwa" fx:id="EmRNAME" />
+                                    <TableColumn text="Indeks" fx:id="EmRIndex" />
+                                    <TableColumn text="L1"  prefWidth="50" fx:id="EmRL1" />
+                                    <TableColumn text="L2"  prefWidth="50" fx:id="EmRL2"/>
+                                    <TableColumn text="D1"  prefWidth="50" fx:id="EmRD1"/>
+                                    <TableColumn text="D2"  prefWidth="50" fx:id="EmRD2"/>
+                                    <TableColumn text="R"  prefWidth="50" fx:id="EmRR"/>
+                                    <TableColumn text="Tooths"  prefWidth="50" fx:id="EmRTooths"/>
+                                    <TableColumn text="Mat"  prefWidth="50" fx:id="EmRMat"/>
+                                    <TableColumn text="Status" fx:id="EmRStatus" />
+                                    <TableColumn text="Uwagi" fx:id="EmRComment" prefWidth="460"/>
+
+                                </columns>
+                            </TableView>
+                            <!-- Tabela na środku -->
+
+                        </VBox>
+                    </Tab>
+                </TabPane>
+            </Tab>
+
+            <Tab text="Wiertła">
+                <TabPane fx:id="innerDRpane" tabClosingPolicy="UNAVAILABLE">
+                    <Tab text="Wiertła Płytkowe">
+                        <VBox fx:id="mainContainer5" alignment="CENTER" >
+                            <!-- Przyciski na górze -->
+
+                            <TableView fx:id="DrillBladeTable">
+                                <columns>
+                                    <TableColumn text="info" fx:id="DBinfoColumn" />
+                                    <TableColumn text="Nazwa" fx:id="DBName" />
+                                    <TableColumn text="Indeks" fx:id="DBIndex" />
+                                    <TableColumn text="⌀"  prefWidth="50" fx:id="DBDiam"/>
+                                    <TableColumn text="Długość"  prefWidth="50" fx:id="DBlength"/>
+                                    <TableColumn text="Tooths"  prefWidth="50" fx:id="DBTooths"/>
+                                    <TableColumn text="Płytki"  prefWidth="50" fx:id="DBInserts"/>
+                                    <TableColumn text="Status" fx:id="DBStatus" />
+                                    <TableColumn text="Uwagi" fx:id="DBComment" prefWidth="460"/>
+
+                                </columns>
+                            </TableView>
+                            <!-- Tabela na środku -->
+
+                        </VBox>
+                    </Tab>
+
+                    <Tab text="Wiertła HSS">
+                        <VBox fx:id="mainContainer8" alignment="CENTER" >
+                            <!-- Przyciski na górze -->
+
+                            <TableView fx:id="DrillHSSTable">
+                                <columns>
+                                    <TableColumn text="info" fx:id="DRHSSinfoColumn" />
+                                    <TableColumn text="Nazwa" fx:id="DRHSSName" />
+                                    <TableColumn text="Indeks" fx:id="DRHSSIndex" />
+
+                                    <TableColumn text="Status" fx:id="DRHSSStatus" />
+                                    <TableColumn text="L1" fx:id="DRHSSL1" />
+                                    <TableColumn text="L2" fx:id="DRHSSL2" />
+                                    <TableColumn text="⌀"  prefWidth="50" fx:id="DRHSSDiam"/>
+                                    <TableColumn text="ilość"  prefWidth="50" fx:id="DRHSSQty"/>
+                                    <TableColumn text="Uwagi" fx:id="DRHSSComment" prefWidth="460"/>
+
+                                </columns>
+                            </TableView>
+                            <!-- Tabela na środku -->
+
+                        </VBox>
+                    </Tab>
+
+
+                    <Tab text="Wiertła VHM">
+                        <VBox fx:id="mainContainer9" alignment="CENTER" >
+                            <!-- Przyciski na górze -->
+
+                            <TableView fx:id="DrillVHMTable">
+                                <columns>
+                                    <TableColumn text="info" fx:id="DRVHMinfoColumn" />
+                                    <TableColumn text="Nazwa" fx:id="DRVHMName" />
+                                    <TableColumn text="Indeks" fx:id="DRVHMIndex" />
+
+                                    <TableColumn text="Status" fx:id="DRVHMStatus" />
+                                    <TableColumn text="L1" fx:id="DRVHML1" />
+                                    <TableColumn text="L2" fx:id="DRVHML2" />
+                                    <TableColumn text="⌀"  prefWidth="50" fx:id="DRVHMDiam"/>
+                                    <TableColumn text="ic"  prefWidth="50" fx:id="DRVHMIC"/>
+                                    <TableColumn text="Uwagi" fx:id="DRVHMComment" prefWidth="460"/>
+
+                                </columns>
+                            </TableView>
+                            <!-- Tabela na środku -->
+
+                        </VBox>
+                    </Tab>
+
+
+
+
+                </TabPane>
+            </Tab>
+
+            <Tab text="Gwinty">
+                <TabPane fx:id="innerTAPpane" tabClosingPolicy="UNAVAILABLE">
+                    <Tab text="Gwintowniki SK">
+                        <VBox fx:id="mainContainer10" alignment="CENTER" >
+                            <!-- Przyciski na górze -->
+
+                            <TableView fx:id="TapSKTable">
+                                <columns>
+                                    <TableColumn text="info" fx:id="TapSKinfoColumn" />
+                                    <TableColumn text="Nazwa" fx:id="TapSKName" />
+                                    <TableColumn text="Indeks" fx:id="TapSKIndex" />
+                                    <TableColumn text="M"  prefWidth="50" fx:id="TapSKMetricSize"/>
+                                    <TableColumn text="Skok"  prefWidth="50" fx:id="TapSKScroll"/>
+                                    <TableColumn text="Klasa"  prefWidth="50" fx:id="TapSKClass"/>
+                                    <TableColumn text="Materiał" fx:id="TapSKMat" />
+                                    <TableColumn text="Status" fx:id="TapSKStatus" />
+                                    <TableColumn text="Uwagi" fx:id="TapSKComment" prefWidth="460"/>
+
+                                </columns>
+                            </TableView>
+                            <!-- Tabela na środku -->
+
+                        </VBox>
+                    </Tab>
+
+                    <Tab text="Gwintowniki PR">
+                        <VBox fx:id="mainContainer11" alignment="CENTER" >
+                            <!-- Przyciski na górze -->
+
+                            <TableView fx:id="TapPRTable">
+                                <columns>
+                                    <TableColumn text="info" fx:id="TapPRinfoColumn" />
+                                    <TableColumn text="Nazwa" fx:id="TapPRName" />
+                                    <TableColumn text="Indeks" fx:id="TapPRIndex" />
+                                    <TableColumn text="M"  prefWidth="50" fx:id="TapPRMetricSize"/>
+                                    <TableColumn text="Skok"  prefWidth="50" fx:id="TapPRScroll"/>
+                                    <TableColumn text="Klasa"  prefWidth="50" fx:id="TapPRClass"/>
+                                    <TableColumn text="Materiał" fx:id="TapPRMat" />
+                                    <TableColumn text="Status" fx:id="TapPRStatus" />
+                                    <TableColumn text="Uwagi" fx:id="TapPRComment" prefWidth="460"/>
+
+                                </columns>
+                            </TableView>
+                            <!-- Tabela na środku -->
+
+                        </VBox>
+                    </Tab>
+
+                    <Tab text="Gwintowniki Calowe">
+                        <VBox fx:id="mainContainer11c" alignment="CENTER" >
+                            <!-- Przyciski na górze -->
+
+                            <TableView fx:id="TapInchTable">
+                                <columns>
+                                    <TableColumn text="info" fx:id="TapInchinfoColumn" />
+                                    <TableColumn text="Nazwa" fx:id="TapInchName" />
+                                    <TableColumn text="Indeks" fx:id="TapInchIndex" />
+                                    <TableColumn text="Materiał" fx:id="TapInchMat" />
+                                    <TableColumn text="Status" fx:id="TapInchStatus" />
+                                    <TableColumn text="Rozmiar"  prefWidth="50" fx:id="TapInchSize"/>
+                                    <TableColumn text="Uwagi" fx:id="TapInchComment" prefWidth="460"/>
+
+                                </columns>
+                            </TableView>
+                            <!-- Tabela na środku -->
+
+                        </VBox>
+                    </Tab>
+
+                    <Tab text="Narzynki">
+                        <VBox fx:id="mainContainer15" alignment="CENTER" >
+                            <!-- Przyciski na górze -->
+
+                            <TableView fx:id="DieTable">
+                                <columns>
+                                    <TableColumn text="info" fx:id="DieinfoColumn" />
+                                    <TableColumn text="Nazwa" fx:id="DieName" />
+                                    <TableColumn text="Indeks" fx:id="DieIndex" />
+                                    <TableColumn text="Metryczny"  prefWidth="50" fx:id="DieMetricSize"/>
+                                    <TableColumn text="Skok"  prefWidth="50" fx:id="DieScroll"/>
+                                    <TableColumn text="Klasa"  prefWidth="50" fx:id="DieClass"/>
+                                    <TableColumn text="Calowy"  prefWidth="50" fx:id="DieInchSize"/>
+                                    <TableColumn text="Materiał" fx:id="DieMat" />
+                                    <TableColumn text="Status" fx:id="DieStatus" />
+
+                                    <TableColumn text="Uwagi" fx:id="DieComment" prefWidth="460"/>
+
+                                </columns>
+                            </TableView>
+                            <!-- Tabela na środku -->
+
+                        </VBox>
+                    </Tab>
+                </TabPane>
+            </Tab>
+
+
+            <Tab text="Noże tokarskie" >
+                <TabPane fx:id="innerLatheTools" tabClosingPolicy="UNAVAILABLE">
+                    <Tab text="Noże Zewnętrzne">
+                        <VBox fx:id="mainContainer6" alignment="CENTER" >
+                            <!-- Przyciski na górze -->
+
+                            <TableView fx:id="OdLatheTable">
+                                <columns>
+                                    <TableColumn text="info" fx:id="ODinfoColumn" />
+                                    <TableColumn text="Nazwa" fx:id="ODName" />
+                                    <TableColumn text="Indeks" fx:id="ODIndex" />
+                                    <TableColumn text="Rodzaj" fx:id="ODType" />
+                                    <TableColumn text="Płytki"  prefWidth="50" fx:id="ODInserts"/>
+                                    <TableColumn text="Status" fx:id="ODStatus" />
+                                    <TableColumn text="Uwagi" fx:id="ODComment" prefWidth="460"/>
+
+                                </columns>
+                            </TableView>
+                            <!-- Tabela na środku -->
+
+                        </VBox>
+                    </Tab>
+
+                    <Tab text="Noże Wewnętrzne">
+                        <VBox fx:id="mainContainer7" alignment="CENTER" >
+                            <!-- Przyciski na górze -->
+
+                            <TableView fx:id="IdLatheTable">
+                                <columns>
+                                    <TableColumn text="info" fx:id="IDinfoColumn" />
+                                    <TableColumn text="Nazwa" fx:id="IDName" />
+                                    <TableColumn text="Indeks" fx:id="IDIndex" />
+                                    <TableColumn text="Rodzaj" fx:id="IDType" />
+                                    <TableColumn text="Płytki"  prefWidth="50" fx:id="IDInserts"/>
+                                    <TableColumn text="Status" fx:id="IDStatus" />
+                                    <TableColumn text="Uwagi" fx:id="IDComment" prefWidth="460"/>
+
+                                </columns>
+                            </TableView>
+                            <!-- Tabela na środku -->
+
+                        </VBox>
+                    </Tab>
+
+
+                    <Tab text="Noże do rowków czołowych">
+                        <VBox fx:id="mainContainer99" alignment="CENTER" >
+                            <!-- Przyciski na górze -->
+
+                            <TableView fx:id="FaceGrooveTable">
+                                <columns>
+                                    <TableColumn text="info" fx:id="FaceGrooveinfoColumn" />
+                                    <TableColumn text="Nazwa" fx:id="FaceGrooveName" />
+                                    <TableColumn text="Indeks" fx:id="FaceGrooveIndex" />
+                                    <TableColumn text="Min ø"  prefWidth="50" fx:id="FaceGrooveMinDiam"/>
+                                    <TableColumn text="Max ø"  prefWidth="50" fx:id="FaceGrooveMaxDiam"/>
+                                    <TableColumn text="Max ap"  prefWidth="50" fx:id="FaceGrooveMaxDepth"/>
+                                    <TableColumn text="Płytki"  prefWidth="200" fx:id="FaceGrooveInserts"/>
+                                    <TableColumn text="Śrubka"  prefWidth="70" fx:id="FaceGrooveBolt"/>
+                                    <TableColumn text="Status" fx:id="FaceGrooveStatus" />
+                                    <TableColumn text="Uwagi" fx:id="FaceGrooveComment" prefWidth="400"/>
+
+                                </columns>
+                            </TableView>
+                            <!-- Tabela na środku -->
+
+                        </VBox>
+                    </Tab>
+
+
+                </TabPane>
+
+            </Tab>
+
+
+
+
+
+
+
+
+
+            <Tab text="Głowice">
+                <TabPane fx:id="innerFaceMillTa">
+                    <Tab text="Głowice szybkościowe">
+                        <VBox fx:id="mainContainer54" alignment="CENTER" >
+                            <!-- Przyciski na górze -->
+
+                            <TableView fx:id="ShelMillFFTable">
+                                <columns>
+
+                                    <TableColumn text="info" fx:id="shellMillFFinfoColumn" />
+                                    <TableColumn text="Nazwa" fx:id="shellMillFFName" />
+                                    <TableColumn text="Indeks" fx:id="shellMillFFIndex" />
+                                    <TableColumn text="⌀"  prefWidth="50" fx:id="shellMillFFDiam"/>
+                                    <TableColumn text="Tooths"  prefWidth="50" fx:id="shellMillFFTooths"/>
+                                    <TableColumn text="Płytki"  prefWidth="50" fx:id="shellMillFFInserts"/>
+                                    <TableColumn text="Śruba"  prefWidth="50" fx:id="shellMillFFBolt"/>
+                                    <TableColumn text="IC"  prefWidth="50" fx:id="shellMillFFIC"/>
+                                    <TableColumn text="Status" fx:id="shellMillFFStatus" />
+                                    <TableColumn text="Uwagi" fx:id="shellMillFFComment" prefWidth="460"/>
+
+                                </columns>
+                            </TableView>
+                            <!-- Tabela na środku -->
+
+                        </VBox>
+                    </Tab>
+
+
+                    <Tab text="Głowice planistyczne">
+                        <VBox fx:id="mainContainer44" alignment="CENTER" >
+                            <!-- Przyciski na górze -->
+
+                            <TableView fx:id="ShelMillNMTable">
+                                <columns>
+                                    <TableColumn text="info" fx:id="shellMillNMinfoColumn" />
+                                    <TableColumn text="Nazwa" fx:id="shellMillNMName" />
+                                    <TableColumn text="Indeks" fx:id="shellMillNMIndex" />
+                                    <TableColumn text="⌀"  prefWidth="50" fx:id="shellMillNMDiam"/>
+                                    <TableColumn text="Tooths"  prefWidth="50" fx:id="shellMillNMTooths"/>
+                                    <TableColumn text="Płytki"  prefWidth="50" fx:id="shellMillNMInserts"/>
+                                    <TableColumn text="Śruba"  prefWidth="50" fx:id="shellMillNMBolt"/>
+                                    <TableColumn text="IC"  prefWidth="50" fx:id="shellMillNMIC"/>
+                                    <TableColumn text="Status" fx:id="shellMillNMStatus" />
+                                    <TableColumn text="Uwagi" fx:id="shellMillNMComment" prefWidth="460"/>
+
+                                </columns>
+                            </TableView>
+                            <!-- Tabela na środku -->
+
+                        </VBox>
+                    </Tab>
+
+                </TabPane>
+            </Tab>
+
+
+
+
+
+
+
+
+
+
+
+            <Tab text="Fazowniki">
+                <VBox fx:id="mainContainer12" alignment="CENTER" >
+                    <!-- Przyciski na górze -->
+
+                    <TableView fx:id="ChamferTable">
+                        <columns>
+                            <TableColumn text="info" fx:id="ChaminfoColumn" />
+                            <TableColumn text="Nazwa" fx:id="ChamName" />
+                            <TableColumn text="Indeks" fx:id="ChamIndex" />
+                            <TableColumn text="D1" fx:id="ChamD1" />
+                            <TableColumn text="D2" fx:id="ChamD2" />
+                            <TableColumn text="L1" fx:id="ChamL1" />
+                            <TableColumn text="L2" fx:id="ChamL2" />
+                            <TableColumn text="°" fx:id="ChamAngle" />
+                            <TableColumn text="Materiał" fx:id="ChamMat" />
+                            <TableColumn text="Status" fx:id="ChamStatus" />
+                            <TableColumn text="Uwagi" fx:id="ChamComment" prefWidth="460"/>
+                        </columns>
+                    </TableView>
+                    <!-- Tabela na środku -->
+
+                </VBox>
+            </Tab>
+
+
+            <Tab text="Nawiertaki">
+                <VBox fx:id="mainContainer13" alignment="CENTER" >
+                    <!-- Przyciski na górze -->
+
+                    <TableView fx:id="SpotDRtable">
+                        <columns>
+                            <TableColumn text="info" fx:id="SDinfoColumn" />
+                            <TableColumn text="Nazwa" fx:id="SDName" />
+                            <TableColumn text="Indeks" fx:id="SDIndex" />
+                            <TableColumn text="Materiał" fx:id="SDMat" />
+                            <TableColumn text="Status" fx:id="SDStatus" />
+
+                            <TableColumn text="D1"  prefWidth="50" fx:id="SDD1"/>
+                            <TableColumn text="D2"  prefWidth="50" fx:id="SDD2"/>
+                            <TableColumn text="L1"  prefWidth="50" fx:id="SDL1"/>
+
+                            <TableColumn text="Uwagi" fx:id="SDComment" prefWidth="460"/>
+
+                        </columns>
+                    </TableView>
+                    <!-- Tabela na środku -->
+
+                </VBox>
+            </Tab>
+
+            <Tab text="Rozwiertaki">
+                <VBox fx:id="mainContainer14" alignment="CENTER" >
+                    <!-- Przyciski na górze -->
+
+                    <TableView fx:id="ReamerTable">
+                        <columns>
+                            <TableColumn text="info" fx:id="ReamerinfoColumn" />
+                            <TableColumn text="Nazwa" fx:id="ReamerName" />
+                            <TableColumn text="Indeks" fx:id="ReamerIndex" />
+                            <TableColumn text="Status" fx:id="ReamerStatus" />
+                            <TableColumn text="Status" fx:id="ReamerMat" />
+                            <TableColumn text="L1" fx:id="ReamerL1" />
+                            <TableColumn text="⌀"  prefWidth="50" fx:id="ReamerDiam"/>
+                            <TableColumn text="Uwagi" fx:id="ReamerComment" prefWidth="460"/>
+
+                        </columns>
+                    </TableView>
+                    <!-- Tabela na środku -->
+
+                </VBox>
+            </Tab>
+
+            <Tab fx:id="insertTab" text="Płytki">
+                <VBox fx:id="mainContainer22" alignment="CENTER" >
+                    <!-- Przyciski na górze -->
+                    <HBox fx:id="typesInserts" spacing="2">
+                        <Button text="Pokaż wszystkie" onAction="#allInsertButton" />
+                        <Button text="Noże tokarskie" onAction="#handleKnivesInsertButton" />
+                        <Button text="Głowice" onAction="#handleFaceMillButton" />
+                        <Button text="Wiertła płytkowe" onAction="#handleInsertDrillButton" />
+                        <!--                            <Button text="Powrót" onAction="#backToHomePage" />-->
+                    </HBox>
+
+                    <!-- Tabela na środku -->
+                    <TableView fx:id="insertTable">
+                        <columns>
+                            <TableColumn text="Nazwa" fx:id="nameColumn2"  />
+                            <TableColumn text="Indeks" fx:id="indexColumn2" />
+                            <TableColumn text="Rodzaj" fx:id="typeColumn2" />
+
+                            <TableColumn text="Pasujące Narzędzia" fx:id="matchingTools" />
+                            <TableColumn text="Ilość" fx:id="qtyColumn2" />
+                            <TableColumn text="info" fx:id="infoColumn2" />
+                        </columns>
+                    </TableView>
+                </VBox>
+            </Tab>
+
+
+
+
+
+
+
+
+        </TabPane>
+
+    </center>
+
+    <top>
+        <HBox  spacing="2">
+            <Button text="Powrót" fx:id="backButton" onAction="#backToHomePage" />
+            <Button text="Statystyka" />
+            <Button text="Historia" fx:id="historyBtn"  onAction="#actionsHistoryPage"/>
+        </HBox>
+    </top>
+
+
+
+
+    <bottom>
+        <HBox spacing="2" fx:id="EditButtons">
+            <MenuButton text="Dodaj" fx:id="actionsMenuButton">
+                <items>
+                    <MenuItem text="Frez STAL" onAction="#showNewEmMet"/>
+                    <MenuItem text="Frez ALU" onAction="#showNewNewEmAlu"/>
+                    <MenuItem text="Frez Z R" onAction="#showNewEmR"/>
+                    <MenuItem text="Wiertło Płytkowe" onAction="#showNewDrillBlade"/>
+                    <MenuItem text="Wiertło VHM " onAction="#showNewDrVhmWindow"/>
+                    <MenuItem text="Wiertło HSS" onAction="#showNewDrHssWindow"/>
+                    <MenuItem text="Nóż Tokarski Zew" onAction="#showNewODLatheWindow"/>
+                    <MenuItem text="Nóż Tokarski Wew" onAction="#showNewIDLatheWindow"/>
+                    <MenuItem text="Nóż Tokarski Rowki Czoł" onAction="#showNewFaceGrooveWindow"/>
+                    <MenuItem text="Gwintownik Prosty " onAction="#showNewTapPRWindow"/>
+                    <MenuItem text="Gwintownik Skrętny " onAction="#showNewTapSKWindow"/>
+                    <MenuItem text="Gwintownik Calowy " onAction="#showNewTapINCHWindow"/>
+                    <MenuItem text="Narzynkę " onAction="#showNewThreadDieWindow"/>
+                    <MenuItem text="Fazownik  " onAction="#showNewChamferWindow"/>
+                    <MenuItem text="Nawiertak " onAction="#showNewSpotDrillWindow"/>
+                    <MenuItem text="Rozwiertak " onAction="#showNewReamerWindow"/>
+                    <MenuItem text="Głowica " onAction="#showNewFaceMillWindow"/>
+                </items>
+            </MenuButton>
+            <Button fx:id="newToolBtn" text="Nowe Narzędzie"  onAction="#showNewToolWindow"  />
+            <Button fx:id="newInsertBtn" text="Nowe Płytki" onAction="#showNewInsertWindow"  />
+            <Button fx:id="dressedBtn" text="Naostrzone"  />
+            <Button text="Odpisz Narzedzie" fx:id="editTool" onAction="#showEditToolWindow" />
+            <Button  text="Odpisz Płytkę" fx:id="editInsert" onAction="#showEditInsertWindow" />
+            <Button  text="Dodaj płytki do detalu" fx:id="addInsertsToPart" onAction="#showAddingInsertsToPart" />
+            <Button  text="Dodaj numer detalu" fx:id="addPartNum" onAction="#showAddingPartNum" />
+
+        </HBox>
+    </bottom>
+</BorderPane>

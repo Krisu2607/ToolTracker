@@ -1,0 +1,154 @@
+#log {
+    -fx-padding: 0 0 30 520;
+}
+#butts {
+
+        -fx-alignment: CENTER;
+        -fx-spacing: 5;
+
+}
+
+#buttTop {
+        -fx-alignment: CENTER;
+        -fx-spacing: 5;
+}
+
+
+#buttBottom {
+        -fx-alignment: CENTER;
+        -fx-spacing: 40;
+}
+
+#tokarka {
+
+                -fx-background-image: url("icons/tokarkaIcon.png");
+                -fx-background-color: transparent;
+                -fx-background-size: cover;
+                -fx-background-repeat: no-repeat;
+                -fx-background-position: center;
+                -fx-pref-width: 80;
+                -fx-pref-height: 80;
+    -fx-border-width: 1;
+    -fx-border-color: grey;
+}
+
+#frezarka {
+
+    -fx-background-image: url("icons/frezarkaIcon.png");
+    -fx-background-color: transparent;
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-pref-width: 80;
+    -fx-pref-height: 80;
+    -fx-border-width: 5;
+    -fx-border-color: grey;
+}
+
+#narzedzia {
+
+    -fx-background-image: url("icons/narzedziaIkon.png");
+    -fx-background-color: transparent;
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-pref-width: 120;
+    -fx-pref-height: 120;
+    -fx-border-width: 0;
+    -fx-border-color: grey;
+}
+
+
+#statystyka {
+
+    -fx-background-image: url("icons/stats.png");
+    -fx-background-color: transparent;
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-pref-width: 120;
+    -fx-pref-height: 120;
+    -fx-border-width: 0;
+    -fx-border-color: grey;
+}
+
+
+#calculator {
+
+    -fx-background-image: url("icons/calculatorIcon.png");
+    -fx-background-color: transparent;
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-pref-width: 120;
+    -fx-pref-height: 120;
+    -fx-border-width: 0;
+    -fx-border-color: #555555;
+}
+
+
+#LiveTools {
+
+    -fx-background-image: url("icons/livets.png");
+    -fx-background-color: transparent;
+
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-pref-width: 120;
+    -fx-pref-height: 120;
+    -fx-border-width: 0;
+    -fx-border-color: grey;
+}
+
+
+#tokarka:hover {
+    -fx-background-size: 90;
+
+
+}
+
+#LiveTools:hover {
+    -fx-background-size: 90;
+}
+
+#frezarka:hover {
+    -fx-background-size: 90;
+}
+
+#calculator:hover {
+    -fx-background-size: 90;
+
+}
+
+#narzedzia:hover {
+    -fx-background-size: 90;
+}
+
+#statystyka:hover {
+    -fx-background-size: 90;
+}
+
+
+
+
+.button:hover {
+        -fx-background-color: yellow; /* Kolor podświetlenia po najechaniu */
+}
+
+.button:hover {
+        -fx-cursor: hand; /* Zmiana kształtu kursora po najechaniu */
+}
+
+
+
+
+#foot {
+    -fx-alignment: center;
+    -fx-padding: 0 0 30 320;
+}
+
+
+
+
+

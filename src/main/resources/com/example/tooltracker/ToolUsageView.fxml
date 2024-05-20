@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
+
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.util.Callback?>
+<?import com.example.tooltracker.model.tools.Tool?>
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.tooltracker.controller.ToolUsageController"
+            stylesheets="@tools.css" style="-fx-background-color: #555555" >
+    <center>
+        <VBox>
+            <children>
+                <Button text="Powrót" onAction="#backToHomePage" />
+            </children>
+            <children>
+                <Label>Wyszukaj po numerze detalu</Label>
+                <TextField fx:id="searchField" promptText="Wprowadź numer detalu" />
+            </children>
+            <children>
+                <Label>Wyszukaj po indeksie narzędzia</Label>
+                <TextField fx:id="searchField2" promptText="Wprowadź numer detalu" />
+            </children>
+            <children>
+                <TableView  fx:id="toolUsageTable" xmlns:fx="http://javafx.com/fxml">
+                    <columns>
+                        <TableColumn text="Numer Detalu" fx:id="partNumberColumn"/>
+                        <TableColumn text="Numer Zlecenia" fx:id="orderNumberColumn"/>
+                        <TableColumn text="Numer Narzędzia" fx:id="toolNumberColumn"/>
+                        <TableColumn text="Ilość Zużytych Narzędzi" fx:id="quantityUsedColumn"/>
+                        <TableColumn text="Ilość Sztuk Wytworzonych" fx:id="quantityProducedColumn"/>
+                    </columns>
+                </TableView>
+            </children>
+        </VBox>
+
+
+    </center>
+
+
+</BorderPane>

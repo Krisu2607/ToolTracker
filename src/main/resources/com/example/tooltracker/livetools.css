@@ -1,0 +1,35 @@
+.table-view {
+
+    -fx-table-cell-border-color: transparent;
+    -fx-table-header-border-color: transparent;
+
+
+    -fx-padding: 30 0 50 0 ; /* Dodaj margines 10px u góry (wartości: top, right, bottom, left) */
+
+
+    /* Opcjonalnie, ustawić konkretny rozmiar */
+    /* -fx-width: 300px;*/
+    /* -fx-height: 400px;*/
+}
+
+
+
+.titled-pane .title {
+    -fx-background-color: grey;
+    -fx-font-size: 18px;
+    -fx-alignment: center; /* Wyśrodkowanie tekstu tytułu */
+    -fx-background-radius: 30;
+    -fx-border-radius: 30;
+}
+
+.titled-pane .content {
+    -fx-border-radius: 30;
+    -fx-background-radius: 30;
+
+}
+
+#partNum {
+    -fx-padding: 10 0 0 0
+}
+
+

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.tooltracker.controller.LatheController"
+            stylesheets="@start.css" style="-fx-background-color: #555555" >
+
+    <left>
+        <VBox fx:id="toolTypeButt" spacing="10">
+            <Button text="Powrót" onAction="#backToHomePage" />
+        </VBox>
+    </left>
+
+
+    <center>
+            <Label style="-fx-font-size: 40">W BUDOWIE...</Label>
+
+<!--            <HBox fx:id="buttTop" spacing="10">-->
+<!--                <Button text="Szczęki" fx:id="szczeki"  />-->
+<!--                <Button text="Oprawki"  fx:id="oprawki"  />-->
+<!--            </HBox>-->
+
+
+    </center>
+
+</BorderPane>

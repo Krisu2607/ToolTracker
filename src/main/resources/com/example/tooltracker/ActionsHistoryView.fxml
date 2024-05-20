@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
+
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.util.Callback?>
+<?import com.example.tooltracker.model.tools.Tool?>
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.tooltracker.controller.ActionsHistoryController"
+            stylesheets="@tools.css" style="-fx-background-color: #555555" >
+
+    <top>
+        <Button text="Powrót" onAction="#backToHomePage" />
+    </top>
+    <center>
+
+
+
+
+
+        <TabPane tabClosingPolicy="UNAVAILABLE">
+            <Tab text="Narzedzie">
+                <TableView fx:id="toolActionTable">
+                    <columns>
+                        <TableColumn text="Użytkownik"  fx:id="tuserColumn" />
+                        <TableColumn text="Indeks"  fx:id="tindexColumn" />
+                        <TableColumn text="Czynność" fx:id="tactionMadeColumn" />
+                        <TableColumn text="Czas" fx:id="tactionTimeColumn" />
+                    </columns>
+                </TableView>
+
+            </Tab>
+            <Tab text="Płytki">
+                <TableView fx:id="insertActionTable">
+                    <columns>
+                        <TableColumn text="Użytkownik"  fx:id="IuserColumn" />
+                        <TableColumn text="Indeks"  fx:id="Iindex" />
+                        <TableColumn text="Czynność" fx:id="IactionMadeColumn" />
+                        <TableColumn text="Czas" fx:id="IactionTimeColumn" />
+                    </columns>
+                </TableView>
+            </Tab>
+        </TabPane>
+
+    </center>
+
+
+</BorderPane>

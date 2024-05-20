@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.tooltracker.controller.LiveToolsViewController"
+            stylesheets="@livetools.css" style="-fx-background-color: lightblue"  prefHeight="700.0" prefWidth="1240.0">
+    <top>
+        <Button text="Powrót" onAction="#backToHomePage" />
+
+    </top>
+
+<center>
+    <HBox spacing="6" alignment="CENTER">
+        <TitledPane fx:id="VF2PANE"   prefHeight="400.0" prefWidth="300.0"  >
+
+            <content>
+
+
+                <TableView  fx:id="partToolInsert" prefHeight="100.0" prefWidth="127.0">
+                    <columns>
+                        <TableColumn fx:id="image" prefWidth="36.666656494140625" />
+                        <TableColumn fx:id="toolImage" prefWidth="35.333345413208008"  />
+                        <TableColumn fx:id="index" prefWidth="85.6666653951009" text="Index" />
+                        <TableColumn fx:id="name" prefWidth="155.6666653951009" text="Nazwa" />
+                    </columns>
+                    <padding>
+                        <Insets bottom="20.0" />
+                    </padding>
+                </TableView>
+            </content>
+        </TitledPane>
+
+        <TitledPane fx:id="pane1" prefHeight="400.0" prefWidth="300.0" text="FV4SS" >
+            <content>
+                <TableView  prefHeight="199.0" prefWidth="127.0">
+                    <columns>
+                        <TableColumn  prefWidth="20.666656494140625"  />
+                        <TableColumn  prefWidth="19.333345413208008"  />
+                        <TableColumn  prefWidth="85.6666653951009" text="Index" />
+                        <TableColumn  prefWidth="155.6666653951009" text="Nazwa" />
+                    </columns>
+                    <padding>
+                        <Insets bottom="20.0" />
+                    </padding>
+                </TableView>
+            </content>
+        </TitledPane>
+
+        <TitledPane   prefHeight="400.0" prefWidth="300.0" text="DS30SSY" >
+            <content>
+                <TableView prefHeight="199.0" prefWidth="127.0">
+                    <columns>
+                        <TableColumn prefWidth="20.666656494140625"  />
+                        <TableColumn prefWidth="19.333345413208008"  />
+                        <TableColumn prefWidth="85.6666653951009" text="Index" />
+                        <TableColumn prefWidth="155.6666653951009" text="Nazwa" />
+                    </columns>
+                    <padding>
+                        <Insets bottom="20.0" />
+                    </padding>
+                </TableView>
+            </content>
+        </TitledPane>
+
+
+            <TitledPane   prefHeight="400.0" prefWidth="300.0" text="DOOSAN" >
+                <content>
+                    <TableView prefHeight="199.0" prefWidth="127.0">
+                        <columns>
+                            <TableColumn prefWidth="20.666656494140625"  />
+                            <TableColumn prefWidth="19.333345413208008"  />
+                            <TableColumn prefWidth="85.6666653951009" text="Index" />
+                            <TableColumn prefWidth="155.6666653951009" text="Nazwa" />
+                        </columns>
+                        <padding>
+                            <Insets bottom="20.0" />
+                        </padding>
+                    </TableView>
+                </content>
+            </TitledPane>
+
+    </HBox>
+
+
+</center>
+
+
+
+
+
+
+
+
+
+</BorderPane>
+
