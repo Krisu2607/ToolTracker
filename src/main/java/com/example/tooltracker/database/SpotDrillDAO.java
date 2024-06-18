@@ -1,9 +1,6 @@
 package com.example.tooltracker.database;
 
-import com.example.tooltracker.model.tools.Chamfer;
-import com.example.tooltracker.model.tools.MaterialType;
-import com.example.tooltracker.model.tools.SpotDrill;
-import com.example.tooltracker.model.tools.ToolStatus;
+import com.example.tooltracker.model.tools.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,6 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SpotDrillDAO {
+
+//    private static final String UPDATE_COMMENT = "UPDATE spotdrill SET  comment=? WHERE toolIndex=?";
+
 
     private Connection connection;
 
@@ -42,6 +42,18 @@ public class SpotDrillDAO {
 
         return tools;
     }
+
+
+//    public void updateComment(Tool1 tool1) {
+//        try (Connection connection = DatabaseUtil.getConnection();
+//             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_COMMENT)) {
+//            preparedStatement.setString(1, tool1.getComment());
+//            preparedStatement.setString(2, tool1.getToolIndex());
+//            preparedStatement.executeUpdate();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
 
     public void addSpotDrill(SpotDrill tool) throws SQLException {

@@ -1,9 +1,6 @@
 package com.example.tooltracker.database;
 
-import com.example.tooltracker.model.tools.EmAlu;
-import com.example.tooltracker.model.tools.EmMet;
-import com.example.tooltracker.model.tools.MaterialType;
-import com.example.tooltracker.model.tools.ToolStatus;
+import com.example.tooltracker.model.tools.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,6 +10,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EmAluDAO {
+
+//    private static final String UPDATE_COMMENT = "UPDATE emalu SET  comment=? WHERE toolIndex=?";
+
+    private static final String UPDATE_TOOL_POST_SHARP = "UPDATE emalu SET  toolStatus=?,  l1=?, l2=?, d1=?, d2=? WHERE toolIndex=?";
+
     private Connection connection;
 
 
@@ -43,6 +45,34 @@ public class EmAluDAO {
         }
         return tools;
     }
+
+
+    public void updatePostSharpen(EmAlu emAlu) {
+        try (Connection connection = DatabaseUtil.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_TOOL_POST_SHARP)) {
+            preparedStatement.setString(1, "W_UZYCIU");
+            preparedStatement.setInt(2, emAlu.getL1());
+            preparedStatement.setInt(3, emAlu.getL2());
+            preparedStatement.setDouble(4, emAlu.getD1());
+            preparedStatement.setDouble(5, emAlu.getD2());
+            preparedStatement.setString(6, emAlu.getToolIndex());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+//    public void updateComment(Tool1 tool1) {
+//        try (Connection connection = DatabaseUtil.getConnection();
+//             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_COMMENT)) {
+//            preparedStatement.setString(1, tool1.getComment());
+//            preparedStatement.setString(2, tool1.getToolIndex());
+//            preparedStatement.executeUpdate();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     public void addEmAluTool(EmAlu tool) throws SQLException {
         String query = "INSERT INTO EmAlu (toolName, toolIndex, toolStatus, comment, price, L1, L2, d1, d2, Material, toothsQty) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";

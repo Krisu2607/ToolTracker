@@ -38,7 +38,10 @@ public class EditToolController {
 
     public void initialize() {
         // Dodaj listener do pola tekstowego, aby aktywować/zdezaktywować przycisk "Zatwierdź" w zależności od zawartości pola
-        indexTextField.textProperty().addListener((observable, oldValue, newValue) -> checkToolExistence(newValue));
+        indexTextField.textProperty().addListener((observable, oldValue, newValue) ->{
+                checkToolExistence(newValue);
+        checkSharpeningAvailability(newValue);
+                });
         confirmButton.setDisable(true);
     }
 
@@ -47,41 +50,22 @@ public class EditToolController {
     private void handleConfirmButton() {
         String index = indexTextField.getText();
         boolean toSharpen = sharpeningCheckBox.isSelected();
+        String newStatus = toSharpen ? "W_OSTRZENIU" : "ZUZYTE";
 
-        // Pobierz narzędzie z bazy danych na podstawie indeksu
-        List<Tool> allTools = toolDAO.getAllTools();
-        Optional<Tool> toolx = allTools.stream()
-                .filter(t -> index.equalsIgnoreCase(t.getToolIndex()))
-                .findFirst();
-        Tool tool = toolx.get();
+        toolDAO.updateToolStatus(index, newStatus);
         ToolAction toolAction = new ToolAction();
+        toolAction.settAction(newStatus);
+        toolAction.settIndex(index);
+        actionDAO.addAction(toolAction);
 
-
-        if (tool != null) {
-            // Ustaw nowy status na podstawie zaznaczenia pola "Do ostrzenia"
-            tool.setToolStatus(toSharpen ? "Do ostrzenia" : "Zużyte");
-            toolAction.settAction(toSharpen ? "Do ostrzenia" : "Zużyte");
-            toolAction.settIndex(tool.getToolIndex());
-
-
-
-
-            // Zapisz zmiany w bazie danych
-            toolDAO.updateToolStatus(tool);
-            actionDAO.addAction(toolAction);
-
-            indexTextField.clear();
-            sharpeningCheckBox.setSelected(false);
-
-            // Wróć do pierwszego pola tekstowego
-            indexTextField.requestFocus();
-
-        }
-
-        toolsController.refreshToolTable();
-
-
+        indexTextField.clear();
+        sharpeningCheckBox.setSelected(false);
+        indexTextField.requestFocus();
     }
+
+
+
+
 
     @FXML
     private void handleCancelButton() {
@@ -97,25 +81,31 @@ public class EditToolController {
     }
 
     private void checkToolExistence(String toolIndex) {
-        List<Tool> allTools = toolDAO.getAllTools();
-        Optional<Tool> toolOptional = allTools.stream()
-                .filter(t -> toolIndex.equalsIgnoreCase(t.getToolIndex()))
-                .findFirst();
-
-        if (toolOptional.isPresent()) {
-            // Narzędzie istnieje, można aktywować przycisk "Zatwierdź"
+        if (toolDAO.toolExists(toolIndex)) {
             confirmButton.setDisable(false);
             indexError.setText("✔");
             indexError.setTextFill(Color.GREEN);
-
-
         } else {
-            // Narzędzie nie istnieje, dezaktywuj przycisk "Zatwierdź"
             confirmButton.setDisable(true);
             indexError.setText("Nie posiadamy takiego narzędzia");
             indexError.setTextFill(Color.RED);
+        }
+    }
 
+    private void checkSharpeningAvailability(String toolIndex) {
+        if (toolIndex.length() >= 2) {
+            String prefix = toolIndex.substring(0, 2).toUpperCase();
+            List<String> validPrefixes = List.of("CM", "DR", "EM", "BM", "CM");
 
+            if (validPrefixes.contains(prefix)) {
+                sharpeningCheckBox.setDisable(false);
+            } else {
+                sharpeningCheckBox.setDisable(true);
+                sharpeningCheckBox.setSelected(false); // Deselect if disabled
+            }
+        } else {
+            sharpeningCheckBox.setDisable(true);
+            sharpeningCheckBox.setSelected(false); // Deselect if disabled
         }
     }
 

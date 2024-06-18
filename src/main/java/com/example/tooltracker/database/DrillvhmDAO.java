@@ -1,9 +1,6 @@
 package com.example.tooltracker.database;
 
-import com.example.tooltracker.model.tools.DrillHSS;
-import com.example.tooltracker.model.tools.DrillVHM;
-import com.example.tooltracker.model.tools.ToolStatus;
-import com.example.tooltracker.model.tools.ToolType;
+import com.example.tooltracker.model.tools.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,6 +10,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DrillvhmDAO {
+
+//    private static final String UPDATE_COMMENT = "UPDATE drillvhm SET  comment=? WHERE toolIndex=?";
+
+
+    private static final String UPDATE_TOOL_POST_SHARP = "UPDATE drillvhm SET  toolStatus=?, diameter=?, length = ?, worklength=? WHERE toolIndex=?";
 
     public List<DrillVHM> getAllDrillHSS() throws SQLException {
         List<DrillVHM> tools = new ArrayList<>();
@@ -57,38 +59,33 @@ public class DrillvhmDAO {
         }
     }
 
-//    public int getLastToolIndexNum(boolean isIc) throws SQLException {
-//        String prefix;
-//        if (isIc) {
-//            prefix = "DR-VHM-IC";
-//        } else {
-//            prefix = "DR-VHM";
-//        }
-//
-//        String query = "SELECT MAX(CAST(SUBSTRING_INDEX(toolindex, '-', -1) AS UNSIGNED)) AS last_num " +
-//                "FROM drillvhm " +
-//                "WHERE toolindex LIKE ?";
-//
-//        int lastNum = 0;
-//
+
+    public void updatePostSharpen(DrillVHM drillVHM) {
+        try (Connection connection = DatabaseUtil.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_TOOL_POST_SHARP)) {
+            preparedStatement.setString(1, "W_UZYCIU");
+            preparedStatement.setInt(2, drillVHM.getLength());
+            preparedStatement.setInt(3, drillVHM.getWorkLength());
+            preparedStatement.setDouble(4, drillVHM.getDiameter());
+            preparedStatement.setString(5, drillVHM.getToolIndex());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+//    public void updateComment(Tool1 tool1) {
 //        try (Connection connection = DatabaseUtil.getConnection();
-//             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-//            preparedStatement.setString(1, prefix + "-%");
-//            try (ResultSet resultSet = preparedStatement.executeQuery()) {
-//                if (resultSet.next()) {
-//                    lastNum = resultSet.getInt("last_num");
-//                }
-//            }
+//             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_COMMENT)) {
+//            preparedStatement.setString(1, tool1.getComment());
+//            preparedStatement.setString(2, tool1.getToolIndex());
+//            preparedStatement.executeUpdate();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
 //        }
-//
-//        // Sprawdź, czy ostatni numer został pobrany
-//        if (lastNum == 0) {
-//            return lastNum;
-//        }
-//
-//        // Jeśli ostatni numer został pobrany, zwróć go
-//        return lastNum;
 //    }
+
+
 
     public int getLastToolIndexNum(boolean isIc) throws SQLException {
         String query = "SELECT toolindex FROM DrillVHM WHERE isinternalcooled = ?";
@@ -123,5 +120,6 @@ public class DrillvhmDAO {
 
         return lastNum;
     }
+
 
 }

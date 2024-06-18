@@ -1,9 +1,6 @@
 package com.example.tooltracker.database;
 
-import com.example.tooltracker.model.tools.DrillBlades;
-import com.example.tooltracker.model.tools.LatheToolTypes;
-import com.example.tooltracker.model.tools.ToolStatus;
-import com.example.tooltracker.model.tools.TurningOD;
+import com.example.tooltracker.model.tools.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,6 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OdTurningDAO {
+
+//    private static final String UPDATE_COMMENT = "UPDATE turningod SET  comment=? WHERE toolIndex=?";
+
 
     public List<TurningOD> getAllOdTurnTools() throws SQLException {
         List<TurningOD> tools = new ArrayList<>();
@@ -63,6 +63,17 @@ public class OdTurningDAO {
             statement.executeUpdate();
         }
     }
+
+//    public void updateComment(Tool1 tool1) {
+//        try (Connection connection = DatabaseUtil.getConnection();
+//             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_COMMENT)) {
+//            preparedStatement.setString(1, tool1.getComment());
+//            preparedStatement.setString(2, tool1.getToolIndex());
+//            preparedStatement.executeUpdate();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     public List<String> getLastToolIndexByDirection(String cutDirection) throws SQLException {
         List<String> toolIndexes = new ArrayList<>();

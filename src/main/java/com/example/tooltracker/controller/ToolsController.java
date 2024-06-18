@@ -2,6 +2,7 @@ package com.example.tooltracker.controller;
 
 import com.example.tooltracker.controller.newtoolcontrollers.*;
 import com.example.tooltracker.database.*;
+import com.example.tooltracker.model.ToolAction;
 import com.example.tooltracker.model.tools.*;
 import com.example.tooltracker.model.ToolInsert;
 import javafx.collections.FXCollections;
@@ -11,6 +12,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -24,12 +26,12 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.util.Callback;
-
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
 
 public class ToolsController {
 
@@ -62,10 +64,23 @@ public class ToolsController {
 
     @FXML
     private TableView<Tool> toolTable;
+    
+    @FXML
+    ImageView EmMetimageView;
+
+    @FXML
+    ImageView DrillVHMimageView;
+
+    @FXML
+    ImageView DrillHSSimageView;
+
+
 
 
     @FXML
     private TableView<EmMet> EmMetTable;
+    @FXML
+    private TableColumn<Tool1, String> EmMetRemImg;
     @FXML
     private TableColumn<Tool1, String> EmMetinfoColumn;
     @FXML
@@ -85,13 +100,15 @@ public class ToolsController {
     @FXML
     private TableColumn<EmMet, String> EMMetmat;
     @FXML
-    private TableColumn<EmMet, String> EMMetstatus;
+    private TableColumn<Tool1, ToolStatus> EMMetstatus;
     @FXML
-    private TableColumn<EmMet, String> EMMetcomment;
+    private TableColumn<Tool1, String> EMMetcomment;
 
 
     @FXML
     private TableView<EmAlu> EmAluTable;
+    @FXML
+    private TableColumn<Tool1, String> EMAluRemImg;
     @FXML
     private TableColumn<Tool1, String> EMAluinfoColumn;
     @FXML
@@ -111,14 +128,16 @@ public class ToolsController {
     @FXML
     private TableColumn<EmAlu,String> EMAlumat ;
     @FXML
-    private TableColumn<EmAlu,String> EMAlustatus;
+    private TableColumn<Tool1,ToolStatus> EMAlustatus;
     @FXML
-    private TableColumn<EmAlu,String> EMAlucomment;
+    private TableColumn<Tool1,String> EMAlucomment;
 
 
 
     @FXML
     private TableView<EmR> EmRTable;
+    @FXML
+    private TableColumn<Tool1, String> EmRRemImg;
     @FXML
     private TableColumn<Tool1, String> EmRinfoColumn;
     @FXML
@@ -140,13 +159,15 @@ public class ToolsController {
     @FXML
     private TableColumn<EmR,String> EmRMat ;
     @FXML
-    private TableColumn<EmR,String> EmRStatus;
+    private TableColumn<Tool1,ToolStatus> EmRStatus;
     @FXML
-    private TableColumn<EmR,String> EmRComment;
+    private TableColumn<Tool1,String> EmRComment;
 
 
     @FXML
     private TableView<ShellMill> ShelMillFFTable;
+    @FXML
+    private TableColumn<Tool1, String> shellMillFFRemImg;
     @FXML
     private TableColumn<Tool1, String> shellMillFFinfoColumn;
     @FXML
@@ -160,9 +181,9 @@ public class ToolsController {
     @FXML
     private TableColumn<ShellMill,String> shellMillFFInserts ;
     @FXML
-    private TableColumn<ShellMill,String> shellMillFFStatus;
+    private TableColumn<Tool1,ToolStatus> shellMillFFStatus;
     @FXML
-    private TableColumn<ShellMill,String> shellMillFFComment;
+    private TableColumn<Tool1,String> shellMillFFComment;
     @FXML
     private TableColumn<ShellMill,String> shellMillFFIC;
     @FXML
@@ -171,6 +192,8 @@ public class ToolsController {
 
     @FXML
     private TableView<ShellMill> ShelMillNMTable;
+    @FXML
+    private TableColumn<Tool1, String> shellMillNMRemImg;
     @FXML
     private TableColumn<Tool1, String> shellMillNMinfoColumn;
     @FXML
@@ -184,9 +207,9 @@ public class ToolsController {
     @FXML
     private TableColumn<ShellMill,String> shellMillNMInserts ;
     @FXML
-    private TableColumn<ShellMill,String> shellMillNMStatus;
+    private TableColumn<Tool1,ToolStatus> shellMillNMStatus;
     @FXML
-    private TableColumn<ShellMill,String> shellMillNMComment;
+    private TableColumn<Tool1,String> shellMillNMComment;
     @FXML
     private TableColumn<ShellMill,String> shellMillNMIC;
     @FXML
@@ -205,6 +228,8 @@ public class ToolsController {
     @FXML
     private TableView<DrillBlades> DrillBladeTable;
     @FXML
+    private TableColumn<Tool1, String> DBRemImg;
+    @FXML
     private TableColumn<Tool1, String> DBinfoColumn;
     @FXML
     private TableColumn<DrillBlades,String> DBName ;
@@ -219,9 +244,9 @@ public class ToolsController {
     @FXML
     private TableColumn<DrillBlades,String> DBInserts ;
     @FXML
-    private TableColumn<DrillBlades,String> DBStatus;
+    private TableColumn<Tool1,ToolStatus> DBStatus;
     @FXML
-    private TableColumn<DrillBlades,String> DBComment;
+    private TableColumn<Tool1,String> DBComment;
 
 
 
@@ -229,6 +254,8 @@ public class ToolsController {
 
     @FXML
     private TableView<DrillHSS> DrillHSSTable;
+    @FXML
+    private TableColumn<Tool1, String> DRHSSRemImg;
     @FXML
     private TableColumn<Tool1, String> DRHSSinfoColumn;
     @FXML
@@ -244,15 +271,17 @@ public class ToolsController {
     @FXML
     private TableColumn<DrillHSS,Integer> DRHSSL2;
     @FXML
-    private TableColumn<DrillHSS,String> DRHSSStatus;
+    private TableColumn<Tool1,ToolStatus> DRHSSStatus;
     @FXML
-    private TableColumn<DrillHSS,String> DRHSSComment;
+    private TableColumn<Tool1,String> DRHSSComment;
 
 
 
 
     @FXML
     private TableView<DrillVHM> DrillVHMTable;
+    @FXML
+    private TableColumn<Tool1, String> DRVHMRemImg;
     @FXML
     private TableColumn<Tool1, String> DRVHMinfoColumn;
     @FXML
@@ -266,15 +295,17 @@ public class ToolsController {
     @FXML
     private TableColumn<DrillVHM,Integer> DRVHML2;
     @FXML
-    private TableColumn<DrillVHM,String> DRVHMStatus;
+    private TableColumn<Tool1,ToolStatus> DRVHMStatus;
     @FXML
-    private TableColumn<DrillVHM,String> DRVHMComment;
+    private TableColumn<Tool1,String> DRVHMComment;
     @FXML
     private TableColumn<DrillVHM,Boolean> DRVHMIC;
 
 
     @FXML
     private TableView<TapSK> TapSKTable;
+    @FXML
+    private TableColumn<Tool1, String> TapSKRemImg;
     @FXML
     private TableColumn<Tool1, String> TapSKinfoColumn;
     @FXML
@@ -291,13 +322,15 @@ public class ToolsController {
     private TableColumn<TapSK,Double> TapSKScroll;
 
     @FXML
-    private TableColumn<TapSK,String> TapSKStatus;
+    private TableColumn<Tool1,ToolStatus> TapSKStatus;
     @FXML
-    private TableColumn<TapSK,String> TapSKComment;
+    private TableColumn<Tool1,String> TapSKComment;
 
 
     @FXML
     private TableView<TapPR> TapPRTable;
+    @FXML
+    private TableColumn<Tool1, String> TapPRRemImg;
     @FXML
     private TableColumn<Tool1, String> TapPRinfoColumn;
     @FXML
@@ -313,15 +346,17 @@ public class ToolsController {
     @FXML
     private TableColumn<TapPR,Double> TapPRScroll;
     @FXML
-    private TableColumn<TapPR,String> TapPRStatus ;
+    private TableColumn<Tool1,ToolStatus> TapPRStatus ;
     @FXML
-    private TableColumn<TapPR,String> TapPRComment;
+    private TableColumn<Tool1,String> TapPRComment;
 
 
 
 
     @FXML
     private TableView<TapInch> TapInchTable;
+    @FXML
+    private TableColumn<Tool1, String> TapInchRemImg;
     @FXML
     private TableColumn<Tool1, String> TapInchinfoColumn;
     @FXML
@@ -331,9 +366,9 @@ public class ToolsController {
     @FXML
     private TableColumn<TapInch,String> TapInchMat ;
     @FXML
-    private TableColumn<TapInch,String> TapInchStatus ;
+    private TableColumn<Tool1,ToolStatus> TapInchStatus ;
     @FXML
-    private TableColumn<TapInch,String> TapInchComment;
+    private TableColumn<Tool1,String> TapInchComment;
 
     @FXML
     private TableColumn<TapInch,String> TapInchSize;
@@ -344,6 +379,8 @@ public class ToolsController {
     @FXML
     private TableView<Chamfer> ChamferTable;
     @FXML
+    private TableColumn<Tool1, String> ChamRemImg;
+    @FXML
     private TableColumn<Tool1, String> ChaminfoColumn;
     @FXML
     private TableColumn<Chamfer,String> ChamName ;
@@ -352,9 +389,9 @@ public class ToolsController {
     @FXML
     private TableColumn<Chamfer,String> ChamMat ;
     @FXML
-    private TableColumn<Chamfer,String> ChamStatus ;
+    private TableColumn<Tool1,ToolStatus> ChamStatus ;
     @FXML
-    private TableColumn<Chamfer,String> ChamComment;
+    private TableColumn<Tool1,String> ChamComment;
     @FXML
     private TableColumn<Chamfer, Double> ChamD1;
     @FXML
@@ -372,6 +409,8 @@ public class ToolsController {
     @FXML
     private TableView<SpotDrill> SpotDRtable;
     @FXML
+    private TableColumn<Tool1, String> SDRemImg;
+    @FXML
     private TableColumn<Tool1, String> SDinfoColumn;
     @FXML
     private TableColumn<SpotDrill,String> SDName ;
@@ -386,14 +425,16 @@ public class ToolsController {
     @FXML
     private TableColumn<SpotDrill,String> SDMat ;
     @FXML
-    private TableColumn<SpotDrill,String> SDStatus;
+    private TableColumn<Tool1,ToolStatus> SDStatus;
     @FXML
-    private TableColumn<SpotDrill,String> SDComment;
+    private TableColumn<Tool1,String> SDComment;
 
 
 
     @FXML
     private TableView<Reamer> ReamerTable;
+    @FXML
+    private TableColumn<Tool1, String> ReamerRemImg;
     @FXML
     private TableColumn<Tool1, String> ReamerinfoColumn;
     @FXML
@@ -407,13 +448,15 @@ public class ToolsController {
     @FXML
     private TableColumn<Reamer,String> ReamerMat ;
     @FXML
-    private TableColumn<Reamer,String> ReamerStatus;
+    private TableColumn<Tool1,ToolStatus> ReamerStatus;
     @FXML
-    private TableColumn<Reamer,String> ReamerComment;
+    private TableColumn<Tool1,String> ReamerComment;
 
 
     @FXML
     private TableView<ThreadDie> DieTable;
+    @FXML
+    private TableColumn<Tool1, String> DieRemImg;
     @FXML
     private TableColumn<Tool1, String> DieinfoColumn;
     @FXML
@@ -429,9 +472,9 @@ public class ToolsController {
     @FXML
     private TableColumn<ThreadDie,Double> DieInchSize;
     @FXML
-    private TableColumn<ThreadDie,String> DieStatus ;
+    private TableColumn<Tool1,ToolStatus> DieStatus ;
     @FXML
-    private TableColumn<ThreadDie,String> DieComment;
+    private TableColumn<Tool1,String> DieComment;
     @FXML
     private TableColumn<ThreadDie,Double> DieScroll;
 
@@ -440,6 +483,8 @@ public class ToolsController {
 
     @FXML
     private TableView<TurningOD> OdLatheTable;
+    @FXML
+    private TableColumn<Tool1, String> ODRemImg;
     @FXML
     private TableColumn<Tool1, String> ODinfoColumn;
     @FXML
@@ -451,14 +496,16 @@ public class ToolsController {
     @FXML
     private TableColumn<TurningOD,String> ODType ;
     @FXML
-    private TableColumn<TurningOD,String> ODStatus;
+    private TableColumn<Tool1,ToolStatus> ODStatus;
     @FXML
-    private TableColumn<TurningOD,String> ODComment;
+    private TableColumn<Tool1,String> ODComment;
 
 
 
     @FXML
     private TableView<TurningID> IdLatheTable;
+    @FXML
+    private TableColumn<Tool1, String> IDRemImg;
     @FXML
     private TableColumn<Tool1, String> IDinfoColumn;
     @FXML
@@ -470,12 +517,14 @@ public class ToolsController {
     @FXML
     private TableColumn<TurningID,String> IDType ;
     @FXML
-    private TableColumn<TurningID,String> IDStatus;
+    private TableColumn<Tool1,ToolStatus> IDStatus;
     @FXML
-    private TableColumn<TurningID,String> IDComment;
+    private TableColumn<Tool1,String> IDComment;
 
     @FXML
     private TableView<FaceGroove> FaceGrooveTable;
+    @FXML
+    private TableColumn<Tool1, String> FaceGrooveRemImg;
     @FXML
     private TableColumn<Tool1, String> FaceGrooveinfoColumn;
     @FXML
@@ -485,9 +534,9 @@ public class ToolsController {
     @FXML
     private TableColumn<FaceGroove,String> FaceGrooveInserts ;
     @FXML
-    private TableColumn<FaceGroove,String> FaceGrooveStatus;
+    private TableColumn<Tool1,ToolStatus> FaceGrooveStatus;
     @FXML
-    private TableColumn<FaceGroove,String> FaceGrooveComment;
+    private TableColumn<Tool1,String> FaceGrooveComment;
     @FXML
     private TableColumn<FaceGroove,Double> FaceGrooveMinDiam;
     @FXML
@@ -502,35 +551,6 @@ public class ToolsController {
 
 
 
-
-
-
-    @FXML
-    private TableColumn<Tool, String> nameColumn;
-
-
-    @FXML
-    private TableColumn<Tool, String> indexColumn;
-
-    @FXML
-    private TableColumn<Tool, String> typeColumn;
-
-    @FXML
-    private TableColumn<Tool, String> commentColumn;
-
-
-
-
-
-    @FXML
-    private TabPane outerToolPane;
-
-    @FXML
-    private TabPane innerEMpane;
-    @FXML
-    private TabPane innerDRpane;
-    @FXML
-    private TabPane innerTAPpane;
 
 
 
@@ -561,6 +581,7 @@ public class ToolsController {
     private OdTurningDAO odTurningDAO = new OdTurningDAO();
     private TapInchDAO tapInchDAO = new TapInchDAO();
     private FaceGrooveDAO grooveDAO = new FaceGrooveDAO();
+    private ActionDAO actionDAO = new ActionDAO();
 
 
     List<TapInch> allTapInch = tapInchDAO.getallTapInch();
@@ -600,9 +621,11 @@ public class ToolsController {
 
 
     public void initialize() {
-        // Inicjalizacja kolumn w Narzędziach
 
 
+        EmMetimageView.setImage(new Image(getClass().getResourceAsStream("/com/example/tooltracker/icons/toolsizesimages/emsize.png")));
+        DrillVHMimageView.setImage(new Image(getClass().getResourceAsStream("/com/example/tooltracker/icons/toolsizesimages/drillsizes.png")));
+        DrillHSSimageView.setImage(new Image(getClass().getResourceAsStream("/com/example/tooltracker/icons/toolsizesimages/drillsizes.png")));
 
 
 
@@ -835,32 +858,84 @@ public class ToolsController {
 //
         // Pobierz wsyztskie płytki z bazy danych
         ObservableList<ToolInsert> toolInserts = FXCollections.observableArrayList(allToolInserts);
-        insertTable.setItems(toolInserts);
-//        statusColumn.setCellFactory(setBackgroundOnStatus);
+//        insertTable.setItems(toolInserts);
+////        statusColumn.setCellFactory(setBackgroundOnStatus);
+//        DBinfoColumn.setCellFactory(setToolInfoBtn);
+//        ChaminfoColumn.setCellFactory(setToolInfoBtn);
+//        DRHSSinfoColumn.setCellFactory(setToolInfoBtn);
+//        DRVHMinfoColumn.setCellFactory(setToolInfoBtn);
+//        EMAluinfoColumn.setCellFactory(setToolInfoBtn);
+//        EmRinfoColumn.setCellFactory(setToolInfoBtn);
+//        EmMetinfoColumn.setCellFactory(setToolInfoBtn);
+//        FaceGrooveinfoColumn.setCellFactory(setToolInfoBtn);
+//        ReamerinfoColumn.setCellFactory(setToolInfoBtn);
+//        shellMillFFinfoColumn.setCellFactory(setToolInfoBtn);
+//        shellMillNMinfoColumn.setCellFactory(setToolInfoBtn);
+//        SDinfoColumn.setCellFactory(setToolInfoBtn);
+//        TapInchinfoColumn.setCellFactory(setToolInfoBtn);
+//        TapPRinfoColumn.setCellFactory(setToolInfoBtn);
+//        TapSKinfoColumn.setCellFactory(setToolInfoBtn);
+//        DieinfoColumn.setCellFactory(setToolInfoBtn);
+//        IDinfoColumn.setCellFactory(setToolInfoBtn);
+//        ODinfoColumn.setCellFactory(setToolInfoBtn);
+//
+//
+//        DBStatus.setCellFactory(setBackgroundOnStatus);
+//        ChamStatus.setCellFactory(setBackgroundOnStatus);
+//        DRHSSStatus.setCellFactory(setBackgroundOnStatus);
+//        DRVHMStatus.setCellFactory(setBackgroundOnStatus);
+//        EMAlustatus.setCellFactory(setBackgroundOnStatus);
+//        EmRStatus.setCellFactory(setBackgroundOnStatus);
+//        EMMetstatus.setCellFactory(setBackgroundOnStatus);
+//        FaceGrooveStatus.setCellFactory(setBackgroundOnStatus);
+//        ReamerStatus.setCellFactory(setBackgroundOnStatus);
+//        shellMillFFStatus.setCellFactory(setBackgroundOnStatus);
+//        shellMillNMStatus.setCellFactory(setBackgroundOnStatus);
+//        SDStatus.setCellFactory(setBackgroundOnStatus);
+//        TapInchStatus.setCellFactory(setBackgroundOnStatus);
+//        TapPRStatus.setCellFactory(setBackgroundOnStatus);
+//        TapSKStatus.setCellFactory(setBackgroundOnStatus);
+//        DieStatus.setCellFactory(setBackgroundOnStatus);
+//        IDStatus.setCellFactory(setBackgroundOnStatus);
+//        ODStatus.setCellFactory(setBackgroundOnStatus);
 
-        DBinfoColumn.setCellFactory(setToolInfoBtn);
-        ChaminfoColumn.setCellFactory(setToolInfoBtn);
-        DRHSSinfoColumn.setCellFactory(setToolInfoBtn);
-        DRVHMinfoColumn.setCellFactory(setToolInfoBtn);
-        EMAluinfoColumn.setCellFactory(setToolInfoBtn);
-        EmRinfoColumn.setCellFactory(setToolInfoBtn);
-        EmMetinfoColumn.setCellFactory(setToolInfoBtn);
-        FaceGrooveinfoColumn.setCellFactory(setToolInfoBtn);
-        ReamerinfoColumn.setCellFactory(setToolInfoBtn);
-        shellMillFFinfoColumn.setCellFactory(setToolInfoBtn);
-        shellMillNMinfoColumn.setCellFactory(setToolInfoBtn);
-        SDinfoColumn.setCellFactory(setToolInfoBtn);
-        TapInchinfoColumn.setCellFactory(setToolInfoBtn);
-        TapPRinfoColumn.setCellFactory(setToolInfoBtn);
-        TapSKinfoColumn.setCellFactory(setToolInfoBtn);
-        DieinfoColumn.setCellFactory(setToolInfoBtn);
-        IDinfoColumn.setCellFactory(setToolInfoBtn);
-        ODinfoColumn.setCellFactory(setToolInfoBtn);
+
+
+
+
+
+
+
+//        DBRemImg.setCellFactory(createImageButtonCellFactory("drillblades"));
+//        ChamRemImg.setCellFactory(createImageButtonCellFactory("chamfer"));
+//        DRHSSRemImg.setCellFactory(createImageButtonCellFactory("drillhss"));
+//        DRVHMRemImg.setCellFactory(createImageButtonCellFactory("drillvhm"));
+//        EMAluRemImg.setCellFactory(createImageButtonCellFactory("emalu"));
+//        EmRRemImg.setCellFactory(createImageButtonCellFactory("emr"));
+//        EmMetRemImg.setCellFactory(createImageButtonCellFactory("emmet"));
+//        FaceGrooveRemImg.setCellFactory(createImageButtonCellFactory("facegroove"));
+//        ReamerRemImg.setCellFactory(createImageButtonCellFactory("reamer"));
+//        shellMillFFRemImg.setCellFactory(createImageButtonCellFactory("shellmill"));
+//        shellMillNMRemImg.setCellFactory(createImageButtonCellFactory("shellmill"));
+//        SDRemImg.setCellFactory(createImageButtonCellFactory("spotdrill"));
+//        TapInchRemImg.setCellFactory(createImageButtonCellFactory("tapinch"));
+//        TapSKRemImg.setCellFactory(createImageButtonCellFactory("tapsk"));
+//        TapPRRemImg.setCellFactory(createImageButtonCellFactory("tappr"));
+//        DieRemImg.setCellFactory(createImageButtonCellFactory("threaddie"));
+//        IDRemImg.setCellFactory(createImageButtonCellFactory("turningid"));
+//        ODRemImg.setCellFactory(createImageButtonCellFactory("turningod"));
+
+
+
+
 
 
 //        infoColumn2.setCellFactory(setParamBtn);
 //
-        typeColumn2.setCellFactory(setInsertImage);
+//        typeColumn2.setCellFactory(setInsertImage);
+
+
+
 
 
         ObservableList<EmMet> EmMetOL = FXCollections.observableArrayList(allEmMet);
@@ -914,39 +989,78 @@ public class ToolsController {
         ObservableList<FaceGroove> faceGroovesOL = FXCollections.observableArrayList(allFaceGroove);
         FaceGrooveTable.setItems(faceGroovesOL);
 
+//        configureCommentColumn("chamfer", ChamComment, ChamferTable, 250);
+//        configureCommentColumn("drillblades", DBComment, DrillBladeTable, 250);
+//        configureCommentColumn("drillhss", DRHSSComment, DrillHSSTable, 250);
+//        configureCommentColumn("drillvhm", DRVHMComment, DrillVHMTable, 250);
+//        configureCommentColumn("threaddie", DieComment, DieTable, 250);
+//        configureCommentColumn("tapsk", TapSKComment, TapSKTable, 250);
+//        configureCommentColumn("tappr", TapPRComment, TapPRTable, 250);
+//        configureCommentColumn("tapinch", TapInchComment, TapInchTable, 250);
+//        configureCommentColumn("turningod", IDComment, OdLatheTable, 250);
+//        configureCommentColumn("turningid", ODComment, IdLatheTable, 250);
+//        configureCommentColumn("facegroove", FaceGrooveComment, FaceGrooveTable, 250);
+//        configureCommentColumn("reamer", ReamerComment, ReamerTable, 250);
+//        configureCommentColumn("shellmill", shellMillFFComment, ShelMillFFTable, 250);
+//        configureCommentColumn("shellmill", shellMillNMComment, ShelMillNMTable, 250);
+//        configureCommentColumn("spotdrill", SDComment, SpotDRtable, 250);
+//        configureCommentColumn("emalu", EMAlucomment, EmAluTable, 250);
+//        configureCommentColumn("emmet", EMMetcomment, EmMetTable, 250);
+//        configureCommentColumn("emr", EmRComment, EmRTable, 250);
 
 
 
-//        toolTable.getSelectionModel().setCellSelectionEnabled(true);
-//        toolTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-//        toolTable.setOnMouseClicked(this::handleMousePressed);
-//        commentColumn.setCellFactory(
-//                TextFieldTableCell.forTableColumn());
 
+
+
+    }
+
+
+
+//    public <S> void configureCommentColumn(String dbName, TableColumn<Tool1, String> commentColumn, TableView<S> tabView, int maxLength) {
+//        Tool1Dao tool1DAO = getToolDAO(dbName);
+//
+//        tabView.getSelectionModel().setCellSelectionEnabled(true);
+//        tabView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+//        tabView.setOnMouseClicked(this::handleMousePressed);
+//        tabView.setEditable(true);
+//        commentColumn.setEditable(true);
+//        commentColumn.setCellFactory(LimitedTextFieldTableCell.forTableColumn(maxLength));
+//
+//
+//
 //        commentColumn.setOnEditCommit(
-//
-//                (TableColumn.CellEditEvent<Tool, String> t) ->
-//                        ( t.getTableView().getItems().get(
-//                                t.getTablePosition().getRow())
-//                        ).setToolInfo(t.getNewValue())
-//
-//
-//
-//        );
-//        commentColumn.setOnEditCommit(
-//                (TableColumn.CellEditEvent<Tool, String> t) -> {
-//                    Tool tool = t.getTableView().getItems().get(t.getTablePosition().getRow());
-//                    tool.setToolInfo(t.getNewValue()); // Aktualizacja pola 'comment'
+//                (TableColumn.CellEditEvent<Tool1, String> t) -> {
+//                    Tool1 tool1 = t.getTableView().getItems().get(t.getTablePosition().getRow());
+//                    tool1.setComment(t.getNewValue()); // Aktualizacja pola 'comment'
 //
 //                    // Pobierz wartość z kolumny "index"
 //                    String toolIndex = t.getTableView().getItems().get(t.getTablePosition().getRow()).getToolIndex();
-//                    tool.setToolIndex(toolIndex);
-//                    toolDAO.updateToolInfo(tool);
+//                    tool1.setToolIndex(toolIndex);
 //
-//
+//                    tool1DAO.updateComment(tool1);
 //                }
 //        );
-    }
+//    }
+
+
+
+
+
+
+
+
+//    public Tool1Dao getToolDAO(String dbName) {
+//        switch (dbName.toLowerCase()) {
+//            case "chamfer" :
+//                return new ChamferDAO();
+//            case "drillblades":
+//                return new DrillBladesDAO();
+//            // Dodaj inne przypadki dla różnych baz danych
+//            default:
+//                throw new IllegalArgumentException("Unsupported database: " + dbName);
+//        }
+//    }
 
 
     private void handleMousePressed(MouseEvent event) {
@@ -954,6 +1068,17 @@ public class ToolsController {
             showContextMenu(event);
         }
     }
+
+
+
+
+
+
+
+
+
+
+
 //
 //
     private void showContextMenu(MouseEvent event) {
@@ -1114,44 +1239,6 @@ public class ToolsController {
 
 
 
-//    @FXML
-//    private void showNewEmMet() {
-//
-//
-//
-//
-//            if (innerSelectedTab != null) {
-//                switch (innerSelectedTab.getText()) {
-//                    case "Frezy Stal":
-//                        fxmlFile = "/path/to/frezysteelnewtool.fxml";
-//                        break;
-//                    case "Frezy ALU":
-//                        fxmlFile = "/path/to/frezyalunewtool.fxml";
-//                        break;
-//                    case "Frezy z R":
-//                        fxmlFile = "/path/to/frezyrnewtool.fxml";
-//                        break;
-//                }
-//            }
-//        } else if (outerSelectedTab.getText().equals("Głowice")) {
-//            fxmlFile = "/path/to/shellmillnewtool.fxml";
-//        } else if (outerSelectedTab.getText().equals("Wiertła")) {
-//            fxmlFile = "/path/to/drillnewtool.fxml";
-//        } // Add more conditions for other outer tabs as necessary
-//
-//        if (!fxmlFile.isEmpty()) {
-//            try {
-//                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlFile));
-//                Parent root = fxmlLoader.load();
-//                Stage stage = new Stage();
-//                stage.setTitle("New Tool");
-//                stage.setScene(new Scene(root));
-//                stage.show();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//    }
 
 
 
@@ -1470,6 +1557,32 @@ public class ToolsController {
 
 
 
+    @FXML
+    private void showBackFromSharpenWindow(ActionEvent event) {
+        try {
+            // Ładowanie widoku narzędzi
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/tooltracker/updateSharpenToolForm.fxml"));
+            Parent root = loader.load();
+            BackFromSharpenController backFromSharpenController = loader.getController();
+            backFromSharpenController.setToolsController(this);
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root, 500,430));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Obsługa błędów ładowania widoku
+        }
+    }
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1721,94 +1834,120 @@ public class ToolsController {
 
 
     // Metoda odpowiedzialna za przypisanie przycisku do narzędzia, otworzenie nowego okna z nowym plikiem FXML
-    Callback<TableColumn<Tool1, String>, TableCell<Tool1, String>> setToolInfoBtn
-            = //
-            new Callback<TableColumn<Tool1, String>, TableCell<Tool1, String>>() {
-                @Override
-                public TableCell call(final TableColumn<Tool1, String> param) {
-                    final TableCell<Tool1, String> cell = new TableCell<Tool1, String>() {
+//    Callback<TableColumn<Tool1, String>, TableCell<Tool1, String>> setToolInfoBtn
+//            = //
+//            new Callback<TableColumn<Tool1, String>, TableCell<Tool1, String>>() {
+//                @Override
+//                public TableCell call(final TableColumn<Tool1, String> param) {
+//                    final TableCell<Tool1, String> cell = new TableCell<Tool1, String>() {
+//
+//                        final Button btn = new Button("Tool Info");
+//
+//                        @Override
+//                        public void updateItem(String item, boolean empty) {
+//                            super.updateItem(item, empty);
+//                            if (empty) {
+//                                setGraphic(null);
+//                                setText(null);
+//                            } else {
+//                                btn.setOnAction(event ->  {
+//                                    try {
+//                                        // Ładowanie widoku narzędzi
+//                                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/tooltracker/ToolInfoView.fxml"));
+//                                        Parent root = loader.load();
+//                                            Tool1 selectedTool = getTableView().getItems().get(getIndex());
+//                                        ToolInfoController toolInfoController = loader.getController();
+//                                        toolInfoController.setToolIndex(selectedTool.getToolIndex());
+//                                        System.out.println(selectedTool.getToolIndex());
+//
+//                                        Stage stage = new Stage();
+//                                        stage.setScene(new Scene(root, 400,300));
+//                                        stage.show();
+//
+//                                    } catch (IOException e) {
+//                                        e.printStackTrace();
+//                                        // Obsługa błędów ładowania widoku
+//                                    }
+//                                }
+//
+//                                );
+//                                setGraphic(btn);
+//                                setText(null);
+//                            }
+//                        }
+//                    };
+//                    return cell;
+//                }
+//            };
 
-                        final Button btn = new Button("Tool Info");
 
-                        @Override
-                        public void updateItem(String item, boolean empty) {
-                            super.updateItem(item, empty);
-                            if (empty) {
-                                setGraphic(null);
-                                setText(null);
-                            } else {
-                                btn.setOnAction(event ->  {
-                                    try {
-                                        // Ładowanie widoku narzędzi
-                                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/tooltracker/ToolInfoView.fxml"));
-                                        Parent root = loader.load();
-                                            Tool1 selectedTool = getTableView().getItems().get(getIndex());
-                                        ToolInfoController toolInfoController = loader.getController();
-                                        toolInfoController.setToolIndex(selectedTool.getToolIndex());
-                                        System.out.println(selectedTool.getToolIndex());
 
-                                        Stage stage = new Stage();
-                                        stage.setScene(new Scene(root, 400,300));
-                                        stage.show();
 
-                                    } catch (IOException e) {
-                                        e.printStackTrace();
-                                        // Obsługa błędów ładowania widoku
-                                    }
+
+
+
+
+
+
+    public Callback<TableColumn<Tool1, String>, TableCell<Tool1, String>> createImageButtonCellFactory(String tabName) {
+        return new Callback<TableColumn<Tool1, String>, TableCell<Tool1, String>>() {
+            @Override
+            public TableCell<Tool1, String> call(TableColumn<Tool1, String> param) {
+                return new TableCell<Tool1, String>() {
+                    final Button imageButton = new Button();
+
+                    {
+                        imageButton.setPrefSize(5, 5);
+                        imageButton.setGraphic(new ImageView(new Image("file:C:\\Users\\gercu\\Downloads\\employeemanager\\ToolTracker\\src\\main\\resources\\com\\example\\tooltracker\\icons\\rem.jpg")));
+                        imageButton.setStyle("-fx-background-color: white;");
+                        imageButton.setOnMouseEntered(event -> imageButton.getScene().setCursor(Cursor.HAND));
+                        imageButton.setOnMouseExited(event -> imageButton.getScene().setCursor(Cursor.DEFAULT));
+                        imageButton.setOnAction(event -> {
+                            if (!isEmpty()) {
+                                Tool1 selectedToolInsert = getTableRow().getItem();
+                                String toolIndex = selectedToolInsert.getToolIndex();
+
+                                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                                alert.setTitle("Potwierdzenie usunięcia");
+                                alert.setHeaderText("Czy na pewno chcesz usunąć narzędzie?");
+                                alert.setContentText("Indeks narzędzia: " + toolIndex);
+
+                                Optional<ButtonType> result = alert.showAndWait();
+                                if (result.isPresent() && result.get() == ButtonType.OK) {
+                                    toolDAO.deleteTool(toolIndex, tabName);
+                                    ToolAction toolAction = new ToolAction();
+                                    toolAction.settAction("Usunięto narzędzie");
+                                    toolAction.settIndex(toolIndex);
+                                    actionDAO.addAction(toolAction);
+                                    getTableView().getItems().remove(selectedToolInsert);
                                 }
-
-                                );
-                                setGraphic(btn);
-                                setText(null);
                             }
+                        });
+                    }
+
+                    @Override
+                    protected void updateItem(String item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                            setText(null);
+                        } else {
+                            setGraphic(imageButton);
+                            setText(null);
                         }
-                    };
-                    return cell;
-                }
-            };
+                    }
+                };
+            }
+        };
+    }
 
 
 
-    Callback<TableColumn<ToolInsert, String>, TableCell<ToolInsert, String>> setParamBtn
-            = //
-            new Callback<TableColumn<ToolInsert, String>, TableCell<ToolInsert, String>>() {
-                @Override
-                public TableCell call(final TableColumn<ToolInsert, String> param) {
-                    final TableCell<ToolInsert, String> cell = new TableCell<ToolInsert, String>() {
-                        final Button btn = new Button("Parametry");
-                        @Override
-                        public void updateItem(String item, boolean empty) {
-                            super.updateItem(item, empty);
-                            if (empty) {
-                                setGraphic(null);
-                                setText(null);
-                            } else {
-                                btn.setOnAction(event ->  {
-                                            try {
-                                                // Ładowanie widoku narzędzi
-                                                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/tooltracker/StartView.fxml"));
-                                                Parent root = loader.load();
-                                                ToolInsert selectedTool = getTableView().getItems().get(getIndex());
-                                                System.out.println(selectedTool.getInsertIndex());
 
-                                                Stage stage = new Stage();
-                                                stage.setScene(new Scene(root, 400,300));
-                                                stage.show();
 
-                                            } catch (IOException e) {
-                                                e.printStackTrace();
-                                                // Obsługa błędów ładowania widoku
-                                            }
-                                        }
-                                );
-                                setGraphic(btn);
-                                setText(null);
-                            }
-                        }
-                    };
-                    return cell;
-                }
-            };
+
+
+
 
 //OBRAZEK Z RODZAJEM PŁYTKI
 Callback<TableColumn<ToolInsert, String>, TableCell<ToolInsert, String>> setInsertImage = new Callback<TableColumn<ToolInsert, String>, TableCell<ToolInsert, String>>() {
@@ -1850,82 +1989,85 @@ Callback<TableColumn<ToolInsert, String>, TableCell<ToolInsert, String>> setInse
 
 
 //Podswietlanie Statusów
-    Callback<TableColumn<Tool, String>, TableCell<Tool, String>> setBackgroundOnStatus
-            = //
-            new Callback<TableColumn<Tool, String>, TableCell<Tool, String>>() {
-                @Override
-                public TableCell call(final TableColumn<Tool, String> param) {
-                    final TableCell<Tool, String> cell = new TableCell<Tool, String>() {
-                        @Override
-                        public void updateItem(String item, boolean empty) {
-                            super.updateItem(item, empty);
-
-                            if (item != null && item.equals("W użyciu")) {
-                                setStyle("-fx-background-color: lightgreen;");
-                            }
-                            if (item != null && item.equals("Do ostrzenia")) {
-                                setStyle("-fx-background-color: blue;");
-                            }
-                            if (item != null && item.equals("Zużyte")) {
-                                setStyle("-fx-background-color: red;");
-                            }
-                            if(item==null) {
-                                setStyle("");
-                            }
-                            setText(item);
-                        }
-                    };
-                    return cell;
-                }
-            };
-
-
-
-    Callback<TableColumn<Tool, String>, TableCell<Tool, String>> setColourInInsertUsage
-            = //
-            new Callback<TableColumn<Tool, String>, TableCell<Tool, String>>() {
-                @Override
-                public TableCell call(final TableColumn<Tool, String> param) {
-                    final TableCell<Tool, String> cell = new TableCell<Tool, String>() {
-                        Tool selectedTool;
+//    Callback<TableColumn<Tool1, ToolStatus>, TableCell<Tool1, ToolStatus>> setBackgroundOnStatus
+//            = //
+//            new Callback<TableColumn<Tool1, ToolStatus>, TableCell<Tool1, ToolStatus>>() {
+//                @Override
+//                public TableCell call(final TableColumn<Tool1, ToolStatus> param) {
+//                    final TableCell<Tool1, ToolStatus> cell = new TableCell<Tool1, ToolStatus>() {
+//                        @Override
+//                        public void updateItem(ToolStatus item, boolean empty) {
+//                            super.updateItem(item, empty);
+//                            setText(String.valueOf(item));
+//                            String item1 = (String.valueOf(item));
+//
+//
+//                            if (item1 != null && item1.equals("W użyciu")) {
+//                                setStyle("-fx-background-color: lightgreen;");
+//                            }
+//                            if (item1 != null && item1.equals("W ostrzeniu")) {
+//                                setStyle("-fx-background-color: blue;");
+//                            }
+//                            if (item1 != null && item1.equals("Zużyte")) {
+//                                setStyle("-fx-background-color: red;");
+//                            }
+//                            if(item==null) {
+//                                setStyle("");
+//                                setText("");
+//                            }
+//                        }
+//                    };
+//                    return cell;
+//                }
+//            };
 
 
 
-                        @Override
-                        public void updateItem(String item, boolean empty) {
-                            super.updateItem(item, empty);
-                            int liczba;
-                            if(item==null || item.equals("")) {
-                                setStyle("");
-                            } else  {
-                                liczba  = Integer.valueOf(item);
-                                if ( liczba<=4) {
-                                    setStyle("-fx-background-color: orange;");
-                                }
-                                if (liczba>4 && liczba<=7) {
-                                    setStyle("-fx-background-color: yellow;");
-                                }
-                                if(liczba>7)
-                                    setStyle("-fx-background-color: lightgreen");
-                            }
-
-                            setText(item);
-                            Tooltip tooltip = new Tooltip("");
-                            if (!empty) {
-                                // Pobierz aktualne narzędzie z wiersza
-                                Tool currentTool = getTableView().getItems().get(getIndex());
-
-                                // Ustaw insertMatching narzędzia jako tekst Tooltip
-                                tooltip.setText(currentTool.getInsertMatching());
-                            }
-
-
-                            setTooltip(tooltip);
-                        }
-                    };
-                    return cell;
-                }
-            };
+//    Callback<TableColumn<Tool, String>, TableCell<Tool, String>> setColourInInsertUsage
+//            = //
+//            new Callback<TableColumn<Tool, String>, TableCell<Tool, String>>() {
+//                @Override
+//                public TableCell call(final TableColumn<Tool, String> param) {
+//                    final TableCell<Tool, String> cell = new TableCell<Tool, String>() {
+//                        Tool selectedTool;
+//
+//
+//
+//                        @Override
+//                        public void updateItem(String item, boolean empty) {
+//                            super.updateItem(item, empty);
+//                            int liczba;
+//                            if(item==null || item.equals("")) {
+//                                setStyle("");
+//                            } else  {
+//                                liczba  = Integer.valueOf(item);
+//                                if ( liczba<=4) {
+//                                    setStyle("-fx-background-color: orange;");
+//                                }
+//                                if (liczba>4 && liczba<=7) {
+//                                    setStyle("-fx-background-color: yellow;");
+//                                }
+//                                if(liczba>7)
+//                                    setStyle("-fx-background-color: lightgreen");
+//                            }
+//
+//                            setText(item);
+//                            Tooltip tooltip = new Tooltip("");
+//                            if (!empty) {
+//                                // Pobierz aktualne narzędzie z wiersza
+//                                Tool currentTool = getTableView().getItems().get(getIndex());
+//
+//                                // Ustaw insertMatching narzędzia jako tekst Tooltip
+//                                tooltip.setText(currentTool.getInsertMatching());
+//                            }
+//
+//
+//                            setTooltip(tooltip);
+//                        }
+//                    };
+//                    return cell;
+//                }
+//            };
 
 
     private void filterByToolType(String toolType) {
@@ -1952,12 +2094,16 @@ Callback<TableColumn<ToolInsert, String>, TableCell<ToolInsert, String>> setInse
 
     }
 
-    public void refreshToolTable() {
+    public void refreshToolTable() throws SQLException {
         List<Tool> allTools = toolDAO.getAllTools();
+        List<EmMet> allEmMet1 = emMetDAO.getAllEmMetTools();
         ObservableList<Tool> toolData = FXCollections.observableArrayList(allTools);
-        toolData.forEach(t -> t.setInsertQty(getMatchingInsertQty(t)));
+        ObservableList<EmMet> emMetData = FXCollections.observableArrayList(allEmMet1);
 
-        toolTable.setItems(getFilteredToolData(toolData));
+//        toolData.forEach(t -> t.setInsertQty(getMatchingInsertQty(t)));
+
+//        toolTable.setItems(getFilteredToolData(toolData));
+        EmMetTable.setItems(emMetData);
     }
 
 
@@ -1995,3 +2141,5 @@ Callback<TableColumn<ToolInsert, String>, TableCell<ToolInsert, String>> setInse
     }
 
 }
+
+

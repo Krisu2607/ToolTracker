@@ -9,6 +9,8 @@
 <?import com.example.tooltracker.model.tools.Tool?>
 <?import java.lang.String?>
 <?import javafx.collections.FXCollections?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 <BorderPane xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.example.tooltracker.controller.ToolsController"
             stylesheets="@tools.css" style="-fx-background-color: #555555" >
@@ -26,6 +28,17 @@
                 <TabPane fx:id="innerEMpane" tabClosingPolicy="UNAVAILABLE">
                     <Tab text="Frezy Stal">
                         <VBox fx:id="mainContainer" alignment="CENTER" >
+                            <ImageView
+                                    fx:id="EmMetimageView"
+                                    fitHeight="100.0"
+                                    fitWidth="200.0"
+                                    layoutX="250.0"
+                                    layoutY="83.0"
+                                    pickOnBounds="true"
+                                    preserveRatio="false"
+                            >
+
+                            </ImageView>
                             <TextField promptText="Search" fx:id="toolSearch" />
                             <!-- Przyciski na górze -->
 
@@ -45,6 +58,7 @@
 
                             <TableView fx:id="EmMetTable">
                                 <columns>
+                                    <TableColumn fx:id="EmMetRemImg" prefWidth="36.666656494140625" />
                                     <TableColumn text="info" fx:id="EmMetinfoColumn" />
                                     <TableColumn text="Nazwa" fx:id="EMMetnameColumn" />
                                     <TableColumn text="Indeks" fx:id="EMMetindexColumn" />
@@ -73,6 +87,7 @@
 
                             <TableView fx:id="EmAluTable">
                                 <columns>
+                                    <TableColumn fx:id="EMAluRemImg" prefWidth="36.666656494140625" />
                                     <TableColumn text="info" fx:id="EMAluinfoColumn" />
                                     <TableColumn text="Nazwa" fx:id="EMAlunameColumn" />
                                     <TableColumn text="Indeks" fx:id="EMAluindexColumn" />
@@ -101,6 +116,7 @@
 
                             <TableView fx:id="EmRTable">
                                 <columns>
+                                    <TableColumn fx:id="EmRRemImg" prefWidth="36.666656494140625" />
                                     <TableColumn text="info" fx:id="EmRinfoColumn" />
                                     <TableColumn text="Nazwa" fx:id="EmRNAME" />
                                     <TableColumn text="Indeks" fx:id="EmRIndex" />
@@ -131,6 +147,7 @@
 
                             <TableView fx:id="DrillBladeTable">
                                 <columns>
+                                    <TableColumn fx:id="DBRemImg" prefWidth="36.666656494140625" />
                                     <TableColumn text="info" fx:id="DBinfoColumn" />
                                     <TableColumn text="Nazwa" fx:id="DBName" />
                                     <TableColumn text="Indeks" fx:id="DBIndex" />
@@ -151,9 +168,21 @@
                     <Tab text="Wiertła HSS">
                         <VBox fx:id="mainContainer8" alignment="CENTER" >
                             <!-- Przyciski na górze -->
+                            <ImageView
+                                    fx:id="DrillHSSimageView"
+                                    fitHeight="100.0"
+                                    fitWidth="200.0"
+                                    layoutX="250.0"
+                                    layoutY="83.0"
+                                    pickOnBounds="true"
+                                    preserveRatio="true"
+                            >
+
+                            </ImageView>
 
                             <TableView fx:id="DrillHSSTable">
                                 <columns>
+                                    <TableColumn fx:id="DRHSSRemImg" prefWidth="36.666656494140625" />
                                     <TableColumn text="info" fx:id="DRHSSinfoColumn" />
                                     <TableColumn text="Nazwa" fx:id="DRHSSName" />
                                     <TableColumn text="Indeks" fx:id="DRHSSIndex" />
@@ -177,8 +206,21 @@
                         <VBox fx:id="mainContainer9" alignment="CENTER" >
                             <!-- Przyciski na górze -->
 
+                            <ImageView
+                                    fx:id="DrillVHMimageView"
+                                    fitHeight="100.0"
+                                    fitWidth="200.0"
+                                    layoutX="250.0"
+                                    layoutY="83.0"
+                                    pickOnBounds="true"
+                                    preserveRatio="true"
+                            >
+
+                            </ImageView>
+
                             <TableView fx:id="DrillVHMTable">
                                 <columns>
+                                    <TableColumn fx:id="DRVHMRemImg" prefWidth="36.666656494140625" />
                                     <TableColumn text="info" fx:id="DRVHMinfoColumn" />
                                     <TableColumn text="Nazwa" fx:id="DRVHMName" />
                                     <TableColumn text="Indeks" fx:id="DRVHMIndex" />
@@ -211,6 +253,7 @@
 
                             <TableView fx:id="TapSKTable">
                                 <columns>
+                                    <TableColumn fx:id="TapSKRemImg" prefWidth="36.666656494140625" />
                                     <TableColumn text="info" fx:id="TapSKinfoColumn" />
                                     <TableColumn text="Nazwa" fx:id="TapSKName" />
                                     <TableColumn text="Indeks" fx:id="TapSKIndex" />
@@ -234,6 +277,7 @@
 
                             <TableView fx:id="TapPRTable">
                                 <columns>
+                                    <TableColumn fx:id="TapPRRemImg" prefWidth="36.666656494140625" />
                                     <TableColumn text="info" fx:id="TapPRinfoColumn" />
                                     <TableColumn text="Nazwa" fx:id="TapPRName" />
                                     <TableColumn text="Indeks" fx:id="TapPRIndex" />
@@ -257,6 +301,7 @@
 
                             <TableView fx:id="TapInchTable">
                                 <columns>
+                                    <TableColumn fx:id="TapInchRemImg" prefWidth="36.666656494140625" />
                                     <TableColumn text="info" fx:id="TapInchinfoColumn" />
                                     <TableColumn text="Nazwa" fx:id="TapInchName" />
                                     <TableColumn text="Indeks" fx:id="TapInchIndex" />
@@ -278,6 +323,7 @@
 
                             <TableView fx:id="DieTable">
                                 <columns>
+                                    <TableColumn fx:id="DieRemImg" prefWidth="36.666656494140625" />
                                     <TableColumn text="info" fx:id="DieinfoColumn" />
                                     <TableColumn text="Nazwa" fx:id="DieName" />
                                     <TableColumn text="Indeks" fx:id="DieIndex" />
@@ -308,6 +354,7 @@
 
                             <TableView fx:id="OdLatheTable">
                                 <columns>
+                                    <TableColumn fx:id="ODRemImg" prefWidth="36.666656494140625" />
                                     <TableColumn text="info" fx:id="ODinfoColumn" />
                                     <TableColumn text="Nazwa" fx:id="ODName" />
                                     <TableColumn text="Indeks" fx:id="ODIndex" />
@@ -329,6 +376,7 @@
 
                             <TableView fx:id="IdLatheTable">
                                 <columns>
+                                    <TableColumn fx:id="IDRemImg" prefWidth="36.666656494140625" />
                                     <TableColumn text="info" fx:id="IDinfoColumn" />
                                     <TableColumn text="Nazwa" fx:id="IDName" />
                                     <TableColumn text="Indeks" fx:id="IDIndex" />
@@ -351,6 +399,7 @@
 
                             <TableView fx:id="FaceGrooveTable">
                                 <columns>
+                                    <TableColumn fx:id="FaceGrooveRemImg" prefWidth="36.666656494140625" />
                                     <TableColumn text="info" fx:id="FaceGrooveinfoColumn" />
                                     <TableColumn text="Nazwa" fx:id="FaceGrooveName" />
                                     <TableColumn text="Indeks" fx:id="FaceGrooveIndex" />
@@ -390,6 +439,7 @@
 
                             <TableView fx:id="ShelMillFFTable">
                                 <columns>
+                                    <TableColumn fx:id="shellMillFFRemImg" prefWidth="36.666656494140625" />
 
                                     <TableColumn text="info" fx:id="shellMillFFinfoColumn" />
                                     <TableColumn text="Nazwa" fx:id="shellMillFFName" />
@@ -416,6 +466,7 @@
 
                             <TableView fx:id="ShelMillNMTable">
                                 <columns>
+                                    <TableColumn fx:id="shellMillNMRemImg" prefWidth="36.666656494140625" />
                                     <TableColumn text="info" fx:id="shellMillNMinfoColumn" />
                                     <TableColumn text="Nazwa" fx:id="shellMillNMName" />
                                     <TableColumn text="Indeks" fx:id="shellMillNMIndex" />
@@ -453,6 +504,7 @@
 
                     <TableView fx:id="ChamferTable">
                         <columns>
+                            <TableColumn fx:id="ChamRemImg" prefWidth="36.666656494140625" />
                             <TableColumn text="info" fx:id="ChaminfoColumn" />
                             <TableColumn text="Nazwa" fx:id="ChamName" />
                             <TableColumn text="Indeks" fx:id="ChamIndex" />
@@ -478,6 +530,7 @@
 
                     <TableView fx:id="SpotDRtable">
                         <columns>
+                            <TableColumn fx:id="SDRemImg" prefWidth="36.666656494140625" />
                             <TableColumn text="info" fx:id="SDinfoColumn" />
                             <TableColumn text="Nazwa" fx:id="SDName" />
                             <TableColumn text="Indeks" fx:id="SDIndex" />
@@ -503,6 +556,7 @@
 
                     <TableView fx:id="ReamerTable">
                         <columns>
+                            <TableColumn fx:id="ReamerRemImg" prefWidth="36.666656494140625" />
                             <TableColumn text="info" fx:id="ReamerinfoColumn" />
                             <TableColumn text="Nazwa" fx:id="ReamerName" />
                             <TableColumn text="Indeks" fx:id="ReamerIndex" />
@@ -590,9 +644,8 @@
                     <MenuItem text="Głowica " onAction="#showNewFaceMillWindow"/>
                 </items>
             </MenuButton>
-            <Button fx:id="newToolBtn" text="Nowe Narzędzie"  onAction="#showNewToolWindow"  />
             <Button fx:id="newInsertBtn" text="Nowe Płytki" onAction="#showNewInsertWindow"  />
-            <Button fx:id="dressedBtn" text="Naostrzone"  />
+            <Button fx:id="dressedBtn" text="Naostrzone" onAction="#showBackFromSharpenWindow"   />
             <Button text="Odpisz Narzedzie" fx:id="editTool" onAction="#showEditToolWindow" />
             <Button  text="Odpisz Płytkę" fx:id="editInsert" onAction="#showEditInsertWindow" />
             <Button  text="Dodaj płytki do detalu" fx:id="addInsertsToPart" onAction="#showAddingInsertsToPart" />

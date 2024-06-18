@@ -17,6 +17,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -27,6 +29,9 @@ import java.util.Optional;
 
 public class AddEmMetController {
     private ToolsController toolsController;
+
+    @FXML
+    ImageView EmMetimageView;
 
 
 
@@ -63,6 +68,9 @@ public class AddEmMetController {
 
 
     public void initialize() {
+
+        EmMetimageView.setImage(new Image(getClass().getResourceAsStream("/com/example/tooltracker/icons/toolsizesimages/emsize.png")));
+
         addedIndexesListView.setItems(addedIndexes);
         //DEZAKTYWACJA PRZYCISKU ZATWIERZ W ZALEZNOSCI CZY JEST JAKIS TEKST W POLU CZY NIE
         confirmButton.disableProperty().bind(nameTextField.textProperty().isEmpty());
@@ -182,7 +190,7 @@ public class AddEmMetController {
         nameTextField.requestFocus();
 
 //        toolsController.refreshInsertTable();
-//        toolsController.refreshToolTable();
+        toolsController.refreshToolTable();
     }
 
     private List<String> getToolIndex(int toothsQty) throws SQLException {

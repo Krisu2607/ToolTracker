@@ -12,6 +12,8 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.sql.SQLException;
+
 public class NewToolController {
     private ToolsController toolsController;
 
@@ -67,7 +69,7 @@ public class NewToolController {
     }
 
     @FXML
-    private void handleConfirmButton() {
+    private void handleConfirmButton() throws SQLException {
 
 
 

@@ -1,9 +1,6 @@
 package com.example.tooltracker.database;
 
-import com.example.tooltracker.model.tools.DrillBlades;
-import com.example.tooltracker.model.tools.DrillHSS;
-import com.example.tooltracker.model.tools.ToolStatus;
-import com.example.tooltracker.model.tools.ToolType;
+import com.example.tooltracker.model.tools.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,7 +9,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DrillHssDAO {
+public class DrillHssDAO  {
+
+//    private static final String UPDATE_COMMENT = "UPDATE drillhss SET  comment=? WHERE toolIndex=?";
+
+
+    private static final String UPDATE_TOOL_POST_SHARP = "UPDATE drillhss SET  toolStatus=?, diameter=?, length = ?, worklength=? WHERE toolIndex=?";
+
     public List<DrillHSS> getAllDrillHSS() throws SQLException {
         List<DrillHSS> tools = new ArrayList<>();
         String query = "SELECT * FROM DrillHSS";
@@ -56,6 +59,32 @@ public class DrillHssDAO {
             statement.executeUpdate();
         }
     }
+
+
+    public void updatePostSharpen(DrillHSS drillHSS) {
+        try (Connection connection = DatabaseUtil.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_TOOL_POST_SHARP)) {
+            preparedStatement.setString(1, "W_UZYCIU");
+            preparedStatement.setInt(2, drillHSS.getLength());
+            preparedStatement.setInt(3, drillHSS.getWorkLength());
+            preparedStatement.setDouble(4, drillHSS.getDiameter());
+            preparedStatement.setString(5, drillHSS.getToolIndex());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+//    public void updateComment(Tool1 tool1) {
+//        try (Connection connection = DatabaseUtil.getConnection();
+//             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_COMMENT)) {
+//            preparedStatement.setString(1, tool1.getComment());
+//            preparedStatement.setString(2, tool1.getToolIndex());
+//            preparedStatement.executeUpdate();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
 
 

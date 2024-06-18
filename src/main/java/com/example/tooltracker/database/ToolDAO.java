@@ -6,8 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class ToolDAO {
     private static final String INSERT_TOOL = "INSERT INTO tools (toolName, toolIndex, toolQty, toolType, toolDiameter, toolInfo, toolStatus, insertMatching ) VALUES (?, ?, ?, ?, ?, ? ,?,?)";
@@ -15,6 +14,10 @@ public class ToolDAO {
     private static final String UPDATE_TOOL = "UPDATE tools SET toolName=?, toolIndex=?, toolQty=?,  toolType=?, toolDiameter=?, toolInfo=?, toolStatus=? WHERE toolIndex=?";
     private static final String UPDATE_TOOLSTATUS = "UPDATE tools SET  toolStatus=? WHERE toolIndex=?";
     private static final String UPDATE_TOOLINFO = "UPDATE tools SET  toolInfo=? WHERE toolIndex=?";
+
+    private static final String[] TABLES = {"shellmill", "drillhss", "drillvhm", "reamer", "idturning", "odturning", "tapsk", "tappr", "threaddie", "chamfer", "drillblade", "spotdrill"};
+    private static final String SELECT_TOOL_BY_INDEX = "SELECT * FROM %s WHERE toolIndex=?";
+    private static final String UPDATE_TOOLSTATUSS = "UPDATE %s SET toolStatus=? WHERE toolIndex=?";
     private static final String SELECT_ALL_TOOLS_FROM_PART = " SELECT tools.* FROM tools JOIN part_tools ON tools.toolIndex = part_tools.toolIndex WHERE part_tools.part_number = ?";
 
     private static final String DELETE_TOOL = "DELETE FROM tools WHERE toolIndex=?";
@@ -175,7 +178,8 @@ public class ToolDAO {
     }
 
 
-    public void deleteTool(String toolIndex) {
+    public void deleteTool(String toolIndex, String tableName) {
+         String DELETE_TOOL = "DELETE FROM " + tableName+  " WHERE toolIndex=?";
         try (Connection connection = DatabaseUtil.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(DELETE_TOOL)) {
             preparedStatement.setString(1, toolIndex);
@@ -185,4 +189,87 @@ public class ToolDAO {
             e.printStackTrace();
         }
     }
+
+
+
+
+
+    private static final Map<String, String> prefixToTableMap = new HashMap<>();
+    static {
+        prefixToTableMap.put("TS-P", "tappr");
+        prefixToTableMap.put("TT-P", "tapsk");
+        prefixToTableMap.put("FF", "shellmill");
+        prefixToTableMap.put("LT-I", "turningid");
+        prefixToTableMap.put("LT-E", "turningod");
+        prefixToTableMap.put("CM", "chamfer");
+        prefixToTableMap.put("CD", "spotdrill");
+        prefixToTableMap.put("DR-HSS", "drillhss");
+        prefixToTableMap.put("DR-VHM", "drillvhm");
+        prefixToTableMap.put("DM", "threaddie");
+        prefixToTableMap.put("EM-N", "emalu");
+        prefixToTableMap.put("EM-P", "emmet");
+        prefixToTableMap.put("EM-R", "emr");
+        prefixToTableMap.put("BM", "emr");
+    }
+
+    private static final String UPDATE_TOOLSTATUSSS = "UPDATE %s SET toolStatus=? WHERE toolIndex=?";
+
+    public String getTableName(String toolIndex) {
+        for (Map.Entry<String, String> entry : prefixToTableMap.entrySet()) {
+            if (toolIndex.startsWith(entry.getKey())) {
+                return entry.getValue();
+            }
+        }
+        return null;
+    }
+
+
+
+
+    public boolean toolExists(String toolIndex) {
+        for (String tableName : prefixToTableMap.values()) {
+            if (toolExistsInTable(toolIndex, tableName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean toolExistsInTable(String toolIndex, String tableName) {
+        String query = "SELECT 1 FROM " + tableName + " WHERE toolIndex = ?";
+        try (Connection connection = DatabaseUtil.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, toolIndex);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                return resultSet.next();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+
+
+    public void updateToolStatus(String toolIndex, String newStatus) {
+        String tableName = getTableName(toolIndex);
+        System.out.println(tableName);
+        if (tableName != null) {
+            String updateQuery = String.format(UPDATE_TOOLSTATUSSS, tableName);
+            System.out.println(updateQuery);
+            try (Connection connection = DatabaseUtil.getConnection();
+                 PreparedStatement preparedStatement = connection.prepareStatement(updateQuery)) {
+                preparedStatement.setString(1, newStatus);
+                preparedStatement.setString(2, toolIndex);
+                preparedStatement.executeUpdate();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("Nie znaleziono odpowiedniej tabeli dla indeksu: " + toolIndex);
+        }
+    }
+
+
+
 }

@@ -1,9 +1,6 @@
 package com.example.tooltracker.database;
 
-import com.example.tooltracker.model.tools.MaterialType;
-import com.example.tooltracker.model.tools.TapInch;
-import com.example.tooltracker.model.tools.TapPR;
-import com.example.tooltracker.model.tools.ToolStatus;
+import com.example.tooltracker.model.tools.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,7 +9,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TapInchDAO {
+public class TapInchDAO  {
+
+//    private static final String UPDATE_COMMENT = "UPDATE tapinch SET  comment=? WHERE toolIndex=?";
+
     public List<TapInch> getallTapInch() throws SQLException {
         List<TapInch> tools = new ArrayList<>();
         String query = "SELECT * FROM tapinch";
@@ -54,6 +54,18 @@ public class TapInchDAO {
             statement.executeUpdate();
         }
     }
+
+
+//    public void updateComment(Tool1 tool1) {
+//        try (Connection connection = DatabaseUtil.getConnection();
+//             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_COMMENT)) {
+//            preparedStatement.setString(1, tool1.getComment());
+//            preparedStatement.setString(2, tool1.getToolIndex());
+//            preparedStatement.executeUpdate();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
 
 

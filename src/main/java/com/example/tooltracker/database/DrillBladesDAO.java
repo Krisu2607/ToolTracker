@@ -10,7 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class DrillBladesDAO {
+public class DrillBladesDAO  {
+//    private static final String UPDATE_COMMENT = "UPDATE drillblades SET  comment=? WHERE toolIndex=?";
+
 
     public List<DrillBlades> getAllDrillBlades() throws SQLException {
         List<DrillBlades> tools = new ArrayList<>();
@@ -55,6 +57,18 @@ public class DrillBladesDAO {
             statement.executeUpdate();
         }
     }
+
+
+//    public void updateComment(Tool1 drillBlade) {
+//        try (Connection connection = DatabaseUtil.getConnection();
+//             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_COMMENT)) {
+//            preparedStatement.setString(1, drillBlade.getComment());
+//            preparedStatement.setString(2, drillBlade.getToolIndex());
+//            preparedStatement.executeUpdate();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     public int getLastToolIndexNum(double diameter) throws SQLException {
         int lastToolIndexNum = 0;

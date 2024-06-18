@@ -1,8 +1,6 @@
 package com.example.tooltracker.database;
 
-import com.example.tooltracker.model.tools.EmMet;
-import com.example.tooltracker.model.tools.MaterialType;
-import com.example.tooltracker.model.tools.ToolStatus;
+import com.example.tooltracker.model.tools.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,7 +10,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EmMetDAO {
+
+//    private static final String UPDATE_COMMENT = "UPDATE emmet SET  comment=? WHERE toolIndex=?";
+
     private Connection connection;
+
+    private static final String UPDATE_TOOL_POST_SHARP = "UPDATE emmet SET  toolStatus=?, l1=?, l2=?, d1=?, d2=? WHERE toolIndex=?";
+
 
 
 
@@ -65,6 +69,35 @@ public class EmMetDAO {
             statement.executeUpdate();
         }
     }
+
+
+    public void updatePostSharpen(EmMet emMet) {
+        try (Connection connection = DatabaseUtil.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_TOOL_POST_SHARP)) {
+            preparedStatement.setString(1, "W_UZYCIU");
+            preparedStatement.setInt(2, emMet.getL1());
+            preparedStatement.setInt(3, emMet.getL2());
+            preparedStatement.setDouble(4, emMet.getD1());
+            preparedStatement.setDouble(5, emMet.getD2());
+            preparedStatement.setString(6, emMet.getToolIndex());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+//    public void updateComment(Tool1 tool1) {
+//        try (Connection connection = DatabaseUtil.getConnection();
+//             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_COMMENT)) {
+//            preparedStatement.setString(1, tool1.getComment());
+//            preparedStatement.setString(2, tool1.getToolIndex());
+//            preparedStatement.executeUpdate();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//    }
+
+
 
     public void updateEmMetTool(EmMet tool) throws SQLException {
         String query = "UPDATE EmMet SET toolName = ?, toolIndex = ?, toolStatus = ?, comment = ?, price = ?, L1 = ?, L2 = ?, d1 = ?, d2 = ?, Material = ?, toothsQty = ? WHERE toolIndex = ?";

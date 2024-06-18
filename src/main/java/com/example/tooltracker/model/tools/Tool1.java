@@ -75,6 +75,14 @@ public class Tool1 {
         return comment.get();
     }
 
+    public void setComment(String comment) {
+        this.comment.set(comment);
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price.set(price);
+    }
+
     public BigDecimal getPrice() {
         return price.get();
     }

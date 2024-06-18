@@ -2,6 +2,7 @@ package com.example.tooltracker.database;
 
 import com.example.tooltracker.model.tools.MaterialType;
 import com.example.tooltracker.model.tools.ThreadDie;
+import com.example.tooltracker.model.tools.Tool1;
 import com.example.tooltracker.model.tools.ToolStatus;
 
 import java.sql.Connection;
@@ -11,7 +12,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ThreadDieDAO {
+public class ThreadDieDAO  {
+
+//    private static final String UPDATE_COMMENT = "UPDATE threaddie SET  comment=? WHERE toolIndex=?";
+
 
     public List<ThreadDie> getAllThreadDie() throws SQLException {
         List<ThreadDie> tools = new ArrayList<>();
@@ -60,6 +64,18 @@ public class ThreadDieDAO {
             statement.executeUpdate();
         }
     }
+
+
+//    public void updateComment(Tool1 tool1) {
+//        try (Connection connection = DatabaseUtil.getConnection();
+//             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_COMMENT)) {
+//            preparedStatement.setString(1, tool1.getComment());
+//            preparedStatement.setString(2, tool1.getToolIndex());
+//            preparedStatement.executeUpdate();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     public int getLastToolIndex() throws SQLException {
         int lastToolIndexNum = 0;

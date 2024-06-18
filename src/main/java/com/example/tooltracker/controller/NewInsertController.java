@@ -9,6 +9,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.sql.SQLException;
+
 public class NewInsertController {
 
     private ToolsController toolsController;
@@ -36,7 +38,7 @@ public class NewInsertController {
     }
 
     @FXML
-    private void handleConfirmButton() {
+    private void handleConfirmButton() throws SQLException {
 
 
 

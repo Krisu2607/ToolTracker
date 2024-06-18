@@ -16,7 +16,7 @@
                 </Label>
                 <HBox fx:id="log" prefHeight="55.0" prefWidth="707.0" spacing="3">
                     <Button prefHeight="25.0" prefWidth="85.0">Zaloguj</Button>
-                    <Button prefHeight="25.0" prefWidth="110.0">Dodaj Użytkownika</Button>
+                    <Button prefHeight="25.0" prefWidth="110.0">Dodaj Uzytkownika</Button>
                 </HBox>
 
 
@@ -27,11 +27,7 @@
     </top>
     <center>
         <VBox fx:id="butts">
-            <!-- Górne przyciski -->
-<!--            <HBox fx:id="buttTop" spacing="10">-->
-<!--                <Button styleClass="custom-button" fx:id="tokarka" onAction="#showLatheView" />-->
-<!--                <Button styleClass="custom-button"   fx:id="frezarka" onAction="#showMillView" />-->
-<!--            </HBox>-->
+
 
             <!-- Dolne przyciski -->
             <HBox fx:id="buttBottom" spacing="20">

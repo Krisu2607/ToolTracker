@@ -12,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
@@ -54,7 +55,7 @@ public class EditInsertController {
     }
 
     @FXML
-    private void handleConfirmButton() {
+    private void handleConfirmButton() throws SQLException {
         String index = indexTextField.getText();
 
 

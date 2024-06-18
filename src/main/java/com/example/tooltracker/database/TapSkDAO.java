@@ -9,7 +9,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TapSkDAO {
+public class TapSkDAO{
+
+//    private static final String UPDATE_COMMENT = "UPDATE tapsk SET  comment=? WHERE toolIndex=?";
+
 
 
     public List<TapSK> getAllSkTap() throws SQLException {
@@ -56,6 +59,17 @@ public class TapSkDAO {
             statement.executeUpdate();
         }
     }
+
+//    public void updateComment(Tool1 tool1) {
+//        try (Connection connection = DatabaseUtil.getConnection();
+//             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_COMMENT)) {
+//            preparedStatement.setString(1, tool1.getComment());
+//            preparedStatement.setString(2, tool1.getToolIndex());
+//            preparedStatement.executeUpdate();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
 
     public int getLastToolIndex() throws SQLException {

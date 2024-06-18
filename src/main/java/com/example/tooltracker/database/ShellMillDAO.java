@@ -2,6 +2,7 @@ package com.example.tooltracker.database;
 
 import com.example.tooltracker.model.tools.DrillBlades;
 import com.example.tooltracker.model.tools.ShellMill;
+import com.example.tooltracker.model.tools.Tool1;
 import com.example.tooltracker.model.tools.ToolStatus;
 
 import java.sql.Connection;
@@ -12,6 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ShellMillDAO {
+
+//    private static final String UPDATE_COMMENT = "UPDATE shellmill SET  comment=? WHERE toolIndex=?";
+
 
     public List<ShellMill> getAllFFShellMill() throws SQLException {
         List<ShellMill> tools = new ArrayList<>();
@@ -80,6 +84,18 @@ public class ShellMillDAO {
         }
         return tools;
     }
+
+
+//    public void updateComment(Tool1 tool1) {
+//        try (Connection connection = DatabaseUtil.getConnection();
+//             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_COMMENT)) {
+//            preparedStatement.setString(1, tool1.getComment());
+//            preparedStatement.setString(2, tool1.getToolIndex());
+//            preparedStatement.executeUpdate();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     public void addShellMills(ShellMill tool) throws SQLException {
         String query = "INSERT INTO Shellmill (toolName, toolIndex, toolStatus, comment,price, matchingInserts, diameter, toothsQty, isItIc, shellMillType, matchingBolt) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?,?,?)";

@@ -9,7 +9,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EMRDAO {
+public class EMRDAO  {
+
+//    private static final String UPDATE_COMMENT = "UPDATE emr SET  comment=? WHERE toolIndex=?";
+
     private Connection connection;
 
 
@@ -69,6 +72,17 @@ public class EMRDAO {
 
 
     }
+
+//    public void updateComment(Tool1 tool1) {
+//        try (Connection connection = DatabaseUtil.getConnection();
+//             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_COMMENT)) {
+//            preparedStatement.setString(1, tool1.getComment());
+//            preparedStatement.setString(2, tool1.getToolIndex());
+//            preparedStatement.executeUpdate();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     public List<String> getToolIndexesByToothsQty(int toothsQty) throws SQLException {
         List<String> toolIndexes = new ArrayList<>();

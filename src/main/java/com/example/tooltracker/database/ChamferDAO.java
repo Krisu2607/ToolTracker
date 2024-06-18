@@ -1,9 +1,6 @@
 package com.example.tooltracker.database;
 
-import com.example.tooltracker.model.tools.Chamfer;
-import com.example.tooltracker.model.tools.EmMet;
-import com.example.tooltracker.model.tools.MaterialType;
-import com.example.tooltracker.model.tools.ToolStatus;
+import com.example.tooltracker.model.tools.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,7 +9,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChamferDAO {
+public class ChamferDAO  {
+
+    private static final String UPDATE_TOOL_POST_SHARP = "UPDATE chamfer SET  toolStatus=?, l1=?, l2=?, d1=?, d2=? WHERE toolIndex=?";
+//    private static final String UPDATE_COMMENT = "UPDATE chamfer SET  comment=? WHERE toolIndex=?";
 
     private Connection connection;
 
@@ -66,6 +66,35 @@ public class ChamferDAO {
             statement.executeUpdate();
         }
     }
+
+    public void updatePostSharpen(Chamfer chamfer) {
+        try (Connection connection = DatabaseUtil.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_TOOL_POST_SHARP)) {
+            preparedStatement.setString(1, "W_UZYCIU");
+            preparedStatement.setInt(2, chamfer.getL1());
+            preparedStatement.setInt(3, chamfer.getL2());
+            preparedStatement.setDouble(4, chamfer.getD1());
+            preparedStatement.setDouble(5, chamfer.getD2());
+            preparedStatement.setString(6, chamfer.getToolIndex());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+//    public void updateComment(Tool1 tool1) {
+//        try (Connection connection = DatabaseUtil.getConnection();
+//             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_COMMENT)) {
+//            preparedStatement.setString(1, tool1.getComment());
+//            preparedStatement.setString(2, tool1.getToolIndex());
+//            preparedStatement.executeUpdate();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//    }
+
 
     public List<String> getToolIndexesByToothsQty(int toothsQty) throws SQLException {
         List<String> toolIndexes = new ArrayList<>();

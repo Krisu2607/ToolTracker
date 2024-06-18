@@ -18,11 +18,11 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/com/example/tooltracker/StartView.fxml"));
-        primaryStage.setScene(new Scene(root, 700, 500));
-        primaryStage.setTitle("Aplikacja do zarządzania narzędziami");
-        primaryStage.setResizable(true);
-        primaryStage.show();
+//        Parent root = FXMLLoader.load(getClass().getResource("/com/example/tooltracker/StartView.fxml"));
+//        primaryStage.setScene(new Scene(root, 700, 500));
+//        primaryStage.setTitle("Aplikacja do zarzadzania narzedziami");
+//        primaryStage.setResizable(true);
+//        primaryStage.show();
     }
 }
 
