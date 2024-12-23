@@ -15,9 +15,9 @@ public class EmR extends Tool1 {
     private SimpleIntegerProperty toothsQty;
     private SimpleObjectProperty<ToolDestinyMat> toolDestinyMat;
 
-    public EmR(String toolName, String toolIndex, ToolStatus toolStatus, String comment, BigDecimal price,
+    public EmR(String toolName, String toolIndex, ToolStatus toolStatus, String comment, BigDecimal price,String producent,
                boolean isItBall, double cornerR, int L1, int L2, double d1, double d2, MaterialType material, int toothsQty, ToolDestinyMat toolDestinyMat) {
-        super(toolName, toolIndex, ToolType.EMR, toolStatus, comment, price);
+        super(toolName, toolIndex, ToolType.EMR, toolStatus, comment, price, producent);
         this.isItBall = new SimpleBooleanProperty(isItBall);
         this.cornerR = new SimpleDoubleProperty(cornerR);
         this.L1 = new SimpleIntegerProperty(L1);

@@ -1,7 +1,10 @@
 package com.example.tooltracker.database;
 
+import com.example.tooltracker.model.tools.DrillHSS;
 import com.example.tooltracker.model.tools.Tool;
+import com.example.tooltracker.model.tools.Tool1;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -198,21 +201,32 @@ public class ToolDAO {
     static {
         prefixToTableMap.put("TS-P", "tappr");
         prefixToTableMap.put("TT-P", "tapsk");
-        prefixToTableMap.put("FF", "shellmill");
-        prefixToTableMap.put("LT-I", "turningid");
-        prefixToTableMap.put("LT-E", "turningod");
+        prefixToTableMap.put("TC-P", "tapinch");
+        prefixToTableMap.put("LT-IE", "facegroove");
+        prefixToTableMap.put("LT-I-", "turningid");
+        prefixToTableMap.put("LT-E-", "turningod");
         prefixToTableMap.put("CM", "chamfer");
         prefixToTableMap.put("CD", "spotdrill");
         prefixToTableMap.put("DR-HSS", "drillhss");
         prefixToTableMap.put("DR-VHM", "drillvhm");
+        prefixToTableMap.put("H-DR", "drillblades");
         prefixToTableMap.put("DM", "threaddie");
         prefixToTableMap.put("EM-N", "emalu");
         prefixToTableMap.put("EM-P", "emmet");
         prefixToTableMap.put("EM-R", "emr");
         prefixToTableMap.put("BM", "emr");
+        prefixToTableMap.put("H-FF", "shellmill");
+        prefixToTableMap.put("H-NM", "shellmill");
+        prefixToTableMap.put("R", "reamer");
     }
 
+
+
+
+
+
     private static final String UPDATE_TOOLSTATUSSS = "UPDATE %s SET toolStatus=? WHERE toolIndex=?";
+    private static final String SELECT_FROM_TOOLINDEX = "SELECT*FROM %s";
 
     public String getTableName(String toolIndex) {
         for (Map.Entry<String, String> entry : prefixToTableMap.entrySet()) {
@@ -249,12 +263,47 @@ public class ToolDAO {
         }
     }
 
+    public BigDecimal getCostByToolIndex(String toolIndex) {
+        String tableName = getTableName(toolIndex);
+        if (tableName == null) {
+            return null;
+        }
+
+        String query = String.format(SELECT_FROM_TOOLINDEX, tableName) + " WHERE toolIndex = ?";
+
+        try (Connection connection = DatabaseUtil.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, toolIndex);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    BigDecimal cost = resultSet.getBigDecimal("price");
+                    return cost;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return BigDecimal.ZERO;
+    }
+
 
 
     public void updateToolStatus(String toolIndex, String newStatus) {
         String tableName = getTableName(toolIndex);
         System.out.println(tableName);
-        if (tableName != null) {
+        if (tableName != null & tableName.equalsIgnoreCase("drillhss")) {
+
+            String query = "UPDATE DrillHSS SET qty = qty -  ? WHERE toolIndex = ?";
+            try (Connection connection = DatabaseUtil.getConnection();
+                 PreparedStatement statement = connection.prepareStatement(query)) {
+                statement.setInt(1, 1);
+                statement.setString(2, toolIndex);
+                statement.executeUpdate();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        } else if (tableName !=null) {
             String updateQuery = String.format(UPDATE_TOOLSTATUSSS, tableName);
             System.out.println(updateQuery);
             try (Connection connection = DatabaseUtil.getConnection();
@@ -265,7 +314,11 @@ public class ToolDAO {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-        } else {
+        }
+
+
+
+         else {
             System.out.println("Nie znaleziono odpowiedniej tabeli dla indeksu: " + toolIndex);
         }
     }

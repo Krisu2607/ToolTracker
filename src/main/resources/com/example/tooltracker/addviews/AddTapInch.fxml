@@ -17,11 +17,18 @@
 
         <Label text="Nazwa narzędzia" GridPane.columnIndex="0" GridPane.rowIndex="1" />
         <TextField fx:id="nameTextField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-        <Label text="Rozmiar" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-        <TextField fx:id="inchSizefield" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+        <Label text="Producent" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+        <ComboBox fx:id="producentCB" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                </FXCollections>
+            </items>
+        </ComboBox>
+        <Label text="Rozmiar" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+        <TextField fx:id="inchSizefield" GridPane.columnIndex="1" GridPane.rowIndex="3" />
 
-        <Label text="Materiał" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-        <ComboBox  fx:id="toolMatComboBox" GridPane.columnIndex="1" GridPane.rowIndex="3">
+        <Label text="Materiał" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+        <ComboBox  fx:id="toolMatComboBox" GridPane.columnIndex="1" GridPane.rowIndex="4">
             <items>
                 <FXCollections fx:factory="observableArrayList">
                     <String  fx:value="HSS" />
@@ -30,9 +37,9 @@
             </items>
         </ComboBox>
 
-        <Label text="Cena" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-        <TextField fx:id="priceTextField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-        <VBox alignment="CENTER" spacing="10" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="7">
+        <Label text="Cena" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+        <TextField fx:id="priceTextField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+        <VBox alignment="CENTER" spacing="10" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="6">
             <Button fx:id="confirmButton" onAction="#handleConfirmButton" text="Zatwierdź" />
             <Button fx:id="cancelButton" onAction="#handleCancelButton" text="Anuluj" />
         </VBox>

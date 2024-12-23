@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.tooltracker.controller.WishActionController"
+            prefHeight="400.0" prefWidth="600.0">
+
+    <TableView fx:id="actionTable" prefWidth="700">
+        <columns>
+            <TableColumn text="Producent"  fx:id="prodColumn" />
+            <TableColumn text="Gdzie zamówione" prefWidth="150"  fx:id="whereOrderedColumn" />
+            <TableColumn text="koszt"  fx:id="costColumn" />
+            <TableColumn text="ilość"  fx:id="qtyColumn" />
+            <TableColumn text="Czynność" fx:id="actionMadeColumn" />
+            <TableColumn text="Czas" prefWidth="150" fx:id="actionTimeColumn" />
+            <TableColumn text="Użytkownik"  fx:id="userColumn" />
+        </columns>
+    </TableView>
+
+</AnchorPane>
+

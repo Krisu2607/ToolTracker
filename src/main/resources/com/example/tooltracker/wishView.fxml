@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane style="-fx-background-color: #555555"  xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tooltracker.controller.FactoryWishController">
+
+    <left>
+        <VBox fx:id="toolTypeButt" prefHeight="545.0" prefWidth="1200.0" spacing="10">
+         <children>
+               <Button onAction="#backToHomePage" text="Powrót" />
+              <TableView fx:id="wishTable">
+                  <columns>
+                      <TableColumn fx:id="idNum" prefWidth="30" text="id" />
+                      <TableColumn fx:id="wishInfo" prefWidth="472.00000762939453" text="Info" />
+                      <TableColumn fx:id="wishType" minWidth="0.0" prefWidth="81.0" text="Rodzaj" />
+                      <TableColumn fx:id="wishMachine" prefWidth="70.3333740234375" text="Maszyna" />
+                      <TableColumn fx:id="wishProducent" prefWidth="100.33331298828125" text="Producent" />
+                      <TableColumn fx:id="wishStatus" prefWidth="100" text="Status" />
+                      <TableColumn fx:id="infoBut" prefWidth="30"  />
+                      <TableColumn fx:id="butts" prefWidth="30"  />
+                      <TableColumn fx:id="butts1" prefWidth="30"  />
+                      <TableColumn fx:id="butts2" prefWidth="30"  />
+                  <TableColumn fx:id="wishUrl" prefWidth="40.0" text="url" />
+      
+                        </columns>
+              </TableView>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button onAction="#putWishView" text="Złóż Zamówienie" />
+               </children>
+            </HBox>
+         </children>
+        </VBox>
+    </left>
+
+
+</BorderPane>

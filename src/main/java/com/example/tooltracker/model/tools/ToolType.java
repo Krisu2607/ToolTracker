@@ -16,6 +16,6 @@ public enum ToolType {
     TURNING_OD,
     SHELL_MILL,
     DRILL_BLADES,
-    FACE_GROOVE
+    OTHERS, FACE_GROOVE
 
 }

@@ -1,92 +1,708 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<?import javafx.geometry.Insets?>
-<BorderPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.tooltracker.controller.LiveToolsViewController"
-            stylesheets="@livetools.css" style="-fx-background-color: lightblue"  prefHeight="700.0" prefWidth="1240.0">
-    <top>
-        <Button text="Powrót" onAction="#backToHomePage" />
+<BorderPane prefHeight="700.0" prefWidth="400" style="-fx-background-color: lightblue" stylesheets="@livetools.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tooltracker.controller.LiveToolsViewController">
 
+
+
+    <top>
+        <Button onAction="#backToHomePage" text="Powrót" />
     </top>
 
+<!--    <left>-->
+<!--        <Pane prefWidth="300"></Pane>-->
+<!--    </left>-->
+
+<!--    <right>-->
+<!--        <Pane prefWidth="300"></Pane>-->
+<!--    </right>-->
+
 <center>
-    <HBox spacing="6" alignment="CENTER">
-        <TitledPane fx:id="VF2PANE"   prefHeight="400.0" prefWidth="300.0"  >
-
-            <content>
+<HBox alignment="CENTER">
+    <TabPane fx:id="MainTabs" tabClosingPolicy="UNAVAILABLE">
 
 
-                <TableView  fx:id="partToolInsert" prefHeight="100.0" prefWidth="127.0">
-                    <columns>
-                        <TableColumn fx:id="image" prefWidth="36.666656494140625" />
-                        <TableColumn fx:id="toolImage" prefWidth="35.333345413208008"  />
-                        <TableColumn fx:id="index" prefWidth="85.6666653951009" text="Index" />
-                        <TableColumn fx:id="name" prefWidth="155.6666653951009" text="Nazwa" />
-                    </columns>
-                    <padding>
-                        <Insets bottom="20.0" />
-                    </padding>
-                </TableView>
-            </content>
-        </TitledPane>
+        <tabs>
+            <Tab fx:id="hcnTab" styleClass="hcnhqr-tab" text="HCN">
+                <HBox alignment="CENTER">
+                    <TitledPane fx:id="HCNPANE"   prefHeight="600.0" prefWidth="700.0" text="HQR">
 
-        <TitledPane fx:id="pane1" prefHeight="400.0" prefWidth="300.0" text="FV4SS" >
-            <content>
-                <TableView  prefHeight="199.0" prefWidth="127.0">
-                    <columns>
-                        <TableColumn  prefWidth="20.666656494140625"  />
-                        <TableColumn  prefWidth="19.333345413208008"  />
-                        <TableColumn  prefWidth="85.6666653951009" text="Index" />
-                        <TableColumn  prefWidth="155.6666653951009" text="Nazwa" />
-                    </columns>
-                    <padding>
-                        <Insets bottom="20.0" />
-                    </padding>
-                </TableView>
-            </content>
-        </TitledPane>
-
-        <TitledPane   prefHeight="400.0" prefWidth="300.0" text="DS30SSY" >
-            <content>
-                <TableView prefHeight="199.0" prefWidth="127.0">
-                    <columns>
-                        <TableColumn prefWidth="20.666656494140625"  />
-                        <TableColumn prefWidth="19.333345413208008"  />
-                        <TableColumn prefWidth="85.6666653951009" text="Index" />
-                        <TableColumn prefWidth="155.6666653951009" text="Nazwa" />
-                    </columns>
-                    <padding>
-                        <Insets bottom="20.0" />
-                    </padding>
-                </TableView>
-            </content>
-        </TitledPane>
-
-
-            <TitledPane   prefHeight="400.0" prefWidth="300.0" text="DOOSAN" >
-                <content>
-                    <TableView prefHeight="199.0" prefWidth="127.0">
-                        <columns>
-                            <TableColumn prefWidth="20.666656494140625"  />
-                            <TableColumn prefWidth="19.333345413208008"  />
-                            <TableColumn prefWidth="85.6666653951009" text="Index" />
-                            <TableColumn prefWidth="155.6666653951009" text="Nazwa" />
-                        </columns>
+                        <content>
+                            <VBox>
+                                <HBox>
+                                    <Button onAction="#showNewOrder" styleClass="newOrderButton" text="Nowe zlecenie" />
+                                    <Button onAction="#showEditToolWindow" styleClass="usedToolButton" text="Odpisz Narzedzie" />
+                                    <Button onAction="#showOrderInfoWindow" styleClass="messageButton"  text="Uwagi dot. detalu" />
+                                </HBox>
+                                <TabPane tabClosingPolicy="UNAVAILABLE">
+                                    <Tab text="SM HIGH-FEED">
+                                        <TableView fx:id="toolInsertTableFF" prefHeight="600.0" prefWidth="200.0">
+                                            <padding>
+                                                <Insets bottom="20.0" />
+                                            </padding>
+                                        </TableView>
+                                    </Tab>
+                                    <Tab text="SM PLAN">
+                                        <TableView fx:id="toolInsertTableNM" prefHeight="600.0" prefWidth="200.0">
+                                            <padding>
+                                                <Insets bottom="20.0" />
+                                            </padding>
+                                        </TableView>
+                                    </Tab>
+                                    <Tab text="Gwinty">
+                                        <TableView fx:id="toolInsertTableThreads" prefHeight="600.0" prefWidth="200.0">
+                                            <padding>
+                                                <Insets bottom="20.0" />
+                                            </padding>
+                                        </TableView>
+                                    </Tab>
+                                    <Tab text="Wiertła Płytkowe">
+                                        <TableView fx:id="toolInsertTableDRBlades" prefHeight="600.0" prefWidth="200.0">
+                                            <padding>
+                                                <Insets bottom="20.0" />
+                                            </padding>
+                                        </TableView>
+                                    </Tab>
+                                    <Tab text="INNE">
+                                        <TableView fx:id="toolInsertTableOthers" prefHeight="600.0" prefWidth="200.0">
+                                            <padding>
+                                                <Insets bottom="20.0" />
+                                            </padding>
+                                        </TableView>
+                                    </Tab>
+                                </TabPane>
+                            </VBox>
+                        </content>
                         <padding>
-                            <Insets bottom="20.0" />
+                            <Insets bottom="2.0" left="50.0" right="50.0" top="2.0" />
                         </padding>
-                    </TableView>
-                </content>
-            </TitledPane>
+                    </TitledPane>
+                </HBox>
 
-    </HBox>
+
+            </Tab>
+            <Tab styleClass="hcnhqr-tab" text="HQR">
+                <HBox alignment="CENTER">
+                    <TitledPane fx:id="HQRPANE" prefHeight="600.0" prefWidth="700" text="HQR">
+
+                        <content>
+                            <VBox>
+                                <HBox>
+                                    <Button onAction="#showNewOrder" styleClass="newOrderButton" text="Nowe zlecenie" />
+                                    <Button onAction="#showEditToolWindow" styleClass="usedToolButton" text="Odpisz Narzedzie" />
+                                    <Button onAction="#showOrderInfoWindow" styleClass="messageButton"  text="Uwagi dot. detalu" />
+                                </HBox>
+                                <TabPane tabClosingPolicy="UNAVAILABLE">
+
+                                    <Tab text="Noże Zew">
+                                        <TableView fx:id="toolInsertTableODLathe2" prefHeight="600.0" prefWidth="200.0">
+                                            <padding>
+                                                <Insets bottom="20.0" />
+                                            </padding>
+                                        </TableView>
+                                    </Tab>
+                                    <Tab text="Noże Wew">
+                                        <TableView fx:id="toolInsertTableIDLathe2" prefHeight="600.0" prefWidth="200.0">
+                                            <padding>
+                                                <Insets bottom="20.0" />
+                                            </padding>
+                                        </TableView>
+                                    </Tab>
+                                    <Tab text="Przecinaki/Listwy">
+                                        <TableView fx:id="toolInsertTableGroove2" prefHeight="600.0" prefWidth="200.0">
+                                            <padding>
+                                                <Insets bottom="20.0" />
+                                            </padding>
+                                        </TableView>
+                                    </Tab>
+                                    <Tab text="Gwinty">
+                                        <TableView fx:id="toolInsertTableThreads2" prefHeight="600.0" prefWidth="200.0">
+                                            <padding>
+                                                <Insets bottom="20.0" />
+                                            </padding>
+                                        </TableView>
+                                    </Tab>
+                                    <Tab text="Wiertła Płytkowe">
+                                        <TableView fx:id="toolInsertTableDRBlades2" prefHeight="600.0" prefWidth="200.0">
+                                            <padding>
+                                                <Insets bottom="20.0" />
+                                            </padding>
+                                        </TableView>
+                                    </Tab>
+
+                                    <Tab text="Rowki Czołowe">
+                                        <TableView fx:id="toolInsertTableFaceGroove2" prefHeight="600.0" prefWidth="200.0">
+                                            <padding>
+                                                <Insets bottom="20.0" />
+                                            </padding>
+                                        </TableView>
+                                    </Tab>
+                                    <Tab text="SM HIGH-FEED">
+                                        <TableView fx:id="toolInsertTableFF2" prefHeight="600.0" prefWidth="200.0">
+                                            <padding>
+                                                <Insets bottom="20.0" />
+                                            </padding>
+                                        </TableView>
+                                    </Tab>
+                                    <Tab text="SM PLAN">
+                                        <TableView fx:id="toolInsertTableNM2" prefHeight="600.0" prefWidth="200.0">
+                                            <padding>
+                                                <Insets bottom="20.0" />
+                                            </padding>
+                                        </TableView>
+                                    </Tab>
+                                    <Tab text="INNE">
+                                        <TableView fx:id="toolInsertTableOthers2" prefHeight="600.0" prefWidth="200.0">
+                                            <padding>
+                                                <Insets bottom="20.0" />
+                                            </padding>
+                                        </TableView>
+                                    </Tab>
+                                </TabPane>
+                            </VBox>
+                        </content>
+                        <padding>
+                            <Insets bottom="2.0" left="50.0" right="50.0" top="2.0" />
+                        </padding>
+                    </TitledPane>
+                </HBox>
+
+            </Tab>
+
+
+            <Tab styleClass="haas-tab" text="VF2SS">
+                <HBox alignment="CENTER">
+                    <TitledPane fx:id="VF2PANE" prefHeight="600.0" prefWidth="700" text="VF2SS">
+
+                        <content>
+                            <VBox>
+                                <HBox>
+                                    <Button onAction="#showNewOrder" styleClass="newOrderButton" text="Nowe zlecenie" />
+                                    <Button onAction="#showEditToolWindow" styleClass="usedToolButton" text="Odpisz Narzedzie" />
+                                    <Button onAction="#showOrderInfoWindow" styleClass="messageButton" text="Uwagi dot. detalu" />
+                                </HBox>
+                                <TabPane tabClosingPolicy="UNAVAILABLE">
+                                    <Tab text="SM HIGH-FEED">
+                                        <TableView fx:id="toolInsertTableFF3" prefHeight="600.0" prefWidth="200.0">
+                                            <padding>
+                                                <Insets bottom="20.0" />
+                                            </padding>
+                                        </TableView>
+                                    </Tab>
+                                    <Tab text="SM PLAN">
+                                        <TableView fx:id="toolInsertTableNM3" prefHeight="600.0" prefWidth="200.0">
+                                            <padding>
+                                                <Insets bottom="20.0" />
+                                            </padding>
+                                        </TableView>
+                                    </Tab>
+                                    <Tab text="Gwinty">
+                                        <TableView fx:id="toolInsertTableThreads3" prefHeight="600.0" prefWidth="200.0">
+                                            <padding>
+                                                <Insets bottom="20.0" />
+                                            </padding>
+                                        </TableView>
+                                    </Tab>
+
+                                    <Tab text="Wiertła Płytkowe">
+                                        <TableView fx:id="toolInsertTableDRBlades3" prefHeight="600.0" prefWidth="200.0">
+                                            <padding>
+                                                <Insets bottom="20.0" />
+                                            </padding>
+                                        </TableView>
+                                    </Tab>
+                                    <Tab text="INNE">
+                                        <TableView fx:id="toolInsertTableOthers3" prefHeight="600.0" prefWidth="200.0">
+                                            <padding>
+                                                <Insets bottom="20.0" />
+                                            </padding>
+                                        </TableView>
+                                    </Tab>
+                                </TabPane>
+                            </VBox>
+                        </content>
+                        <padding>
+                            <Insets bottom="2.0" left="50.0" right="50.0" top="2.0" />
+                        </padding>
+                    </TitledPane>
+                </HBox>
+
+            </Tab>
+
+
+            <Tab styleClass="haas-tab" text="VF4SS">
+                <HBox alignment="CENTER">
+                    <TitledPane fx:id="VF4PANE" prefHeight="600.0" prefWidth="700" text="VF4SS">
+
+                        <content>
+                            <VBox>
+                                <HBox>
+                                    <Button onAction="#showNewOrder" styleClass="newOrderButton" text="Nowe zlecenie" />
+                                    <Button onAction="#showEditToolWindow" styleClass="usedToolButton" text="Odpisz Narzedzie" />
+                                    <Button onAction="#showOrderInfoWindow" styleClass="messageButton"  text="Uwagi dot. detalu" />
+                                </HBox>
+                                <TabPane tabClosingPolicy="UNAVAILABLE">
+                                    <Tab text="SM HIGH-FEED">
+                                        <TableView fx:id="toolInsertTableFF4" prefHeight="600.0" prefWidth="200.0">
+                                            <padding>
+                                                <Insets bottom="20.0" />
+                                            </padding>
+                                        </TableView>
+                                    </Tab>
+                                    <Tab text="SM PLAN">
+                                        <TableView fx:id="toolInsertTableNM4" prefHeight="600.0" prefWidth="200.0">
+                                            <padding>
+                                                <Insets bottom="20.0" />
+                                            </padding>
+                                        </TableView>
+                                    </Tab>
+                                    <Tab text="Gwinty">
+                                        <TableView fx:id="toolInsertTableThreads4" prefHeight="600.0" prefWidth="200.0">
+                                            <padding>
+                                                <Insets bottom="20.0" />
+                                            </padding>
+                                        </TableView>
+                                    </Tab>
+                                    <Tab text="Wiertła Płytkowe">
+                                        <TableView fx:id="toolInsertTableDRBlades4" prefHeight="600.0" prefWidth="200.0">
+                                            <padding>
+                                                <Insets bottom="20.0" />
+                                            </padding>
+                                        </TableView>
+                                    </Tab>
+                                    <Tab text="INNE">
+                                        <TableView fx:id="toolInsertTableOthers4" prefHeight="600.0" prefWidth="200.0">
+                                            <padding>
+                                                <Insets bottom="20.0" />
+                                            </padding>
+                                        </TableView>
+                                    </Tab>
+                                </TabPane>
+                            </VBox>
+                        </content>
+                        <padding>
+                            <Insets bottom="2.0" left="50.0" right="50.0" top="2.0" />
+                        </padding>
+                    </TitledPane>
+                </HBox>
+
+            </Tab>
+
+
+
+
+            <Tab styleClass="haas-tab" text="DS30SSY">
+                <HBox alignment="CENTER">
+                    <TitledPane fx:id="DS30PANE" prefHeight="600.0" prefWidth="700" text="DS30SSY">
+
+                        <content>
+                            <VBox>
+                                <HBox>
+                                    <Button onAction="#showNewOrder" styleClass="newOrderButton" text="Nowe zlecenie" />
+                                    <Button onAction="#showEditToolWindow" styleClass="usedToolButton" text="Odpisz Narzedzie" />
+                                    <Button onAction="#showOrderInfoWindow" styleClass="messageButton"  text="Uwagi dot. detalu" />
+                                </HBox>
+                                <TabPane tabClosingPolicy="UNAVAILABLE">
+
+                                    <Tab text="Noże Zew">
+                                        <TableView fx:id="toolInsertTableODLathe5" prefHeight="600.0" prefWidth="200.0">
+                                            <padding>
+                                                <Insets bottom="20.0" />
+                                            </padding>
+                                        </TableView>
+                                    </Tab>
+                                    <Tab text="Noże Wew">
+                                        <TableView fx:id="toolInsertTableIDLathe5" prefHeight="600.0" prefWidth="200.0">
+                                            <padding>
+                                                <Insets bottom="20.0" />
+                                            </padding>
+                                        </TableView>
+                                    </Tab>
+                                    <Tab text="Przecinaki/Listwy">
+                                        <TableView fx:id="toolInsertTableGroove5" prefHeight="600.0" prefWidth="200.0">
+                                            <padding>
+                                                <Insets bottom="20.0" />
+                                            </padding>
+                                        </TableView>
+                                    </Tab>
+                                    <Tab text="Gwinty">
+                                        <TableView fx:id="toolInsertTableThreads5" prefHeight="600.0" prefWidth="200.0">
+                                            <padding>
+                                                <Insets bottom="20.0" />
+                                            </padding>
+                                        </TableView>
+                                    </Tab>
+                                    <Tab text="Wiertła Płytkowe">
+                                        <TableView fx:id="toolInsertTableDRBlades5" prefHeight="600.0" prefWidth="200.0">
+                                            <padding>
+                                                <Insets bottom="20.0" />
+                                            </padding>
+                                        </TableView>
+                                    </Tab>
+
+                                    <Tab text="Rowki Czołowe">
+                                        <TableView fx:id="toolInsertTableFaceGroove5" prefHeight="600.0" prefWidth="200.0">
+                                            <padding>
+                                                <Insets bottom="20.0" />
+                                            </padding>
+                                        </TableView>
+                                    </Tab>
+                                    <Tab text="SM HIGH-FEED">
+                                        <TableView fx:id="toolInsertTableFF5" prefHeight="600.0" prefWidth="200.0">
+                                            <padding>
+                                                <Insets bottom="20.0" />
+                                            </padding>
+                                        </TableView>
+                                    </Tab>
+                                    <Tab text="SM PLAN">
+                                        <TableView fx:id="toolInsertTableNM5" prefHeight="600.0" prefWidth="200.0">
+                                            <padding>
+                                                <Insets bottom="20.0" />
+                                            </padding>
+                                        </TableView>
+                                    </Tab>
+                                    <Tab text="INNE">
+                                        <TableView fx:id="toolInsertTableOthers5" prefHeight="600.0" prefWidth="200.0">
+                                            <padding>
+                                                <Insets bottom="20.0" />
+                                            </padding>
+                                        </TableView>
+                                    </Tab>
+                                </TabPane>
+                            </VBox>
+                        </content>
+                        <padding>
+                            <Insets bottom="2.0" left="50.0" right="50.0" top="2.0" />
+                        </padding>
+                    </TitledPane>
+                </HBox>
+
+            </Tab>
+
+
+
+            <Tab styleClass="doosan-tab" text="DOOSAN">
+                <HBox alignment="CENTER">
+                    <TitledPane fx:id="LM2000PANE" prefHeight="600.0" prefWidth="700" text="LM2000">
+
+                        <content>
+                            <VBox>
+                                <HBox>
+                                    <Button onAction="#showNewOrder" styleClass="newOrderButton" text="Nowe zlecenie" />
+                                    <Button onAction="#showEditToolWindow" styleClass="usedToolButton" text="Odpisz Narzedzie" />
+                                    <Button onAction="#showOrderInfoWindow" styleClass="messageButton"  text="Uwagi dot. detalu" />
+                                </HBox>
+                                <TabPane tabClosingPolicy="UNAVAILABLE">
+
+                                    <Tab text="Noże Zew">
+                                        <TableView fx:id="toolInsertTableODLathe6" prefHeight="600.0" prefWidth="200.0">
+                                            <padding>
+                                                <Insets bottom="20.0" />
+                                            </padding>
+                                        </TableView>
+                                    </Tab>
+                                    <Tab text="Noże Wew">
+                                        <TableView fx:id="toolInsertTableIDLathe6" prefHeight="600.0" prefWidth="200.0">
+                                            <padding>
+                                                <Insets bottom="20.0" />
+                                            </padding>
+                                        </TableView>
+                                    </Tab>
+                                    <Tab text="Przecinaki/Listwy">
+                                        <TableView fx:id="toolInsertTableGroove6" prefHeight="600.0" prefWidth="200.0">
+                                            <padding>
+                                                <Insets bottom="20.0" />
+                                            </padding>
+                                        </TableView>
+                                    </Tab>
+                                    <Tab text="Gwinty">
+                                        <TableView fx:id="toolInsertTableThreads6" prefHeight="600.0" prefWidth="200.0">
+                                            <padding>
+                                                <Insets bottom="20.0" />
+                                            </padding>
+                                        </TableView>
+                                    </Tab>
+                                    <Tab text="Wiertła Płytkowe">
+                                        <TableView fx:id="toolInsertTableDRBlades6" prefHeight="600.0" prefWidth="200.0">
+                                            <padding>
+                                                <Insets bottom="20.0" />
+                                            </padding>
+                                        </TableView>
+                                    </Tab>
+
+                                    <Tab text="Rowki Czołowe">
+                                        <TableView fx:id="toolInsertTableFaceGroove6" prefHeight="600.0" prefWidth="200.0">
+                                            <padding>
+                                                <Insets bottom="20.0" />
+                                            </padding>
+                                        </TableView>
+                                    </Tab>
+                                    <Tab text="SM HIGH-FEED">
+                                        <TableView fx:id="toolInsertTableFF6" prefHeight="600.0" prefWidth="200.0">
+                                            <padding>
+                                                <Insets bottom="20.0" />
+                                            </padding>
+                                        </TableView>
+                                    </Tab>
+                                    <Tab text="SM PLAN">
+                                        <TableView fx:id="toolInsertTableNM6" prefHeight="600.0" prefWidth="200.0">
+                                            <padding>
+                                                <Insets bottom="20.0" />
+                                            </padding>
+                                        </TableView>
+                                    </Tab>
+                                    <Tab text="INNE">
+                                        <TableView fx:id="toolInsertTableOthers6" prefHeight="600.0" prefWidth="200.0">
+                                            <padding>
+                                                <Insets bottom="20.0" />
+                                            </padding>
+                                        </TableView>
+                                    </Tab>
+                                </TabPane>
+                            </VBox>
+                        </content>
+                        <padding>
+                            <Insets bottom="2.0" left="50.0" right="50.0" top="2.0" />
+                        </padding>
+                    </TitledPane>
+                </HBox>
+
+            </Tab>
+
+
+
+        </tabs>
+    </TabPane>
+</HBox>
+
+
+
+
+
+
+
+
+
+
+
+<!--    <HBox alignment="CENTER" prefHeight="609.0" prefWidth="1237.0" spacing="6">-->
+<!--         <VBox prefHeight="200.0" prefWidth="100.0" />-->
+<!--         <GridPane prefHeight="675.0" prefWidth="1174.0">-->
+<!--           <columnConstraints>-->
+<!--             <ColumnConstraints hgrow="SOMETIMES" maxWidth="362.6666666666667" minWidth="10.0" prefWidth="362.6666666666667" />-->
+<!--             <ColumnConstraints hgrow="SOMETIMES" maxWidth="304.0" minWidth="0.0" prefWidth="238.00000000000006" />-->
+<!--               <ColumnConstraints hgrow="SOMETIMES" maxWidth="388.0" minWidth="0.0" prefWidth="388.0" />-->
+<!--           </columnConstraints>-->
+<!--           <rowConstraints>-->
+<!--             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />-->
+<!--             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />-->
+<!--           </rowConstraints>-->
+<!--            <children>-->
+<!--              <TitledPane fx:id="VF2PANE" prefHeight="350.0" prefWidth="300.0" text="HQR">-->
+<!--      -->
+<!--                  <content>-->
+
+<!--                      <VBox>-->
+<!--                          <HBox>-->
+<!--                              <Button onAction="#backToHomePage" text="NEW" />-->
+<!--                              <Button onAction="#backToHomePage" text="Odpisz narzędzie" />-->
+
+<!--                          </HBox>-->
+<!--                          <TableView fx:id="partToolInsert" prefHeight="200.0" prefWidth="200.0">-->
+<!--                              <columns>-->
+<!--                                  <TableColumn fx:id="image" prefWidth="36.666656494140625" />-->
+<!--                                  <TableColumn fx:id="toolImage" prefWidth="35.333345413208008" />-->
+<!--                                  <TableColumn fx:id="index" prefWidth="105.00000762939453" text="Index" />-->
+<!--                                  <TableColumn fx:id="name" prefWidth="136.99998474121094" text="Nazwa" />-->
+<!--                              </columns>-->
+<!--                              <padding>-->
+<!--                                  <Insets bottom="20.0" />-->
+<!--                              </padding>-->
+<!--                          </TableView>-->
+<!--                      </VBox>-->
+<!--      -->
+<!--      -->
+
+<!--                  </content>-->
+<!--                  <padding>-->
+<!--                     <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />-->
+<!--                  </padding>-->
+<!--              </TitledPane>-->
+<!--      -->
+<!--              <TitledPane fx:id="pane1" prefHeight="350.0" prefWidth="300.0" text="DS30SSY" GridPane.columnIndex="1">-->
+<!--                  <content>-->
+<!--                      <VBox>-->
+<!--                          <HBox>-->
+<!--                              <Button onAction="#backToHomePage" text="NEW" />-->
+<!--                              <Button onAction="#backToHomePage" text="Odpisz narzędzie" />-->
+
+<!--                          </HBox>-->
+<!--                          <TableView fx:id="partToolInsert1" prefHeight="200.0" prefWidth="200.0">-->
+<!--                              <columns>-->
+<!--                                  <TableColumn fx:id="image1" prefWidth="36.666656494140625" />-->
+<!--                                  <TableColumn fx:id="toolImage1" prefWidth="35.333345413208008" />-->
+<!--                                  <TableColumn fx:id="index1" prefWidth="105.00000762939453" text="Index" />-->
+<!--                                  <TableColumn fx:id="name1" prefWidth="136.99998474121094" text="Nazwa" />-->
+<!--                              </columns>-->
+<!--                              <padding>-->
+<!--                                  <Insets bottom="20.0" />-->
+<!--                              </padding>-->
+<!--                          </TableView>-->
+<!--                      </VBox>-->
+<!--                  </content>-->
+<!--                  <padding>-->
+<!--                     <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />-->
+<!--                  </padding>-->
+<!--              </TitledPane>-->
+<!--      -->
+<!--              <TitledPane prefHeight="350.0" prefWidth="300.0" text="DOOSAN" GridPane.columnIndex="2">-->
+<!--                  <content>-->
+<!--                      <VBox>-->
+<!--                          <HBox>-->
+<!--                              <Button onAction="#backToHomePage" text="NEW" />-->
+<!--                              <Button onAction="#backToHomePage" text="Odpisz narzędzie" />-->
+
+<!--                          </HBox>-->
+<!--                          <TableView fx:id="partToolInsert2" prefHeight="200.0" prefWidth="200.0">-->
+<!--                              <columns>-->
+<!--                                  <TableColumn fx:id="image2" prefWidth="36.666656494140625" />-->
+<!--                                  <TableColumn fx:id="toolImage2" prefWidth="35.333345413208008" />-->
+<!--                                  <TableColumn fx:id="index2" prefWidth="105.00000762939453" text="Index" />-->
+<!--                                  <TableColumn fx:id="name2" prefWidth="136.99998474121094" text="Nazwa" />-->
+<!--                              </columns>-->
+<!--                              <padding>-->
+<!--                                  <Insets bottom="20.0" />-->
+<!--                              </padding>-->
+<!--                          </TableView>-->
+<!--                      </VBox>-->
+<!--                  </content>-->
+<!--                  <GridPane.margin>-->
+<!--                     <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />-->
+<!--                  </GridPane.margin>-->
+<!--              </TitledPane>-->
+
+
+
+
+
+<!--                <TitledPane prefHeight="350.0" prefWidth="300.0" text="HCN" GridPane.columnIndex="0" GridPane.rowIndex="1">-->
+<!--                    <content>-->
+<!--                        <VBox>-->
+<!--                            <HBox>-->
+<!--                                <Button onAction="#backToHomePage" text="NEW" />-->
+<!--                                <Button onAction="#backToHomePage" text="Odpisz narzędzie" />-->
+
+<!--                            </HBox>-->
+<!--                            <TableView fx:id="partToolInsert3" prefHeight="200.0" prefWidth="200.0">-->
+<!--                                <columns>-->
+<!--                                    <TableColumn fx:id="image3" prefWidth="36.666656494140625" />-->
+<!--                                    <TableColumn fx:id="toolImage3" prefWidth="35.333345413208008" />-->
+<!--                                    <TableColumn fx:id="index3" prefWidth="105.00000762939453" text="Index" />-->
+<!--                                    <TableColumn fx:id="name3" prefWidth="136.99998474121094" text="Nazwa" />-->
+<!--                                </columns>-->
+<!--                                <padding>-->
+<!--                                    <Insets bottom="20.0" />-->
+<!--                                </padding>-->
+<!--                            </TableView>-->
+<!--                        </VBox>-->
+<!--                    </content>-->
+<!--                    <GridPane.margin>-->
+<!--                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />-->
+<!--                    </GridPane.margin>-->
+<!--                </TitledPane>-->
+
+
+
+
+
+<!--                <TitledPane prefHeight="350.0" prefWidth="300.0" text="VF4SS" GridPane.columnIndex="1" GridPane.rowIndex="1">-->
+<!--                    <content>-->
+<!--                        <VBox>-->
+<!--                            <HBox>-->
+<!--                                <Button onAction="#backToHomePage" text="NEW" />-->
+<!--                                <Button onAction="#backToHomePage" text="Odpisz narzędzie" />-->
+
+<!--                            </HBox>-->
+<!--                            <TableView fx:id="partToolInsert4" prefHeight="200.0" prefWidth="200.0">-->
+<!--                                <columns>-->
+<!--                                    <TableColumn fx:id="image4" prefWidth="36.666656494140625" />-->
+<!--                                    <TableColumn fx:id="toolImage4" prefWidth="35.333345413208008" />-->
+<!--                                    <TableColumn fx:id="index4" prefWidth="105.00000762939453" text="Index" />-->
+<!--                                    <TableColumn fx:id="name4" prefWidth="136.99998474121094" text="Nazwa" />-->
+<!--                                </columns>-->
+<!--                                <padding>-->
+<!--                                    <Insets bottom="20.0" />-->
+<!--                                </padding>-->
+<!--                            </TableView>-->
+<!--                        </VBox>-->
+<!--                    </content>-->
+<!--                    <GridPane.margin>-->
+<!--                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />-->
+<!--                    </GridPane.margin>-->
+<!--                </TitledPane>-->
+
+
+
+<!--                <TitledPane prefHeight="350.0" prefWidth="300.0" text="VF2SS" GridPane.columnIndex="2" GridPane.rowIndex="1">-->
+<!--                    <content>-->
+<!--                        <VBox>-->
+<!--                            <HBox>-->
+<!--                                <Button onAction="#backToHomePage" text="NEW" />-->
+<!--                                <Button onAction="#backToHomePage" text="Odpisz narzędzie" />-->
+
+<!--                            </HBox>-->
+<!--                            <TableView fx:id="partToolInsert5" prefHeight="200.0" prefWidth="200.0">-->
+<!--                                <columns>-->
+<!--                                    <TableColumn fx:id="image5" prefWidth="36.666656494140625" />-->
+<!--                                    <TableColumn fx:id="toolImage5" prefWidth="35.333345413208008" />-->
+<!--                                    <TableColumn fx:id="index5" prefWidth="105.00000762939453" text="Index" />-->
+<!--                                    <TableColumn fx:id="name5" prefWidth="136.99998474121094" text="Nazwa" />-->
+<!--                                </columns>-->
+<!--                                <padding>-->
+<!--                                    <Insets bottom="20.0" />-->
+<!--                                </padding>-->
+<!--                            </TableView>-->
+<!--                        </VBox>-->
+<!--                    </content>-->
+<!--                    <GridPane.margin>-->
+<!--                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />-->
+<!--                    </GridPane.margin>-->
+<!--                </TitledPane>-->
+<!--      -->
+<!--      -->
+<!--                  <TitledPane prefHeight="350.0" prefWidth="300.0" text="HCN" GridPane.rowIndex="1">-->
+<!--                      <content>-->
+<!--                          <VBox>-->
+<!--                              <HBox>-->
+<!--                                  <Button onAction="#backToHomePage" text="NEW" />-->
+<!--                                  <Button onAction="#backToHomePage" text="Odpisz narzędzie" />-->
+
+<!--                              </HBox>-->
+<!--                              <TableView fx:id="partToolInsert6" prefHeight="200.0" prefWidth="200.0">-->
+<!--                                  <columns>-->
+<!--                                      <TableColumn fx:id="image6" prefWidth="36.666656494140625" />-->
+<!--                                      <TableColumn fx:id="toolImage6" prefWidth="35.333345413208008" />-->
+<!--                                      <TableColumn fx:id="index6" prefWidth="105.00000762939453" text="Index" />-->
+<!--                                      <TableColumn fx:id="name6" prefWidth="136.99998474121094" text="Nazwa" />-->
+<!--                                  </columns>-->
+<!--                                  <padding>-->
+<!--                                      <Insets bottom="20.0" />-->
+<!--                                  </padding>-->
+<!--                              </TableView>-->
+<!--                          </VBox>-->
+<!--                      </content>-->
+<!--                  <padding>-->
+<!--                     <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />-->
+<!--                  </padding>-->
+<!--                  </TitledPane>-->
+
+<!--            </children>-->
+<!--         </GridPane>-->
+
+<!--    </HBox>-->
 
 
 </center>
@@ -100,4 +716,3 @@
 
 
 </BorderPane>
-

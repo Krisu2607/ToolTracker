@@ -17,20 +17,37 @@
             </children>
             <children>
                 <Label>Wyszukaj po numerze detalu</Label>
-                <TextField fx:id="searchField" promptText="Wprowadź numer detalu" />
-            </children>
-            <children>
-                <Label>Wyszukaj po indeksie narzędzia</Label>
-                <TextField fx:id="searchField2" promptText="Wprowadź numer detalu" />
+                <TextField fx:id="searchField" promptText="Wprowadź numer detalu" maxWidth="100" />
+                <Button text="Wyszukaj" onAction="#SearchForOrder" />
+                <Button text="Pokaż wszystkie" onAction="#ShowAll" />
+
+
+
             </children>
             <children>
                 <TableView  fx:id="toolUsageTable" xmlns:fx="http://javafx.com/fxml">
                     <columns>
                         <TableColumn text="Numer Detalu" fx:id="partNumberColumn"/>
+                        <TableColumn text="Maszyna" fx:id="machineColumn"/>
                         <TableColumn text="Numer Zlecenia" fx:id="orderNumberColumn"/>
-                        <TableColumn text="Numer Narzędzia" fx:id="toolNumberColumn"/>
-                        <TableColumn text="Ilość Zużytych Narzędzi" fx:id="quantityUsedColumn"/>
-                        <TableColumn text="Ilość Sztuk Wytworzonych" fx:id="quantityProducedColumn"/>
+                        <TableColumn text="Qty" fx:id="partsQtyColumn" prefWidth="50"/>
+                        <TableColumn text="Płytki" fx:id="usedInsertsColumn" prefWidth="50"/>
+                        <TableColumn text="Gwint" fx:id="usedTapsColumn" prefWidth="50"/>
+
+                        <TableColumn text="Frezy" fx:id="usedEmsColumn" prefWidth="50"/>
+                        <TableColumn text="Kule" fx:id="usedBmColumn" prefWidth="50"/>
+                        <TableColumn text="DR-VHM" fx:id="usedDRVHMColumn" prefWidth="50"/>
+                        <TableColumn text="DR-HSS" fx:id="usedDRHSSColumn" prefWidth="50"/>
+                        <TableColumn text="DR-Płytk" fx:id="usedDrBladeColumn" prefWidth="50"/>
+                        <TableColumn text="Fazery" fx:id="usedChamferColumn" prefWidth="50"/>
+                        <TableColumn text="Głowice" fx:id="usedShellMillColumn" prefWidth="50"/>
+                        <TableColumn text="Narzynki" fx:id="usedThreadDieColumn" prefWidth="50"/>
+                        <TableColumn text="Noże Zew" fx:id="usedLatheODColumn" prefWidth="50"/>
+                        <TableColumn text="Noże Wew" fx:id="usedLatheIDColumn" prefWidth="50"/>
+                        <TableColumn text="Rowki czoł" fx:id="usedFaceGrooveColumn" prefWidth="50"/>
+                        <TableColumn text="Rozw." fx:id="usedReamerColumn" prefWidth="50"/>
+                        <TableColumn text="NW" fx:id="usedSpotDrillColumn" prefWidth="50"/>
+                        <TableColumn text="Info" fx:id="infoColumn" prefWidth="150"/>
                     </columns>
                 </TableView>
             </children>

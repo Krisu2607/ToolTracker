@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="200.0" prefWidth="466.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tooltracker.controller.DetailErrController">
+
+
+
+    <GridPane alignment="CENTER" hgap="10" vgap="10" xmlns:fx="http://javafx.com/fxml">
+
+        <Label text="Wiadomość:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+        <TextArea fx:id="messageTextField" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+        <VBox alignment="CENTER" prefWidth="471.0" spacing="10" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="2">
+            <Button fx:id="confirmButton" onAction="#handleConfirmButton" text="Zatwierdź" />
+            <Button fx:id="cancelButton" onAction="#handleCancelButton" text="Anuluj" />
+        </VBox>
+
+    </GridPane>
+</AnchorPane>

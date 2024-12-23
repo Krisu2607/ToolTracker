@@ -10,8 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class DrillBladesDAO  {
-//    private static final String UPDATE_COMMENT = "UPDATE drillblades SET  comment=? WHERE toolIndex=?";
+public class DrillBladesDAO implements Tool1Dao {
+    private static final String UPDATE_COMMENT = "UPDATE drillblades SET  comment=? WHERE toolIndex=?";
 
 
     public List<DrillBlades> getAllDrillBlades() throws SQLException {
@@ -29,6 +29,8 @@ public class DrillBladesDAO  {
                         ToolStatus.valueOf(resultSet.getString("toolStatus")),
                         resultSet.getString("comment"),
                         resultSet.getBigDecimal("price"),
+                        resultSet.getString("producent"),
+
                         resultSet.getString("matchingInserts"),
                         resultSet.getDouble("diameter"),
                         resultSet.getInt("length"),
@@ -42,7 +44,7 @@ public class DrillBladesDAO  {
     }
 
     public void addDrillBladeTool(DrillBlades tool) throws SQLException {
-        String query = "INSERT INTO DrillBlades (toolName, toolIndex, toolStatus, comment,price, matchingInserts, diameter, length, toothsQty) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO DrillBlades (toolName, toolIndex, toolStatus, comment,price, matchingInserts, diameter, length, toothsQty, producent) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
         try (  Connection connection = DatabaseUtil.getConnection();
                PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, tool.getToolName());
@@ -54,21 +56,23 @@ public class DrillBladesDAO  {
             statement.setDouble(7, tool.getDiameter());
             statement.setInt(8, tool.getLength());
             statement.setInt(9, tool.getToothsQty());
+            statement.setString(10, tool.getProducent());
+
             statement.executeUpdate();
         }
     }
 
 
-//    public void updateComment(Tool1 drillBlade) {
-//        try (Connection connection = DatabaseUtil.getConnection();
-//             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_COMMENT)) {
-//            preparedStatement.setString(1, drillBlade.getComment());
-//            preparedStatement.setString(2, drillBlade.getToolIndex());
-//            preparedStatement.executeUpdate();
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//    }
+    public void updateComment(Tool1 drillBlade) {
+        try (Connection connection = DatabaseUtil.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_COMMENT)) {
+            preparedStatement.setString(1, drillBlade.getComment());
+            preparedStatement.setString(2, drillBlade.getToolIndex());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     public int getLastToolIndexNum(double diameter) throws SQLException {
         int lastToolIndexNum = 0;

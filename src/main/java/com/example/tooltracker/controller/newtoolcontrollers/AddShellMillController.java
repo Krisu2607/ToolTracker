@@ -1,10 +1,7 @@
 package com.example.tooltracker.controller.newtoolcontrollers;
 
 import com.example.tooltracker.controller.ToolsController;
-import com.example.tooltracker.database.ActionDAO;
-import com.example.tooltracker.database.IdTurningDAO;
-import com.example.tooltracker.database.ShellMillDAO;
-import com.example.tooltracker.database.ToolInsertDAO;
+import com.example.tooltracker.database.*;
 import com.example.tooltracker.model.ToolAction;
 import com.example.tooltracker.model.ToolInsert;
 import com.example.tooltracker.model.tools.ShellMill;
@@ -55,9 +52,12 @@ public class AddShellMillController {
     @FXML
     private ComboBox matchingInserts1CB;
     @FXML
+    private ComboBox producentCB;
+    @FXML
     private ComboBox matchingInserts2CB;
     @FXML
     private ComboBox workType;
+
 
 
     @FXML
@@ -81,10 +81,12 @@ public class AddShellMillController {
     ShellMillDAO shellMillDAO = new ShellMillDAO();
     private ActionDAO actionDAO = new ActionDAO();
     private final ToolInsertDAO toolInsertDAO = new ToolInsertDAO();
+    private final ProducentDAO producentDA0 = new ProducentDAO();
+
     private ObservableList<String> addedIndexes = FXCollections.observableArrayList();
 
 
-    public void initialize() {
+    public void initialize() throws SQLException {
 
         shellMillTypeToggleGroup = new ToggleGroup();
         FFRadio.setToggleGroup(shellMillTypeToggleGroup);
@@ -103,6 +105,10 @@ public class AddShellMillController {
         matchingInserts1CB.setItems(insertIndexes);
         matchingInserts2CB.setItems(insertIndexes);
 
+        List<String> producentsList = producentDA0.getAllProducents();
+        ObservableList<String> allProducents = FXCollections.observableArrayList(producentsList);
+        producentCB.setItems(allProducents);
+
 
         addedIndexesListView.setItems(addedIndexes);
         //DEZAKTYWACJA PRZYCISKU ZATWIERZ W ZALEZNOSCI CZY JEST JAKIS TEKST W POLU CZY NIE
@@ -110,6 +116,7 @@ public class AddShellMillController {
                         nameTextField.getText().isEmpty() ||
                         diamTextField.getText().isEmpty() ||
                         toothsQtyTextField.getText().isEmpty() ||
+                        producentCB.getValue() == null ||
                                 priceTextField.getText().isEmpty() ||
                                 boltTextField.getText().isEmpty() ||
                                 shellMillTypeToggleGroup.getSelectedToggle() == null ||
@@ -148,6 +155,8 @@ public class AddShellMillController {
         } else if (!CB2nserts.isEmpty()) {
             matchingInsertsFromForm = CB2nserts;
         }
+        String prodName = producentCB.getValue().toString();
+
 
 
         String toolName = nameTextField.getText();
@@ -188,13 +197,14 @@ public class AddShellMillController {
 
         ShellMill shellMill = new ShellMill(toolName, newIndex,
                 ToolStatus.W_UZYCIU, "",
-                price, matchingInsertsFromForm,
+                price,prodName, matchingInsertsFromForm,
                 toolDiam, toothsQty,isItCooledIn, shellMillType,  matchingBolt);
 
 
 
         shellMillDAO.addShellMills(shellMill);
         addedIndexes.add(newIndex);
+        producentDA0.addCostByName(prodName, price);
 
         ToolAction toolAction = new ToolAction();
         toolAction.settAction("Nowe narzędzie");
@@ -236,7 +246,7 @@ public class AddShellMillController {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue,
                                 String newValue) {
-                if (!newValue.matches("\\d{1,4}(\\.\\d{0,2})?")) {
+                if (!newValue.matches("\\d{0,4}(\\.\\d{0,2})?")) {
                     textField.setText(oldValue);
                 }
 
@@ -252,7 +262,7 @@ public class AddShellMillController {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue,
                                 String newValue) {
-                if (!newValue.matches("\\d{1,2}")) {
+                if (!newValue.matches("\\d{0,2}")) {
                     textField.setText(oldValue);
                 }
 
@@ -266,7 +276,7 @@ public class AddShellMillController {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue,
                                 String newValue) {
-                if (!newValue.matches("\\d{1,3}")) {
+                if (!newValue.matches("\\d{0,3}")) {
                     textField.setText(oldValue);
                 }
 

@@ -27,7 +27,7 @@
 
 <HBox spacing="10" alignment="CENTER" GridPane.columnIndex="0" GridPane.rowIndex="3" GridPane.columnSpan="2">
     <Button text="Zatwierdź" fx:id="confirmButton" onAction="#handleConfirmButton" />
-    <Button text="Anuluj"  />
+    <Button text="Anuluj" onAction="#handleCancelButton" />
 </HBox>
 </GridPane>
 </AnchorPane>

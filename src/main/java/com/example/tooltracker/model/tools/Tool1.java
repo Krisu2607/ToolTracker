@@ -6,6 +6,8 @@ import javafx.beans.property.SimpleObjectProperty;
 import java.math.BigDecimal;
 
 public class Tool1 {
+
+    private SimpleStringProperty producent;
     private SimpleStringProperty toolName;
     private SimpleStringProperty toolIndex;
     private SimpleObjectProperty<ToolType> toolType;
@@ -13,13 +15,35 @@ public class Tool1 {
     private SimpleStringProperty comment;
     private SimpleObjectProperty<BigDecimal> price;
 
-    public Tool1(String toolName, String toolIndex, ToolType toolType, ToolStatus toolStatus, String comment, BigDecimal price) {
+    public Tool1(String toolName, String toolIndex, ToolType toolType, ToolStatus toolStatus, String comment, BigDecimal price, String producent) {
         this.toolName = new SimpleStringProperty(toolName);
         this.toolIndex = new SimpleStringProperty(toolIndex);
         this.toolType = new SimpleObjectProperty<>(toolType);
         this.toolStatus = new SimpleObjectProperty<>(toolStatus);
         this.comment = new SimpleStringProperty(comment);
         this.price = new SimpleObjectProperty<>(price);
+        this.producent = new SimpleStringProperty(producent);
+    }
+
+
+    public String getProducent() {
+        return producent.get();
+    }
+
+    public SimpleStringProperty producentProperty() {
+        return producent;
+    }
+
+    public void setProducent(String producent) {
+        this.producent.set(producent);
+    }
+
+    public SimpleStringProperty commentProperty() {
+        return comment;
+    }
+
+    public SimpleObjectProperty<BigDecimal> priceProperty() {
+        return price;
     }
 
     // Getters and setters

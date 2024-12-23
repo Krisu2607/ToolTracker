@@ -17,9 +17,9 @@ public class FaceGroove extends Tool1 {
 
     public FaceGroove(String toolName, String toolIndex, ToolType toolType,
                       ToolStatus toolStatus, String comment,
-                      BigDecimal price, double minDiamCut, double maxDiamCut,
+                      BigDecimal price,String producent, double minDiamCut, double maxDiamCut,
                       int maxDepth, String matchingInserts, String matchingBolt, String workDirection) {
-        super(toolName, toolIndex, toolType, toolStatus, comment, price);
+        super(toolName, toolIndex, toolType, toolStatus, comment, price, producent);
 
         this.minDiamCut = new SimpleDoubleProperty(minDiamCut);
         this.maxDiamCut = new SimpleDoubleProperty(maxDiamCut);

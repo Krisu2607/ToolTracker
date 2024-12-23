@@ -13,9 +13,9 @@ public class TapInch extends Tool1 {
     private SimpleStringProperty inchSize;
 
 
-    public TapInch(String toolName, String toolIndex, ToolStatus toolStatus, String comment, BigDecimal price,
+    public TapInch(String toolName, String toolIndex, ToolStatus toolStatus, String comment, BigDecimal price,String producent,
                  MaterialType materialType, String inchSize) {
-        super(toolName, toolIndex, ToolType.TAPPR, toolStatus, comment, price);
+        super(toolName, toolIndex, ToolType.TAPPR, toolStatus, comment, price, producent);
         this.materialType = new SimpleObjectProperty<>(materialType);
         this.inchSize = new SimpleStringProperty(inchSize);
     }

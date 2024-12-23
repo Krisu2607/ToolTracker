@@ -3,6 +3,7 @@ package com.example.tooltracker.controller.newtoolcontrollers;
 import com.example.tooltracker.controller.ToolsController;
 import com.example.tooltracker.database.ActionDAO;
 import com.example.tooltracker.database.ChamferDAO;
+import com.example.tooltracker.database.ProducentDAO;
 import com.example.tooltracker.database.SpotDrillDAO;
 import com.example.tooltracker.model.ToolAction;
 import com.example.tooltracker.model.tools.Chamfer;
@@ -45,6 +46,8 @@ public class AddSpotDrillController {
     @FXML
     private ComboBox toolMatComboBox;
     @FXML
+    private ComboBox producentCB;
+    @FXML
     private ListView<String> addedIndexesListView;
 
 
@@ -54,10 +57,15 @@ public class AddSpotDrillController {
 
     SpotDrillDAO spotDrillDAO = new SpotDrillDAO();
     private ActionDAO actionDAO = new ActionDAO();
+    private final ProducentDAO producentDA0 = new ProducentDAO();
     private ObservableList<String> addedIndexes = FXCollections.observableArrayList();
 
 
-    public void initialize() {
+    public void initialize() throws SQLException {
+        List<String> producentsList = producentDA0.getAllProducents();
+        ObservableList<String> allProducents = FXCollections.observableArrayList(producentsList);
+        producentCB.setItems(allProducents);
+
         addedIndexesListView.setItems(addedIndexes);
         //DEZAKTYWACJA PRZYCISKU ZATWIERZ W ZALEZNOSCI CZY JEST JAKIS TEKST W POLU CZY NIE
         BooleanBinding fieldsEmpty = Bindings.createBooleanBinding(() ->
@@ -65,6 +73,7 @@ public class AddSpotDrillController {
                                 priceTextField.getText().isEmpty() ||
                                 L1textfield.getText().isEmpty() ||
                                 D1textfield.getText().isEmpty() ||
+                                producentCB.getValue() == null ||
                                 D2textfield.getText().isEmpty() ||
                                 toolMatComboBox.getValue() == null,
                 nameTextField.textProperty(),
@@ -117,6 +126,7 @@ public class AddSpotDrillController {
 //        String indexName = indexTextField.getText();
         BigDecimal price = new BigDecimal(priceTextField.getText());
         String toolName = nameTextField.getText();
+        String prodName = producentCB.getValue().toString();
         String toolMaterial = (String) toolMatComboBox.getValue();
         int L1 = Integer.valueOf(L1textfield.getText());
         double D1 = Double.valueOf(D1textfield.getText());
@@ -146,10 +156,11 @@ public class AddSpotDrillController {
 
 
 
-        SpotDrill spotDrill = new SpotDrill(toolName, newIndex, ToolStatus.W_UZYCIU, "",price,D1, D2, L1, MaterialType.valueOf(toolMaterial) );
+        SpotDrill spotDrill = new SpotDrill(toolName, newIndex, ToolStatus.W_UZYCIU, "",price,prodName,D1, D2, L1, MaterialType.valueOf(toolMaterial) );
 
         addedIndexes.add(newIndex);
         spotDrillDAO.addSpotDrill(spotDrill);
+        producentDA0.addCostByName(prodName, price);
 
         ToolAction toolAction = new ToolAction();
         toolAction.settAction("Nowe narzędzie");
@@ -191,7 +202,7 @@ public class AddSpotDrillController {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue,
                                 String newValue) {
-                if (!newValue.matches("\\d{1,4}(\\.\\d{0,2})?")) {
+                if (!newValue.matches("\\d{0,4}(\\.\\d{0,2})?")) {
                     textField.setText(oldValue);
                 }
 
@@ -207,7 +218,7 @@ public class AddSpotDrillController {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue,
                                 String newValue) {
-                if (!newValue.matches("\\d{1,2}")) {
+                if (!newValue.matches("\\d{0,2}")) {
                     textField.setText(oldValue);
                 }
 
@@ -221,7 +232,7 @@ public class AddSpotDrillController {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue,
                                 String newValue) {
-                if (!newValue.matches("\\d{1,3}")) {
+                if (!newValue.matches("\\d{0,3}")) {
                     textField.setText(oldValue);
                 }
 

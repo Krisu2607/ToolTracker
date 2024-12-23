@@ -14,9 +14,9 @@ public class TurningOD extends Tool1 {
 
 
 
-    public TurningOD(String toolName, String toolIndex, ToolStatus toolStatus, String comment, BigDecimal price,
+    public TurningOD(String toolName, String toolIndex, ToolStatus toolStatus, String comment, BigDecimal price,String producent,
                      String matchingInserts, String workType, String cutDirection, String matchingBolt) {
-        super(toolName, toolIndex, ToolType.TURNING_OD, toolStatus, comment, price);
+        super(toolName, toolIndex, ToolType.TURNING_OD, toolStatus, comment, price, producent);
         this.matchingInserts = new SimpleStringProperty(matchingInserts);
         this.workType = new SimpleStringProperty(workType);
         this.cutDirection = new SimpleStringProperty(cutDirection);

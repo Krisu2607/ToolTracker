@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tooltracker.controller.newtoolcontrollers.AddVariousToolController">
+
+    <GridPane alignment="CENTER" hgap="10" vgap="10" xmlns:fx="http://javafx.com/fxml">
+        <padding>
+            <Insets bottom="20" left="20" right="20" top="20" />
+        </padding>
+
+
+
+        <Label text="Nazwa narzędzia" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+        <TextField fx:id="nameTextField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+        <Label text="Producent" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+        <ComboBox fx:id="producentCB" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                </FXCollections>
+            </items>
+        </ComboBox>
+        <Label text="Indeks narzędzia" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+        <TextField fx:id="indexTextField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+        <Label text="D1" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+        <TextField fx:id="D1textfield" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+
+
+
+        <Label text="Typ Narzędzia" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+        <ComboBox fx:id="toolType" GridPane.columnIndex="1" GridPane.rowIndex="5">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="Frezowanie czółowe" />
+                    <String fx:value="Frezowanie obwodowe" />
+                    <String fx:value="Narzędzie tokarskie" />
+                    <String fx:value="Narzędzie do gwintów" />
+                    <String fx:value="Inne" />
+                </FXCollections>
+            </items>
+        </ComboBox>
+        <Label text="Cena" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+        <TextField fx:id="priceTextField" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+
+
+
+        <VBox alignment="CENTER" spacing="10" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="7">
+            <Button fx:id="confirmButton" onAction="#handleConfirmButton" text="Zatwierdź" />
+            <Button fx:id="cancelButton" onAction="#handleCancelButton" text="Anuluj" />
+        </VBox>
+
+    </GridPane>
+
+
+
+</AnchorPane>

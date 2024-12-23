@@ -17,14 +17,21 @@
 
         <Label text="Nazwa narzędzia" GridPane.columnIndex="0" GridPane.rowIndex="1" />
         <TextField fx:id="nameTextField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-        <Label text="D1" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-        <TextField fx:id="D1textfield" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-        <Label text="D2" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-        <TextField fx:id="D2textfield" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-        <Label text="L1" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-        <TextField fx:id="L1textfield" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-        <Label text="Materiał" GridPane.columnIndex="0" GridPane.rowIndex="5" />
-        <ComboBox fx:id="toolMatComboBox" GridPane.columnIndex="1" GridPane.rowIndex="5">
+        <Label text="Producent" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+        <ComboBox fx:id="producentCB" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                </FXCollections>
+            </items>
+        </ComboBox>
+        <Label text="D1" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+        <TextField fx:id="D1textfield" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+        <Label text="D2" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+        <TextField fx:id="D2textfield" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+        <Label text="L1" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+        <TextField fx:id="L1textfield" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+        <Label text="Materiał" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+        <ComboBox fx:id="toolMatComboBox" GridPane.columnIndex="1" GridPane.rowIndex="6">
             <items>
                 <FXCollections fx:factory="observableArrayList">
                     <String fx:value="HSS" />
@@ -33,8 +40,8 @@
             </items>
         </ComboBox>
 
-        <Label text="Cena" GridPane.columnIndex="0" GridPane.rowIndex="6" />
-        <TextField fx:id="priceTextField" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+        <Label text="Cena" GridPane.columnIndex="0" GridPane.rowIndex="7" />
+        <TextField fx:id="priceTextField" GridPane.columnIndex="1" GridPane.rowIndex="7" />
 
 
 

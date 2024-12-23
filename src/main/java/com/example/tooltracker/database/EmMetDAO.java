@@ -9,9 +9,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EmMetDAO {
+public class EmMetDAO implements Tool1Dao {
 
-//    private static final String UPDATE_COMMENT = "UPDATE emmet SET  comment=? WHERE toolIndex=?";
+    private static final String UPDATE_COMMENT = "UPDATE emmet SET  comment=? WHERE toolIndex=?";
 
     private Connection connection;
 
@@ -22,7 +22,7 @@ public class EmMetDAO {
 
     public List<EmMet> getAllEmMetTools() throws SQLException {
         List<EmMet> tools = new ArrayList<>();
-        String query = "SELECT * FROM EmMet";
+        String query = "SELECT * FROM emmet ";
         try ( Connection connection = DatabaseUtil.getConnection();
                 PreparedStatement statement = connection.prepareStatement(query);
              ResultSet resultSet = statement.executeQuery()) {
@@ -35,6 +35,8 @@ public class EmMetDAO {
                         ToolStatus.valueOf(resultSet.getString("toolStatus")),
                         resultSet.getString("comment"),
                         resultSet.getBigDecimal("price"),
+                        resultSet.getString("producent"),
+
                         resultSet.getInt("L1"),
                         resultSet.getInt("L2"),
                         resultSet.getDouble("d1"),
@@ -49,7 +51,7 @@ public class EmMetDAO {
     }
 
     public void addEmMetTool(EmMet tool) throws SQLException {
-        String query = "INSERT INTO EmMet (toolName, toolIndex, toolStatus, comment, price, L1, L2, d1, d2, Material, toothsQty) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO EmMet (toolName, toolIndex, toolStatus, comment, price, L1, L2, d1, d2, Material, toothsQty, producent) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
         try (  Connection connection = DatabaseUtil.getConnection();
                 PreparedStatement statement = connection.prepareStatement(query)) {
             ;
@@ -66,6 +68,8 @@ public class EmMetDAO {
             statement.setDouble(9, tool.getD2());
             statement.setString(10, tool.getMaterial().toString());
             statement.setInt(11, tool.getToothsQty());
+            statement.setString(12, tool.getProducent());
+
             statement.executeUpdate();
         }
     }
@@ -86,16 +90,16 @@ public class EmMetDAO {
         }
     }
 
-//    public void updateComment(Tool1 tool1) {
-//        try (Connection connection = DatabaseUtil.getConnection();
-//             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_COMMENT)) {
-//            preparedStatement.setString(1, tool1.getComment());
-//            preparedStatement.setString(2, tool1.getToolIndex());
-//            preparedStatement.executeUpdate();
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//    }
+    public void updateComment(Tool1 tool1) {
+        try (Connection connection = DatabaseUtil.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_COMMENT)) {
+            preparedStatement.setString(1, tool1.getComment());
+            preparedStatement.setString(2, tool1.getToolIndex());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
 
 

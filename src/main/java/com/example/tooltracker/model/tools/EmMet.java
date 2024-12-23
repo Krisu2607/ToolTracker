@@ -13,9 +13,9 @@ public class EmMet extends Tool1 {
     private SimpleObjectProperty<MaterialType> material;
     private SimpleIntegerProperty toothsQty;
 
-    public EmMet(String toolName, String toolIndex,  ToolStatus toolStatus, String comment, BigDecimal price,
+    public EmMet(String toolName, String toolIndex,  ToolStatus toolStatus, String comment, BigDecimal price,String producent,
                  int L1, int L2, double d1, double d2, MaterialType material, int toothsQty) {
-        super(toolName, toolIndex, ToolType.EMMET, toolStatus, comment, price);
+        super(toolName, toolIndex, ToolType.EMMET, toolStatus, comment, price, producent);
         this.L1 = new SimpleIntegerProperty(L1);
         this.L2 = new SimpleIntegerProperty(L2);
         this.d1 = new SimpleDoubleProperty(d1);

@@ -1,5 +1,6 @@
 package com.example.tooltracker.database;
 
+import com.example.tooltracker.model.LoggedUser;
 import com.example.tooltracker.model.ToolAction;
 
 import java.sql.*;
@@ -10,9 +11,10 @@ import java.util.List;
 public class ActionDAO {
 
 
-    private static final String INSERT_ACTION = "INSERT INTO ToolAction (tIndex, tAction, actionDatetime ) VALUES (?, ?, ?)";
+    private static final String INSERT_ACTION = "INSERT INTO ToolAction (tIndex, tAction, actionDatetime, user ) VALUES (?, ?, ?,?)";
     private static final String SELECT_ALL_ACTION = "SELECT * FROM ToolAction";
     private static final String SELECT_ALL_ACTION_WITH_INDEX = "SELECT * FROM ToolAction WHERE tIndex=?";
+    private String username = LoggedUser.getUser().getUsername();
 
 
 
@@ -30,6 +32,8 @@ public class ActionDAO {
             // MUSIMY UZYC TIMESTAMP BO TO JEST ODPOWIEDNIK DATETIME W SQL
             Timestamp timestamp = Timestamp.valueOf(now);
             preparedStatement.setTimestamp(3, timestamp);
+            preparedStatement.setString(4, username);
+
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -55,11 +59,13 @@ public class ActionDAO {
                String index = resultSet.getString("tIndex");
                 String actionMade = resultSet.getString("tAction");
                LocalDateTime actionTime = resultSet.getTimestamp("actionDateTime").toLocalDateTime(); // Konwersja z Timestamp do LocalDateTime
-                String user = "Jurek";
+                String userr = resultSet.getString("user");
 
 
 
-                toolActions.add(new ToolAction(index, actionMade, actionTime, user));
+
+
+                toolActions.add(new ToolAction(index, actionMade, actionTime, userr));
             }
         } catch (SQLException e) {
             e.printStackTrace();

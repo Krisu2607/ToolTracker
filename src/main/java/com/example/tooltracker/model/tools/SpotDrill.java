@@ -10,9 +10,9 @@ public class SpotDrill extends Tool1 {
     private SimpleIntegerProperty length;
     private MaterialType materialType;
 
-    public SpotDrill(String toolName, String toolIndex, ToolStatus toolStatus, String comment, BigDecimal price,
+    public SpotDrill(String toolName, String toolIndex, ToolStatus toolStatus, String comment, BigDecimal price,String producent,
                      double d1, double d2, int length, MaterialType materialType) {
-        super(toolName, toolIndex, ToolType.SPOTDRILL, toolStatus, comment, price);
+        super(toolName, toolIndex, ToolType.SPOTDRILL, toolStatus, comment, price, producent);
         this.d1 = new SimpleDoubleProperty(d1);
         this.d2 = new SimpleDoubleProperty(d2);
         this.length = new SimpleIntegerProperty(length);

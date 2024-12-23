@@ -4,6 +4,7 @@ import com.example.tooltracker.controller.ToolsController;
 import com.example.tooltracker.database.ActionDAO;
 import com.example.tooltracker.database.DrillvhmDAO;
 import com.example.tooltracker.database.EmMetDAO;
+import com.example.tooltracker.database.ProducentDAO;
 import com.example.tooltracker.model.ToolAction;
 import com.example.tooltracker.model.tools.DrillVHM;
 import com.example.tooltracker.model.tools.EmMet;
@@ -43,6 +44,8 @@ public class AddDrillVhmController {
     @FXML
     private RadioButton icNo;
     @FXML
+    private ComboBox producentCB;
+    @FXML
     private ToggleGroup icToggleGroup;
 
 
@@ -56,10 +59,15 @@ public class AddDrillVhmController {
 
     DrillvhmDAO drillvhmDAO = new DrillvhmDAO();
     private ActionDAO actionDAO = new ActionDAO();
+    private final ProducentDAO producentDA0 = new ProducentDAO();
     private ObservableList<String> addedIndexes = FXCollections.observableArrayList();
 
 
-    public void initialize() {
+    public void initialize() throws SQLException {
+        List<String> producentsList = producentDA0.getAllProducents();
+        ObservableList<String> allProducents = FXCollections.observableArrayList(producentsList);
+        producentCB.setItems(allProducents);
+
         icToggleGroup = new ToggleGroup();
         icYes.setToggleGroup(icToggleGroup);
         icNo.setToggleGroup(icToggleGroup);
@@ -70,6 +78,7 @@ public class AddDrillVhmController {
                         nameTextField.getText().isEmpty() ||
                                 priceTextField.getText().isEmpty() ||
                                 L1textfield.getText().isEmpty() ||
+                                producentCB.getValue() == null ||
                                 L2textfield.getText().isEmpty() ||
                                 D1textfield.getText().isEmpty() ||
                                 icToggleGroup.getSelectedToggle() == null,
@@ -106,6 +115,7 @@ public class AddDrillVhmController {
 
         String toolName = nameTextField.getText();
         BigDecimal price = new BigDecimal(priceTextField.getText());
+        String prodName = producentCB.getValue().toString();
 
         int L1 = Integer.valueOf(L1textfield.getText());
         int L2 = Integer.valueOf(L2textfield.getText());
@@ -125,7 +135,7 @@ public class AddDrillVhmController {
             newSeqNumStr = String.format("%05d", newSeqNum);
         }
         String newIndex = isIc ? String.format("DR-VHM-IC-%s", newSeqNumStr) : String.format("DR-VHM-%s", newSeqNumStr);
-        DrillVHM drillVHM = new DrillVHM(toolName, newIndex, ToolStatus.W_UZYCIU, "",price,D1, L1, L2,isIc  );
+        DrillVHM drillVHM = new DrillVHM(toolName, newIndex, ToolStatus.W_UZYCIU, "",price,prodName,D1, L1, L2,isIc  );
 
         drillvhmDAO.addDrillVHM(drillVHM);
         addedIndexes.add(newIndex);
@@ -135,6 +145,7 @@ public class AddDrillVhmController {
         toolAction.settAction("Nowe narzędzie");
         toolAction.settIndex(newIndex);
         actionDAO.addAction(toolAction);
+        producentDA0.addCostByName(prodName, price);
 
 //        indexTextField.clear();
 //        qtyTextField.clear();
@@ -171,7 +182,7 @@ public class AddDrillVhmController {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue,
                                 String newValue) {
-                if (!newValue.matches("\\d{1,4}(\\.\\d{0,2})?")) {
+                if (!newValue.matches("\\d{0,4}(\\.\\d{0,2})?")) {
                     textField.setText(oldValue);
                 }
 
@@ -187,7 +198,7 @@ public class AddDrillVhmController {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue,
                                 String newValue) {
-                if (!newValue.matches("\\d{1,2}")) {
+                if (!newValue.matches("\\d{0,2}")) {
                     textField.setText(oldValue);
                 }
 
@@ -197,17 +208,13 @@ public class AddDrillVhmController {
     }
 
     private void setThreeNumsTextField(TextField textField) {
-        textField.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue,
-                                String newValue) {
-                if (!newValue.matches("\\d{1,3}")) {
-                    textField.setText(oldValue);
-                }
-
-
+        textField.setTextFormatter(new TextFormatter<>(change -> {
+            String newText = change.getControlNewText();
+            if (newText.matches("\\d{0,3}")) { // Akceptuj tylko cyfry i maksymalnie 5 znaków
+                return change;
             }
-        });
+            return null;
+        }));
     }
     private void setTextFieldLimit(TextField textField, int maxLength) {
         textField.textProperty().addListener(new ChangeListener<String>() {

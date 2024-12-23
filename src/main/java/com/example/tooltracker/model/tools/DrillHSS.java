@@ -11,9 +11,9 @@ public class DrillHSS extends Tool1 {
     private SimpleIntegerProperty workLength;
 
 
-    public DrillHSS(String toolName, String toolIndex, ToolType toolType, ToolStatus toolStatus, String comment, BigDecimal price,
+    public DrillHSS(String toolName, String toolIndex, ToolType toolType, ToolStatus toolStatus, String comment, BigDecimal price,String producent,
                     double diameter, int length, int workLength, int qty) {
-        super(toolName, toolIndex, ToolType.DRILL_HSS, toolStatus, comment, price);
+        super(toolName, toolIndex, ToolType.DRILL_HSS, toolStatus, comment, price, producent);
         this.diameter = new SimpleDoubleProperty(diameter);
         this.length = new SimpleIntegerProperty(length);
         this.workLength = new SimpleIntegerProperty(workLength);

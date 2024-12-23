@@ -13,9 +13,9 @@ public class TapPR extends Tool1 {
     private SimpleDoubleProperty tapScroll;
 
 
-    public TapPR(String toolName, String toolIndex, ToolStatus toolStatus, String comment, BigDecimal price,
+    public TapPR(String toolName, String toolIndex, ToolStatus toolStatus, String comment, BigDecimal price,String producent,
                  MaterialType materialType, String threadClass, double metricSize, double tapScroll) {
-        super(toolName, toolIndex, ToolType.TAPPR, toolStatus, comment, price);
+        super(toolName, toolIndex, ToolType.TAPPR, toolStatus, comment, price, producent);
         this.materialType = new SimpleObjectProperty<>(materialType);
         this.threadClass = new SimpleStringProperty(threadClass);
         this.metricSize = new SimpleDoubleProperty(metricSize);

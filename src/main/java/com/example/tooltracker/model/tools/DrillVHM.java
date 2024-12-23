@@ -12,9 +12,9 @@ public class DrillVHM extends Tool1 {
     private SimpleIntegerProperty length;
     private SimpleIntegerProperty workLength;
 
-    public DrillVHM(String toolName, String toolIndex, ToolStatus toolStatus,  String comment, BigDecimal price,
+    public DrillVHM(String toolName, String toolIndex, ToolStatus toolStatus,  String comment, BigDecimal price,String producent,
                     double diameter, int length, int workLength, boolean isInternalCooled) {
-        super(toolName, toolIndex, ToolType.DRILL_VHM ,toolStatus,  comment, price);
+        super(toolName, toolIndex, ToolType.DRILL_VHM ,toolStatus,  comment, price, producent);
         this.isInternalCooled = new SimpleBooleanProperty(isInternalCooled);
         this.diameter = new SimpleDoubleProperty(diameter);
         this.length = new SimpleIntegerProperty(length);

@@ -45,9 +45,11 @@
     -fx-border-color: grey;
 }
 
+
+
 #narzedzia {
 
-    -fx-background-image: url("icons/narzedziaIkon.png");
+    -fx-background-image: url("icons/dbtool.png");
     -fx-background-color: transparent;
     -fx-background-size: cover;
     -fx-background-repeat: no-repeat;
@@ -75,7 +77,7 @@
 
 #calculator {
 
-    -fx-background-image: url("icons/calculatorIcon.png");
+    -fx-background-image: url("icons/shoporder.png");
     -fx-background-color: transparent;
     -fx-background-size: cover;
     -fx-background-repeat: no-repeat;
@@ -89,7 +91,7 @@
 
 #LiveTools {
 
-    -fx-background-image: url("icons/livets.png");
+    -fx-background-image: url("icons/livetool.png");
     -fx-background-color: transparent;
 
     -fx-background-size: cover;
@@ -147,6 +149,9 @@
     -fx-alignment: center;
     -fx-padding: 0 0 30 320;
 }
+
+
+
 
 
 

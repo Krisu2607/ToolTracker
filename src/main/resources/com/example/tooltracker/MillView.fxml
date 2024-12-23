@@ -1,22 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.tooltracker.controller.MillController"
-            stylesheets="@start.css" style="-fx-background-color: #555555" >
+<BorderPane prefHeight="382.0" prefWidth="1750.0" style="-fx-background-color: #555555" stylesheets="@start.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tooltracker.controller.MillController">
   <center>
       <Label style="-fx-font-size: 40">W BUDOWIE...</Label>
   </center>
 
 
     <left>
-        <VBox fx:id="toolTypeButt" spacing="10">
-            <Button text="Powrót" onAction="#backToHomePage" />
+        <VBox fx:id="toolTypeButt" prefHeight="301.0" prefWidth="1694.0" spacing="10">
+            <Button onAction="#backToHomePage" text="Powrót" />
+         <Cell prefHeight="200.0" prefWidth="0.0" />
+         <TabPane prefHeight="335.0" prefWidth="1684.0" tabClosingPolicy="UNAVAILABLE">
+           <tabs>
+             <Tab text="HCN">
+               <content>
+                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                        <children>
+                           <TitledPane animated="false" layoutX="58.0" layoutY="10.0" prefHeight="285.0" prefWidth="369.0" text="HCN">
+                             <content>
+                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                             </content>
+                           </TitledPane>
+                        </children>
+                     </AnchorPane>
+               </content>
+             </Tab>
+             <Tab text="HQR">
+               <content>
+                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                        <children>
+                           <TitledPane animated="false" layoutX="76.0" prefHeight="305.0" prefWidth="338.0" text="HQR">
+                             <content>
+                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                             </content>
+                           </TitledPane>
+                        </children>
+                     </AnchorPane>
+               </content>
+             </Tab>
+           </tabs>
+         </TabPane>
         </VBox>
     </left>
 </BorderPane>

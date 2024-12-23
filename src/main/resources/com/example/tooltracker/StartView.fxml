@@ -4,19 +4,36 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane style="-fx-background-color: white" stylesheets="@start.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.2-ea" fx:controller="com.example.tooltracker.controller.StartController">
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<BorderPane style="-fx-background-color: white" stylesheets="@start.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tooltracker.controller.StartController">
+
     <top>
-        <Pane prefHeight="214.0" prefWidth="707.0" style="-fx-background-color: #383658;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <Pane prefHeight="68.0" prefWidth="770.0" style="-fx-background-color: #383658;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+
             <children>
 
-                <Label layoutX="136.0" layoutY="105.0" text="Tools Menagment System " textFill="WHITE">
-                    <font>
-                        <Font size="15.0" />
-                    </font>
-                </Label>
-                <HBox fx:id="log" prefHeight="55.0" prefWidth="707.0" spacing="3">
-                    <Button prefHeight="25.0" prefWidth="85.0">Zaloguj</Button>
-                    <Button prefHeight="25.0" prefWidth="110.0">Dodaj Uzytkownika</Button>
+
+                <VBox prefHeight="208.0" prefWidth="479.0">
+                    <ImageView>
+                    <image>
+                        <Image url="@icons/applogo5.png" />
+                    </image></ImageView>
+                    <HBox prefHeight="48.0" prefWidth="479.0" />
+                </VBox>
+
+
+
+
+<!--                <Label layoutX="136.0" layoutY="105.0" text="Tools Menagment System " textFill="WHITE">-->
+<!--                    <font>-->
+<!--                        <Font size="15.0" />-->
+<!--                    </font>-->
+<!--                </Label>-->
+                <HBox fx:id="log" layoutX="14.0" layoutY="6.0" prefHeight="55.0" prefWidth="713.0" spacing="3">
+                    <Button fx:id="logoutbutt" minWidth="75" onAction="#showLogPage">Wyloguj</Button>
+
+
                 </HBox>
 
 
@@ -26,12 +43,12 @@
 
     </top>
     <center>
-        <VBox fx:id="butts">
+        <VBox fx:id="butts" prefHeight="164.0" prefWidth="770.0">
 
 
             <!-- Dolne przyciski -->
-            <HBox fx:id="buttBottom" spacing="20">
-                <Button fx:id="narzedzia" onAction="#showToolsView" prefHeight="50.0" prefWidth="50.0" styleClass="custom-button" />
+            <HBox fx:id="buttBottom" prefHeight="145.0" prefWidth="770.0" spacing="20">
+                <Button fx:id="narzedzia" onAction="#showToolsView" prefHeight="61.0" prefWidth="86.0" styleClass="custom-button" />
                 <Button fx:id="statystyka" onAction="#showUsageView" styleClass="custom-button" />
                 <Button fx:id="calculator" onAction="#showCalcView" styleClass="custom-button" />
                 <Button fx:id="LiveTools" onAction="#showLiveTools" styleClass="custom-button" />
@@ -40,15 +57,20 @@
     </center>
 
 
+
+
     <bottom>
-        <Pane prefHeight="20.0" prefWidth="500.0" style="-fx-background-color: #383658;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <Pane prefHeight="194.0" prefWidth="770.0" style="-fx-background-color: #383658;">
             <children>
 
-                <Label layoutX="300.0" layoutY="0" text="Created by kris" textFill="WHITE">
+                <Label layoutX="327.0" layoutY="145.0" text="Created by Juras" textFill="WHITE">
                     <font>
                         <Font size="10.0" />
                     </font>
                 </Label>
+<!--                  <TextField fx:id="messageField" layoutX="7.0" layoutY="141.0" prefHeight="38.0" prefWidth="226.0" />-->
+<!--                  <Button fx:id="sendButton" layoutX="233.0" layoutY="148.0" onAction="#sendMessage" text="Send" />-->
+<!--                 <TextArea fx:id="chatArea" editable="false" layoutX="1.0" layoutY="32.0" prefHeight="108.0" prefWidth="770.0" />-->
 
 
 

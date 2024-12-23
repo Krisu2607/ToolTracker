@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="600.0" prefWidth="300.0" style="-fx-background-color: white" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tooltracker.controller.LoginController">
+
+
+    <VBox alignment="CENTER" spacing="10" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="100">
+        <TextField fx:id="usernameField" maxWidth="200" promptText="Username" />
+        <PasswordField fx:id="passwordField" maxWidth="200" promptText="Password" />
+        <Button onAction="#handleLogin" text="Login" />
+        <Label fx:id="errorMessage" textFill="red" /><ImageView fx:id="logoimage" fitHeight="100" fitWidth="100" preserveRatio="true" AnchorPane.bottomAnchor="20" AnchorPane.leftAnchor="250">
+        <image>
+            <Image url="@icons/applogo2.png" />
+        </image></ImageView>
+
+    </VBox>
+
+
+     <Pane layoutY="345.0" prefHeight="31.0" prefWidth="300.0" style="-fx-background-color: #383658;">
+         <children>
+
+             <Label layoutX="117.0" layoutY="6.0" text="Created by Juras" textFill="WHITE">
+                 <font>
+                     <Font size="10.0" />
+                 </font>
+             </Label>
+
+
+
+         </children>
+
+     </Pane>
+
+
+
+
+</AnchorPane>

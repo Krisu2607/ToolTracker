@@ -2,6 +2,7 @@ package com.example.tooltracker.controller.newtoolcontrollers;
 
 import com.example.tooltracker.controller.ToolsController;
 import com.example.tooltracker.database.ActionDAO;
+import com.example.tooltracker.database.ProducentDAO;
 import com.example.tooltracker.database.TapInchDAO;
 import com.example.tooltracker.database.TapPrDAO;
 import com.example.tooltracker.model.ToolAction;
@@ -18,6 +19,7 @@ import javafx.stage.Stage;
 
 import java.math.BigDecimal;
 import java.sql.SQLException;
+import java.util.List;
 
 public class AddTapINCHController {
 
@@ -30,6 +32,8 @@ public class AddTapINCHController {
 
     @FXML
     private ComboBox<String> toolMatComboBox;
+    @FXML
+    private ComboBox producentCB;
 
     @FXML
     private TextField priceTextField;
@@ -40,17 +44,23 @@ public class AddTapINCHController {
 
     private TapInchDAO tapInchDAO;
     private ActionDAO actionDAO = new ActionDAO();
+    private final ProducentDAO producentDA0 = new ProducentDAO();
     private ObservableList<String> addedIndexes = FXCollections.observableArrayList();
 
 
 
 
-    public void initialize() {
+    public void initialize() throws SQLException {
+        List<String> producentsList = producentDA0.getAllProducents();
+        ObservableList<String> allProducents = FXCollections.observableArrayList(producentsList);
+        producentCB.setItems(allProducents);
+
         addedIndexesListView.setItems(addedIndexes);
         //DEZAKTYWACJA PRZYCISKU ZATWIERZ W ZALEZNOSCI CZY JEST JAKIS TEKST W POLU CZY NIE
         BooleanBinding fieldsEmpty = Bindings.createBooleanBinding(() ->
                         nameTextField.getText().isEmpty() ||
                                 priceTextField.getText().isEmpty() ||
+                                producentCB.getValue() == null ||
                                 inchSizefield.getText().isEmpty() ||
                                 toolMatComboBox.getValue() == null,
                 nameTextField.textProperty(),
@@ -80,6 +90,7 @@ public class AddTapINCHController {
     public void handleConfirmButton() {
         try {
             String toolName = nameTextField.getText();
+            String prodName = producentCB.getValue().toString();
             String inchSize = inchSizefield.getText();
             String toolMaterial = (String) toolMatComboBox.getValue();
             BigDecimal price = new BigDecimal(priceTextField.getText());
@@ -88,12 +99,13 @@ public class AddTapINCHController {
             String lastIndex = String.valueOf(tapInchDAO.getLastToolIndex());
             String newIndex = generateNewIndex(lastIndex);
 
-            TapInch newTool = new TapInch(toolName, newIndex, ToolStatus.W_UZYCIU, "", price, MaterialType.valueOf(toolMaterial),inchSize);
+            TapInch newTool = new TapInch(toolName, newIndex, ToolStatus.W_UZYCIU, "", price,prodName, MaterialType.valueOf(toolMaterial),inchSize);
             tapInchDAO.addTapInch(newTool);
             ToolAction toolAction = new ToolAction();
             toolAction.settAction("Nowe narzędzie");
             toolAction.settIndex(newIndex);
             actionDAO.addAction(toolAction);
+            producentDA0.addCostByName(prodName, price);
 
 
             addedIndexesListView.getItems().add(newIndex);
@@ -128,7 +140,7 @@ public class AddTapINCHController {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue,
                                 String newValue) {
-                if (!newValue.matches("\\d{1,4}(\\.\\d{0,2})?")) {
+                if (!newValue.matches("\\d{0,4}(\\.\\d{0,2})?")) {
                     textField.setText(oldValue);
                 }
 
@@ -144,7 +156,7 @@ public class AddTapINCHController {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue,
                                 String newValue) {
-                if (!newValue.matches("\\d{1,2}")) {
+                if (!newValue.matches("\\d{0,2}")) {
                     textField.setText(oldValue);
                 }
 
@@ -158,7 +170,7 @@ public class AddTapINCHController {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue,
                                 String newValue) {
-                if (!newValue.matches("\\d{1,3}")) {
+                if (!newValue.matches("\\d{0,3}")) {
                     textField.setText(oldValue);
                 }
 

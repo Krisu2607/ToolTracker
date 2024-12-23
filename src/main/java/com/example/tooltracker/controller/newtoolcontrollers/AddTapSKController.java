@@ -2,6 +2,7 @@ package com.example.tooltracker.controller.newtoolcontrollers;
 
 import com.example.tooltracker.controller.ToolsController;
 import com.example.tooltracker.database.ActionDAO;
+import com.example.tooltracker.database.ProducentDAO;
 import com.example.tooltracker.database.TapPrDAO;
 import com.example.tooltracker.database.TapSkDAO;
 import com.example.tooltracker.model.ToolAction;
@@ -21,6 +22,7 @@ import javafx.stage.Stage;
 
 import java.math.BigDecimal;
 import java.sql.SQLException;
+import java.util.List;
 
 public class AddTapSKController {
 
@@ -35,6 +37,8 @@ public class AddTapSKController {
     @FXML
     private ComboBox<String> toolMatComboBox;
     @FXML
+    private ComboBox producentCB;
+    @FXML
     private ComboBox<String> threadClassCB;
     @FXML
     private TextField tapScroll;
@@ -47,19 +51,25 @@ public class AddTapSKController {
 
     private TapSkDAO tapSkDAO;
     private ActionDAO actionDAO = new ActionDAO();
+    private final ProducentDAO producentDA0 = new ProducentDAO();
 
     private ObservableList<String> addedIndexes = FXCollections.observableArrayList();
 
 
 
 
-    public void initialize() {
+    public void initialize() throws SQLException {
+        List<String> producentsList = producentDA0.getAllProducents();
+        ObservableList<String> allProducents = FXCollections.observableArrayList(producentsList);
+        producentCB.setItems(allProducents);
+
         addedIndexesListView.setItems(addedIndexes);
         //DEZAKTYWACJA PRZYCISKU ZATWIERZ W ZALEZNOSCI CZY JEST JAKIS TEKST W POLU CZY NIE
         BooleanBinding fieldsEmpty = Bindings.createBooleanBinding(() ->
                         nameTextField.getText().isEmpty() ||
                                 priceTextField.getText().isEmpty() ||
                                 mFieldText.getText().isEmpty() ||
+                                producentCB.getValue() == null ||
                                 threadClassCB.getValue() == null ||
                                 tapScroll.getText().isEmpty() ||
                                 toolMatComboBox.getValue() == null,
@@ -92,6 +102,7 @@ public class AddTapSKController {
     public void handleConfirmButton() {
         try {
             String toolName = nameTextField.getText();
+            String prodName = producentCB.getValue().toString();
             double metricSize = Double.parseDouble(mFieldText.getText());
             String toolMaterial = (String) toolMatComboBox.getValue();
             double tapScrollValue = Double.parseDouble(tapScroll.getText());
@@ -102,13 +113,14 @@ public class AddTapSKController {
             String lastIndex = String.valueOf(tapSkDAO.getLastToolIndex());
             String newIndex = generateNewIndex(lastIndex);
 
-            TapSK newTool = new TapSK(toolName, newIndex, ToolStatus.W_UZYCIU, "", price, MaterialType.valueOf(toolMaterial), threadClass, metricSize, tapScrollValue);
+            TapSK newTool = new TapSK(toolName, newIndex, ToolStatus.W_UZYCIU, "", price,prodName, MaterialType.valueOf(toolMaterial), threadClass, metricSize, tapScrollValue);
             tapSkDAO.addTapSK(newTool);
 
             ToolAction toolAction = new ToolAction();
             toolAction.settAction("Nowe narzędzie");
             toolAction.settIndex(newIndex);
             actionDAO.addAction(toolAction);
+            producentDA0.addCostByName(prodName, price);
 
             addedIndexesListView.getItems().add(newIndex);
         } catch (SQLException e) {
@@ -142,7 +154,7 @@ public class AddTapSKController {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue,
                                 String newValue) {
-                if (!newValue.matches("\\d{1,4}(\\.\\d{0,2})?")) {
+                if (!newValue.matches("\\d{0,4}(\\.\\d{0,2})?")) {
                     textField.setText(oldValue);
                 }
 
@@ -158,7 +170,7 @@ public class AddTapSKController {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue,
                                 String newValue) {
-                if (!newValue.matches("\\d{1,2}")) {
+                if (!newValue.matches("\\d{0,2}")) {
                     textField.setText(oldValue);
                 }
 
@@ -172,7 +184,7 @@ public class AddTapSKController {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue,
                                 String newValue) {
-                if (!newValue.matches("\\d{1,3}")) {
+                if (!newValue.matches("\\d{0,3}")) {
                     textField.setText(oldValue);
                 }
 

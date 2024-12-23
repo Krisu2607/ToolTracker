@@ -2,6 +2,7 @@ package com.example.tooltracker.controller.newtoolcontrollers;
 
 import com.example.tooltracker.controller.ToolsController;
 import com.example.tooltracker.database.ActionDAO;
+import com.example.tooltracker.database.ProducentDAO;
 import com.example.tooltracker.database.TapPrDAO;
 import com.example.tooltracker.model.ToolAction;
 import com.example.tooltracker.model.tools.MaterialType;
@@ -19,6 +20,7 @@ import javafx.stage.Stage;
 
 import java.math.BigDecimal;
 import java.sql.SQLException;
+import java.util.List;
 
 public class AddTapPRController {
 
@@ -35,6 +37,8 @@ public class AddTapPRController {
     @FXML
     private ComboBox<String> threadClassCB;
     @FXML
+    private ComboBox producentCB;
+    @FXML
     private TextField tapScroll;
     @FXML
     private TextField priceTextField;
@@ -46,17 +50,23 @@ public class AddTapPRController {
     private TapPrDAO tapPrDAO;
     private ObservableList<String> addedIndexes = FXCollections.observableArrayList();
     private ActionDAO actionDAO = new ActionDAO();
+    private final ProducentDAO producentDA0 = new ProducentDAO();
 
 
 
 
-    public void initialize() {
+    public void initialize() throws SQLException {
+        List<String> producentsList = producentDA0.getAllProducents();
+        ObservableList<String> allProducents = FXCollections.observableArrayList(producentsList);
+        producentCB.setItems(allProducents);
+
         addedIndexesListView.setItems(addedIndexes);
         //DEZAKTYWACJA PRZYCISKU ZATWIERZ W ZALEZNOSCI CZY JEST JAKIS TEKST W POLU CZY NIE
         BooleanBinding fieldsEmpty = Bindings.createBooleanBinding(() ->
                         nameTextField.getText().isEmpty() ||
                                 priceTextField.getText().isEmpty() ||
                                 mFieldText.getText().isEmpty() ||
+                                producentCB.getValue() == null ||
                                 threadClassCB.getValue() == null ||
                                 tapScroll.getText().isEmpty() ||
                                 toolMatComboBox.getValue() == null,
@@ -89,6 +99,7 @@ public class AddTapPRController {
     public void handleConfirmButton() {
         try {
             String toolName = nameTextField.getText();
+            String prodName = producentCB.getValue().toString();
             double metricSize = Double.parseDouble(mFieldText.getText());
             String toolMaterial = (String) toolMatComboBox.getValue();
             double tapScrollValue = Double.parseDouble(tapScroll.getText());
@@ -99,7 +110,7 @@ public class AddTapPRController {
             String lastIndex = String.valueOf(tapPrDAO.getLastToolIndex());
             String newIndex = generateNewIndex(lastIndex);
 
-            TapPR newTool = new TapPR(toolName, newIndex, ToolStatus.W_UZYCIU, "", price, MaterialType.valueOf(toolMaterial), threadClass, metricSize, tapScrollValue);
+            TapPR newTool = new TapPR(toolName, newIndex, ToolStatus.W_UZYCIU, "", price,prodName, MaterialType.valueOf(toolMaterial), threadClass, metricSize, tapScrollValue);
             tapPrDAO.addTapPR(newTool);
 
 
@@ -107,6 +118,7 @@ public class AddTapPRController {
             toolAction.settAction("Nowe narzędzie");
             toolAction.settIndex(newIndex);
             actionDAO.addAction(toolAction);
+            producentDA0.addCostByName(prodName, price);
 
             addedIndexesListView.getItems().add(newIndex);
         } catch (SQLException e) {
@@ -140,7 +152,7 @@ public class AddTapPRController {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue,
                                 String newValue) {
-                if (!newValue.matches("\\d{1,4}(\\.\\d{0,2})?")) {
+                if (!newValue.matches("\\d{0,4}(\\.\\d{0,2})?")) {
                     textField.setText(oldValue);
                 }
 
@@ -156,7 +168,7 @@ public class AddTapPRController {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue,
                                 String newValue) {
-                if (!newValue.matches("\\d{1,2}")) {
+                if (!newValue.matches("\\d{0,2}")) {
                     textField.setText(oldValue);
                 }
 
@@ -170,7 +182,7 @@ public class AddTapPRController {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue,
                                 String newValue) {
-                if (!newValue.matches("\\d{1,3}")) {
+                if (!newValue.matches("\\d{0,3}")) {
                     textField.setText(oldValue);
                 }
 

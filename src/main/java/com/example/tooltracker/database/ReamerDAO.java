@@ -9,9 +9,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReamerDAO {
+public class ReamerDAO implements Tool1Dao {
 
-//    private static final String UPDATE_COMMENT = "UPDATE reamer SET  comment=? WHERE toolIndex=?";
+    private static final String UPDATE_COMMENT = "UPDATE reamer SET  comment=? WHERE toolIndex=?";
 
     private Connection connection;
 
@@ -30,6 +30,8 @@ public class ReamerDAO {
                         ToolStatus.valueOf(resultSet.getString("toolStatus")),
                         resultSet.getString("comment"),
                         resultSet.getBigDecimal("price"),
+                        resultSet.getString("producent"),
+
                         resultSet.getDouble("diameter"),
                         MaterialType.valueOf(resultSet.getString("MaterialType")),
                         resultSet.getInt("length"
@@ -44,7 +46,7 @@ public class ReamerDAO {
 
 
     public void addReamer(Reamer tool) throws SQLException {
-        String query = "INSERT INTO Reamer (toolName, toolIndex, toolStatus, comment, price, diameter, MaterialType, length) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO Reamer (toolName, toolIndex, toolStatus, comment, price, diameter, MaterialType, length, producent) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?)";
         try (  Connection connection = DatabaseUtil.getConnection();
                PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, tool.getToolName());
@@ -55,22 +57,24 @@ public class ReamerDAO {
             statement.setDouble(6, tool.getDiameter());
             statement.setString(7, tool.getMaterial().toString());
             statement.setInt(8, tool.getLength());
+            statement.setString(9, tool.getProducent());
+
 
 
             statement.executeUpdate();
         }
     }
 
-//    public void updateComment(Tool1 tool1) {
-//        try (Connection connection = DatabaseUtil.getConnection();
-//             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_COMMENT)) {
-//            preparedStatement.setString(1, tool1.getComment());
-//            preparedStatement.setString(2, tool1.getToolIndex());
-//            preparedStatement.executeUpdate();
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//    }
+    public void updateComment(Tool1 tool1) {
+        try (Connection connection = DatabaseUtil.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_COMMENT)) {
+            preparedStatement.setString(1, tool1.getComment());
+            preparedStatement.setString(2, tool1.getToolIndex());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
 
     public List<String> getToolIndexes() throws SQLException {

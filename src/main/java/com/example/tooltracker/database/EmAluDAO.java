@@ -9,9 +9,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EmAluDAO {
+public class EmAluDAO implements Tool1Dao {
 
-//    private static final String UPDATE_COMMENT = "UPDATE emalu SET  comment=? WHERE toolIndex=?";
+    private static final String UPDATE_COMMENT = "UPDATE emalu SET  comment=? WHERE toolIndex=?";
 
     private static final String UPDATE_TOOL_POST_SHARP = "UPDATE emalu SET  toolStatus=?,  l1=?, l2=?, d1=?, d2=? WHERE toolIndex=?";
 
@@ -33,6 +33,8 @@ public class EmAluDAO {
                         ToolStatus.valueOf(resultSet.getString("toolStatus")),
                         resultSet.getString("comment"),
                         resultSet.getBigDecimal("price"),
+                        resultSet.getString("producent"),
+
                         resultSet.getInt("L1"),
                         resultSet.getInt("L2"),
                         resultSet.getDouble("d1"),
@@ -63,19 +65,19 @@ public class EmAluDAO {
     }
 
 
-//    public void updateComment(Tool1 tool1) {
-//        try (Connection connection = DatabaseUtil.getConnection();
-//             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_COMMENT)) {
-//            preparedStatement.setString(1, tool1.getComment());
-//            preparedStatement.setString(2, tool1.getToolIndex());
-//            preparedStatement.executeUpdate();
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//    }
+    public void updateComment(Tool1 tool1) {
+        try (Connection connection = DatabaseUtil.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_COMMENT)) {
+            preparedStatement.setString(1, tool1.getComment());
+            preparedStatement.setString(2, tool1.getToolIndex());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void addEmAluTool(EmAlu tool) throws SQLException {
-        String query = "INSERT INTO EmAlu (toolName, toolIndex, toolStatus, comment, price, L1, L2, d1, d2, Material, toothsQty) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO EmAlu (toolName, toolIndex, toolStatus, comment, price, L1, L2, d1, d2, Material, toothsQty, producent) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
         try (  Connection connection = DatabaseUtil.getConnection();
                PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, tool.getToolName());
@@ -89,6 +91,8 @@ public class EmAluDAO {
             statement.setDouble(9, tool.getD2());
             statement.setString(10, tool.getMaterial().toString());
             statement.setInt(11, tool.getToothsQty());
+            statement.setString(12, tool.getProducent());
+
             statement.executeUpdate();
         }
     }

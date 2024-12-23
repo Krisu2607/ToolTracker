@@ -9,9 +9,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EMRDAO  {
+public class EMRDAO implements Tool1Dao  {
 
-//    private static final String UPDATE_COMMENT = "UPDATE emr SET  comment=? WHERE toolIndex=?";
+    private static final String UPDATE_COMMENT = "UPDATE emr SET  comment=? WHERE toolIndex=?";
 
     private Connection connection;
 
@@ -31,6 +31,8 @@ public class EMRDAO  {
                         ToolStatus.valueOf(resultSet.getString("toolStatus")),
                         resultSet.getString("comment"),
                         resultSet.getBigDecimal("price"),
+                        resultSet.getString("producent"),
+
                         resultSet.getBoolean("isitball"),
                         resultSet.getDouble("cornerr"),
 
@@ -49,7 +51,7 @@ public class EMRDAO  {
     }
 
     public void addEmrTool(EmR tool) throws SQLException {
-        String query = "INSERT INTO EmR (toolName, toolIndex, toolStatus, comment, price, L1, L2, d1, d2, Material, toothsQty, isitball, cornerr, toolDestinyMaterial) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?,?)";
+        String query = "INSERT INTO EmR (toolName, toolIndex, toolStatus, comment, price, L1, L2, d1, d2, Material, toothsQty, isitball, cornerr, toolDestinyMaterial, producent) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?,?,?)";
         try (  Connection connection = DatabaseUtil.getConnection();
                PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, tool.getToolName());
@@ -66,6 +68,8 @@ public class EMRDAO  {
             statement.setBoolean(12, tool.isIsItBall());
             statement.setDouble(13, tool.getCornerR());
             statement.setString(14, tool.getToolDestinyMat().toString());
+            statement.setString(15, tool.getProducent());
+
             statement.executeUpdate();
         }
 
@@ -73,16 +77,16 @@ public class EMRDAO  {
 
     }
 
-//    public void updateComment(Tool1 tool1) {
-//        try (Connection connection = DatabaseUtil.getConnection();
-//             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_COMMENT)) {
-//            preparedStatement.setString(1, tool1.getComment());
-//            preparedStatement.setString(2, tool1.getToolIndex());
-//            preparedStatement.executeUpdate();
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//    }
+    public void updateComment(Tool1 tool1) {
+        try (Connection connection = DatabaseUtil.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_COMMENT)) {
+            preparedStatement.setString(1, tool1.getComment());
+            preparedStatement.setString(2, tool1.getToolIndex());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     public List<String> getToolIndexesByToothsQty(int toothsQty) throws SQLException {
         List<String> toolIndexes = new ArrayList<>();

@@ -1,6 +1,8 @@
 package com.example.tooltracker.controller;
 
+import com.example.tooltracker.database.InsertActionDAO;
 import com.example.tooltracker.database.ToolInsertDAO;
+import com.example.tooltracker.model.InsertAction;
 import com.example.tooltracker.model.ToolInsert;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -13,6 +15,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,6 +41,7 @@ public class EditInsertController {
             private Label indexError;
 
     ToolInsertDAO toolInsertDAO = new ToolInsertDAO();
+    InsertActionDAO insertActionDAO = new InsertActionDAO();
 
     public void initialize() {
         //DEZAKTYWACJA PRZYCISKU ZATWIERZ W ZALEZNOSCI CZY JEST JAKIS TEKST W POLU CZY NIE
@@ -68,11 +72,14 @@ public class EditInsertController {
         int currentQty = toolInsert.getInsertQty();
         int reducingQty = Integer.parseInt(qtyTextField.getText());
         toolInsert.setInsertQty(currentQty-reducingQty);
+        String actioninfo = "Odpisano " + reducingQty + " szt.";
 
 
 
 
         toolInsertDAO.updateToolInsertQty(toolInsert);
+        InsertAction insertAction = new InsertAction(index, actioninfo, LocalDateTime.now());
+        insertActionDAO.addAction(insertAction);
 
             indexTextField.clear();
             qtyTextField.clear();
@@ -81,7 +88,6 @@ public class EditInsertController {
             indexTextField.requestFocus();
 
         toolsController.refreshInsertTable();
-        toolsController.refreshToolTable();
     }
 
 

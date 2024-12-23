@@ -9,9 +9,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class IdTurningDAO {
+public class IdTurningDAO implements Tool1Dao {
 
-//    private static final String UPDATE_COMMENT = "UPDATE turningid SET  comment=? WHERE toolIndex=?";
+    private static final String UPDATE_COMMENT = "UPDATE turningid SET  comment=? WHERE toolIndex=?";
 
 
     public List<TurningID> getAllIdTurnTools() throws SQLException {
@@ -28,6 +28,8 @@ public class IdTurningDAO {
                         ToolStatus.valueOf(resultSet.getString("toolStatus")),
                         resultSet.getString("comment"),
                         resultSet.getBigDecimal("price"),
+                        resultSet.getString("producent"),
+
                         resultSet.getString("matchingInserts"),
                         resultSet.getString("Type"),
                         resultSet.getString("workDirection"),
@@ -44,7 +46,7 @@ public class IdTurningDAO {
     }
 
     public void addIdTools(TurningID tool) throws SQLException {
-        String query = "INSERT INTO turningid (toolName, toolIndex, toolStatus, comment,price, matchingInserts, matchingBolt, workDirection,  type) VALUES (?, ?, ?, ?, ?, ?, ?,?,?)";
+        String query = "INSERT INTO turningid (toolName, toolIndex, toolStatus, comment,price, matchingInserts, matchingBolt, workDirection,  type, producent) VALUES (?, ?, ?, ?, ?, ?, ?,?,?,?)";
         try (  Connection connection = DatabaseUtil.getConnection();
                PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, tool.getToolName());
@@ -56,6 +58,8 @@ public class IdTurningDAO {
             statement.setString(7, tool.getMatchingBolt());
             statement.setString(8, tool.getCutDirection());
             statement.setString(9, tool.getWorkType());
+            statement.setString(10, tool.getProducent());
+
 
 
 
@@ -64,16 +68,16 @@ public class IdTurningDAO {
         }
     }
 
-//    public void updateComment(Tool1 tool1) {
-//        try (Connection connection = DatabaseUtil.getConnection();
-//             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_COMMENT)) {
-//            preparedStatement.setString(1, tool1.getComment());
-//            preparedStatement.setString(2, tool1.getToolIndex());
-//            preparedStatement.executeUpdate();
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//    }
+    public void updateComment(Tool1 tool1) {
+        try (Connection connection = DatabaseUtil.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_COMMENT)) {
+            preparedStatement.setString(1, tool1.getComment());
+            preparedStatement.setString(2, tool1.getToolIndex());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     public List<String> getLastToolIndexByDirection(String cutDirection) throws SQLException {
         List<String> toolIndexes = new ArrayList<>();

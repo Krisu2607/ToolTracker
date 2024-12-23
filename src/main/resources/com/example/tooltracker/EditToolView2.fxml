@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.tooltracker.controller.EditToolController2"
+            prefHeight="400.0" prefWidth="600.0">
+
+
+
+    <GridPane xmlns:fx="http://javafx.com/fxml" alignment="CENTER" hgap="10" vgap="10">
+        <padding>
+            <Insets top="20" right="20" bottom="20" left="20"/>
+        </padding>
+
+        <Label text="Numer Indeks:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+        <TextField fx:id="indexTextField" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+        <Label fx:id="indexError" style="-fx-text-fill: red" GridPane.columnIndex="1" GridPane.rowIndex="1"></Label>
+
+        <CheckBox fx:id="sharpeningCheckBox" text="Do ostrzenia" GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.columnSpan="2" />
+
+        <HBox spacing="10" alignment="CENTER" GridPane.columnIndex="0" GridPane.rowIndex="3" GridPane.columnSpan="2">
+            <Button text="Zatwierdź" fx:id="confirmButton" onAction="#handleConfirmButton" />
+            <Button text="Anuluj" onAction="#handleCancelButton" />
+        </HBox>
+    </GridPane>
+</AnchorPane>

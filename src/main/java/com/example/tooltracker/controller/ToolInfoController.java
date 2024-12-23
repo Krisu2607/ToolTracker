@@ -38,6 +38,7 @@ public class ToolInfoController {
     public void initialize() {
         actionTimeColumn.setCellValueFactory(new PropertyValueFactory<>("actionDateTime"));
         actionMadeColumn.setCellValueFactory(new PropertyValueFactory<>("tAction"));
+        userColumn.setCellValueFactory(new PropertyValueFactory<>("user"));
         Platform.runLater(() -> {
             ObservableList<ToolAction> allActions = FXCollections.observableArrayList(actionDAO.getAllActionsWithIndex(toolIndex));
             actionTable.setItems(allActions);

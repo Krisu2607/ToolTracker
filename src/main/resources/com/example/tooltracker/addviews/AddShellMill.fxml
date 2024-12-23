@@ -18,42 +18,49 @@
 
         <Label text="Nazwa narzędzia" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
         <TextField fx:id="nameTextField" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-        <Label text="ø" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
-        <TextField fx:id="diamTextField" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
-        <Label text="Ostrza" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
-        <TextField fx:id="toothsQtyTextField" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
-        <Label text="Rodzaj" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
-        <HBox spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="4" GridPane.columnSpan="2">
+        <Label text="Producent" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+        <ComboBox fx:id="producentCB" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                </FXCollections>
+            </items>
+        </ComboBox>
+        <Label text="ø" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+        <TextField fx:id="diamTextField" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+        <Label text="Ostrza" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+        <TextField fx:id="toothsQtyTextField" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+        <Label text="Rodzaj" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+        <HBox spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="5" GridPane.columnSpan="2">
             <RadioButton text="FF" fx:id="FFRadio" toggleGroup="$shellMillTypeToggleGroup"/>
             <RadioButton text="NM" fx:id="NMRadio" toggleGroup="$shellMillTypeToggleGroup"/>
         </HBox>
-        <Label text="Chłodzenie przez środek?" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
-        <HBox spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="5" GridPane.columnSpan="2">
+        <Label text="Chłodzenie przez środek?" GridPane.columnIndex="0" GridPane.rowIndex="6"/>
+        <HBox spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="6" GridPane.columnSpan="2">
             <RadioButton text="Tak" fx:id="yesIC" toggleGroup="$ICToggleGroup"/>
             <RadioButton text="Nie" fx:id="noIC" toggleGroup="$ICToggleGroup"/>
         </HBox>
 
 
-        <Label text="Pasujące płytki" GridPane.columnIndex="0" GridPane.rowIndex="6"/>
-        <ComboBox fx:id="matchingInserts1CB" GridPane.columnIndex="1" GridPane.rowIndex="6">
+        <Label text="Pasujące płytki" GridPane.columnIndex="0" GridPane.rowIndex="7"/>
+        <ComboBox fx:id="matchingInserts1CB" GridPane.columnIndex="1" GridPane.rowIndex="7">
             <items>
                 <FXCollections fx:factory="observableArrayList">
                 </FXCollections>
             </items>
         </ComboBox>
-        <Label text="Pasujące płytki" GridPane.columnIndex="0" GridPane.rowIndex="7"/>
-        <ComboBox fx:id="matchingInserts2CB" GridPane.columnIndex="1" GridPane.rowIndex="7">
+        <Label text="Pasujące płytki" GridPane.columnIndex="0" GridPane.rowIndex="8"/>
+        <ComboBox fx:id="matchingInserts2CB" GridPane.columnIndex="1" GridPane.rowIndex="8">
             <items>
                 <FXCollections fx:factory="observableArrayList">
                 </FXCollections>
             </items>
         </ComboBox>
 
-        <Label text="Pasująca śrubka" GridPane.columnIndex="0" GridPane.rowIndex="8"/>
-        <TextField fx:id="boltTextField" GridPane.columnIndex="1" GridPane.rowIndex="8"/>
-        <Label text="Cena" GridPane.columnIndex="0" GridPane.rowIndex="9"/>
-        <TextField fx:id="priceTextField" GridPane.columnIndex="1" GridPane.rowIndex="9"/>
-        <VBox alignment="CENTER" spacing="10" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="10">
+        <Label text="Pasująca śrubka" GridPane.columnIndex="0" GridPane.rowIndex="9"/>
+        <TextField fx:id="boltTextField" GridPane.columnIndex="1" GridPane.rowIndex="9"/>
+        <Label text="Cena" GridPane.columnIndex="0" GridPane.rowIndex="10"/>
+        <TextField fx:id="priceTextField" GridPane.columnIndex="1" GridPane.rowIndex="10"/>
+        <VBox alignment="CENTER" spacing="10" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="11">
             <Button fx:id="confirmButton" onAction="#handleConfirmButton" text="Zatwierdź"/>
             <Button fx:id="cancelButton" onAction="#handleCancelButton" text="Anuluj"/>
         </VBox>
@@ -75,8 +82,8 @@
             <RowConstraints/>
         </rowConstraints>
     </GridPane>
-    <AnchorPane layoutX="270.0" layoutY="14.0" prefHeight="269.0" prefWidth="185.0"/>
-    <VBox layoutX="300" layoutY="50">
+    <AnchorPane layoutX="300.0" layoutY="14.0" prefHeight="269.0" prefWidth="185.0"/>
+    <VBox layoutX="350" layoutY="50">
         <Label text="Dodane indeksy:"/>
         <ListView fx:id="addedIndexesListView" prefHeight="300" prefWidth="120"/>
     </VBox>

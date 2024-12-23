@@ -62,6 +62,7 @@
                                     <TableColumn text="info" fx:id="EmMetinfoColumn" />
                                     <TableColumn text="Nazwa" fx:id="EMMetnameColumn" />
                                     <TableColumn text="Indeks" fx:id="EMMetindexColumn" />
+                                    <TableColumn text="Producent" fx:id="EmMetProdColumn" />
                                     <TableColumn text="L1"  prefWidth="50" fx:id="EMMetL1"/>
                                     <TableColumn text="L2"  prefWidth="50" fx:id="EMMetL2"/>
                                     <TableColumn text="D1"  prefWidth="50" fx:id="EMMetD1"/>
@@ -91,6 +92,8 @@
                                     <TableColumn text="info" fx:id="EMAluinfoColumn" />
                                     <TableColumn text="Nazwa" fx:id="EMAlunameColumn" />
                                     <TableColumn text="Indeks" fx:id="EMAluindexColumn" />
+                                    <TableColumn text="Producent" fx:id="EmAluProdColumn" />
+
                                     <TableColumn text="L1"  prefWidth="50" fx:id="EMAluL1"/>
                                     <TableColumn text="L2"  prefWidth="50" fx:id="EMAluL2"/>
                                     <TableColumn text="D1"  prefWidth="50" fx:id="EMAluD1"/>
@@ -120,6 +123,8 @@
                                     <TableColumn text="info" fx:id="EmRinfoColumn" />
                                     <TableColumn text="Nazwa" fx:id="EmRNAME" />
                                     <TableColumn text="Indeks" fx:id="EmRIndex" />
+                                    <TableColumn text="Producent" fx:id="EmRProdColumn" />
+
                                     <TableColumn text="L1"  prefWidth="50" fx:id="EmRL1" />
                                     <TableColumn text="L2"  prefWidth="50" fx:id="EmRL2"/>
                                     <TableColumn text="D1"  prefWidth="50" fx:id="EmRD1"/>
@@ -151,6 +156,8 @@
                                     <TableColumn text="info" fx:id="DBinfoColumn" />
                                     <TableColumn text="Nazwa" fx:id="DBName" />
                                     <TableColumn text="Indeks" fx:id="DBIndex" />
+                                    <TableColumn text="Producent" fx:id="DBProdColumn" />
+
                                     <TableColumn text="⌀"  prefWidth="50" fx:id="DBDiam"/>
                                     <TableColumn text="Długość"  prefWidth="50" fx:id="DBlength"/>
                                     <TableColumn text="Tooths"  prefWidth="50" fx:id="DBTooths"/>
@@ -186,6 +193,8 @@
                                     <TableColumn text="info" fx:id="DRHSSinfoColumn" />
                                     <TableColumn text="Nazwa" fx:id="DRHSSName" />
                                     <TableColumn text="Indeks" fx:id="DRHSSIndex" />
+                                    <TableColumn text="Producent" fx:id="DRHSSProdColumn" />
+
 
                                     <TableColumn text="Status" fx:id="DRHSSStatus" />
                                     <TableColumn text="L1" fx:id="DRHSSL1" />
@@ -224,6 +233,8 @@
                                     <TableColumn text="info" fx:id="DRVHMinfoColumn" />
                                     <TableColumn text="Nazwa" fx:id="DRVHMName" />
                                     <TableColumn text="Indeks" fx:id="DRVHMIndex" />
+                                    <TableColumn text="Producent" fx:id="DRVHMProdColumn" />
+
 
                                     <TableColumn text="Status" fx:id="DRVHMStatus" />
                                     <TableColumn text="L1" fx:id="DRVHML1" />
@@ -257,6 +268,8 @@
                                     <TableColumn text="info" fx:id="TapSKinfoColumn" />
                                     <TableColumn text="Nazwa" fx:id="TapSKName" />
                                     <TableColumn text="Indeks" fx:id="TapSKIndex" />
+                                    <TableColumn text="Producent" fx:id="TapSKProdColumn" />
+
                                     <TableColumn text="M"  prefWidth="50" fx:id="TapSKMetricSize"/>
                                     <TableColumn text="Skok"  prefWidth="50" fx:id="TapSKScroll"/>
                                     <TableColumn text="Klasa"  prefWidth="50" fx:id="TapSKClass"/>
@@ -281,6 +294,8 @@
                                     <TableColumn text="info" fx:id="TapPRinfoColumn" />
                                     <TableColumn text="Nazwa" fx:id="TapPRName" />
                                     <TableColumn text="Indeks" fx:id="TapPRIndex" />
+                                    <TableColumn text="Producent" fx:id="TapPRProdColumn" />
+
                                     <TableColumn text="M"  prefWidth="50" fx:id="TapPRMetricSize"/>
                                     <TableColumn text="Skok"  prefWidth="50" fx:id="TapPRScroll"/>
                                     <TableColumn text="Klasa"  prefWidth="50" fx:id="TapPRClass"/>
@@ -305,6 +320,8 @@
                                     <TableColumn text="info" fx:id="TapInchinfoColumn" />
                                     <TableColumn text="Nazwa" fx:id="TapInchName" />
                                     <TableColumn text="Indeks" fx:id="TapInchIndex" />
+                                    <TableColumn text="Producent" fx:id="TapInchProdColumn" />
+
                                     <TableColumn text="Materiał" fx:id="TapInchMat" />
                                     <TableColumn text="Status" fx:id="TapInchStatus" />
                                     <TableColumn text="Rozmiar"  prefWidth="50" fx:id="TapInchSize"/>
@@ -327,6 +344,8 @@
                                     <TableColumn text="info" fx:id="DieinfoColumn" />
                                     <TableColumn text="Nazwa" fx:id="DieName" />
                                     <TableColumn text="Indeks" fx:id="DieIndex" />
+                                    <TableColumn text="Producent" fx:id="DieProdColumn" />
+
                                     <TableColumn text="Metryczny"  prefWidth="50" fx:id="DieMetricSize"/>
                                     <TableColumn text="Skok"  prefWidth="50" fx:id="DieScroll"/>
                                     <TableColumn text="Klasa"  prefWidth="50" fx:id="DieClass"/>
@@ -358,8 +377,12 @@
                                     <TableColumn text="info" fx:id="ODinfoColumn" />
                                     <TableColumn text="Nazwa" fx:id="ODName" />
                                     <TableColumn text="Indeks" fx:id="ODIndex" />
+                                    <TableColumn text="Producent" fx:id="ODProdColumn" />
+
                                     <TableColumn text="Rodzaj" fx:id="ODType" />
                                     <TableColumn text="Płytki"  prefWidth="50" fx:id="ODInserts"/>
+                                    <TableColumn text="Śruba"  prefWidth="50" fx:id="ODBolt"/>
+
                                     <TableColumn text="Status" fx:id="ODStatus" />
                                     <TableColumn text="Uwagi" fx:id="ODComment" prefWidth="460"/>
 
@@ -380,8 +403,12 @@
                                     <TableColumn text="info" fx:id="IDinfoColumn" />
                                     <TableColumn text="Nazwa" fx:id="IDName" />
                                     <TableColumn text="Indeks" fx:id="IDIndex" />
+                                    <TableColumn text="Producent" fx:id="IDProdColumn" />
+
                                     <TableColumn text="Rodzaj" fx:id="IDType" />
                                     <TableColumn text="Płytki"  prefWidth="50" fx:id="IDInserts"/>
+                                    <TableColumn text="Śruba"  prefWidth="50" fx:id="IDBolt"/>
+
                                     <TableColumn text="Status" fx:id="IDStatus" />
                                     <TableColumn text="Uwagi" fx:id="IDComment" prefWidth="460"/>
 
@@ -403,6 +430,8 @@
                                     <TableColumn text="info" fx:id="FaceGrooveinfoColumn" />
                                     <TableColumn text="Nazwa" fx:id="FaceGrooveName" />
                                     <TableColumn text="Indeks" fx:id="FaceGrooveIndex" />
+                                    <TableColumn text="Producent" fx:id="FaceGrooveProdColumn" />
+
                                     <TableColumn text="Min ø"  prefWidth="50" fx:id="FaceGrooveMinDiam"/>
                                     <TableColumn text="Max ø"  prefWidth="50" fx:id="FaceGrooveMaxDiam"/>
                                     <TableColumn text="Max ap"  prefWidth="50" fx:id="FaceGrooveMaxDepth"/>
@@ -432,7 +461,7 @@
 
 
             <Tab text="Głowice">
-                <TabPane fx:id="innerFaceMillTa">
+                <TabPane fx:id="innerFaceMillTa" tabClosingPolicy="UNAVAILABLE">
                     <Tab text="Głowice szybkościowe">
                         <VBox fx:id="mainContainer54" alignment="CENTER" >
                             <!-- Przyciski na górze -->
@@ -444,6 +473,8 @@
                                     <TableColumn text="info" fx:id="shellMillFFinfoColumn" />
                                     <TableColumn text="Nazwa" fx:id="shellMillFFName" />
                                     <TableColumn text="Indeks" fx:id="shellMillFFIndex" />
+                                    <TableColumn text="Producent" fx:id="shellMillFFProdColumn" />
+
                                     <TableColumn text="⌀"  prefWidth="50" fx:id="shellMillFFDiam"/>
                                     <TableColumn text="Tooths"  prefWidth="50" fx:id="shellMillFFTooths"/>
                                     <TableColumn text="Płytki"  prefWidth="50" fx:id="shellMillFFInserts"/>
@@ -470,6 +501,8 @@
                                     <TableColumn text="info" fx:id="shellMillNMinfoColumn" />
                                     <TableColumn text="Nazwa" fx:id="shellMillNMName" />
                                     <TableColumn text="Indeks" fx:id="shellMillNMIndex" />
+                                    <TableColumn text="Producent" fx:id="shellMillNMProdColumn" />
+
                                     <TableColumn text="⌀"  prefWidth="50" fx:id="shellMillNMDiam"/>
                                     <TableColumn text="Tooths"  prefWidth="50" fx:id="shellMillNMTooths"/>
                                     <TableColumn text="Płytki"  prefWidth="50" fx:id="shellMillNMInserts"/>
@@ -508,6 +541,8 @@
                             <TableColumn text="info" fx:id="ChaminfoColumn" />
                             <TableColumn text="Nazwa" fx:id="ChamName" />
                             <TableColumn text="Indeks" fx:id="ChamIndex" />
+                            <TableColumn text="Producent" fx:id="ChamProdColumn" />
+
                             <TableColumn text="D1" fx:id="ChamD1" />
                             <TableColumn text="D2" fx:id="ChamD2" />
                             <TableColumn text="L1" fx:id="ChamL1" />
@@ -534,6 +569,8 @@
                             <TableColumn text="info" fx:id="SDinfoColumn" />
                             <TableColumn text="Nazwa" fx:id="SDName" />
                             <TableColumn text="Indeks" fx:id="SDIndex" />
+                            <TableColumn text="Producent" fx:id="SDProdColumn" />
+
                             <TableColumn text="Materiał" fx:id="SDMat" />
                             <TableColumn text="Status" fx:id="SDStatus" />
 
@@ -560,6 +597,8 @@
                             <TableColumn text="info" fx:id="ReamerinfoColumn" />
                             <TableColumn text="Nazwa" fx:id="ReamerName" />
                             <TableColumn text="Indeks" fx:id="ReamerIndex" />
+                            <TableColumn text="Producent" fx:id="ReamerProdColumn" />
+
                             <TableColumn text="Status" fx:id="ReamerStatus" />
                             <TableColumn text="Status" fx:id="ReamerMat" />
                             <TableColumn text="L1" fx:id="ReamerL1" />
@@ -573,20 +612,53 @@
                 </VBox>
             </Tab>
 
+
+            <Tab text="INNE">
+                <VBox fx:id="mainContainer19" alignment="CENTER" >
+                    <!-- Przyciski na górze -->
+
+                    <TableView fx:id="VariousTable">
+                        <columns>
+                            <TableColumn fx:id="VariousRemImg" prefWidth="36.666656494140625" />
+                            <TableColumn text="info" fx:id="VariousinfoColumn" />
+                            <TableColumn text="Nazwa" fx:id="VariousName" />
+                            <TableColumn text="Indeks" fx:id="VariousIndex" />
+                            <TableColumn text="Producent" fx:id="VariousProdColumn" />
+
+                            <TableColumn text="Status" fx:id="VariousStatus" />
+                            <TableColumn text="Rodzaj" fx:id="VariousType" />
+                            <TableColumn text="⌀"  prefWidth="50" fx:id="VariousDiam"/>
+                            <TableColumn text="Uwagi" fx:id="VariousComment" prefWidth="460"/>
+
+                        </columns>
+                    </TableView>
+                    <!-- Tabela na środku -->
+
+                </VBox>
+            </Tab>
+
+
             <Tab fx:id="insertTab" text="Płytki">
                 <VBox fx:id="mainContainer22" alignment="CENTER" >
                     <!-- Przyciski na górze -->
                     <HBox fx:id="typesInserts" spacing="2">
                         <Button text="Pokaż wszystkie" onAction="#allInsertButton" />
-                        <Button text="Noże tokarskie" onAction="#handleKnivesInsertButton" />
-                        <Button text="Głowice" onAction="#handleFaceMillButton" />
-                        <Button text="Wiertła płytkowe" onAction="#handleInsertDrillButton" />
+                        <Button text="Noże tokarskie Zew" onAction="#handleLatheOd" />
+                        <Button text="Noże tokarskie Wew" onAction="#handleLatheId" />
+                        <Button text="GłowiceFF" onAction="#handleFaceMillFF" />
+                        <Button text="GłowiceNM" onAction="#handleFaceMillNM" />
+                        <Button text="Wiertła płytkowe" onAction="#handleInsertDrill" />
+                        <Button text="Rowki Czołowe" onAction="#handleInsertFaceGroove" />
+                        <Button text="Przecinaki/Listwy" onAction="#handleOdGroove" />
+                        <Button text="Gwinty" onAction="#handleInsertThreads" />
+
                         <!--                            <Button text="Powrót" onAction="#backToHomePage" />-->
                     </HBox>
 
                     <!-- Tabela na środku -->
                     <TableView fx:id="insertTable">
                         <columns>
+                            <TableColumn fx:id="addCell" prefWidth="60" />
                             <TableColumn text="Nazwa" fx:id="nameColumn2"  />
                             <TableColumn text="Indeks" fx:id="indexColumn2" />
                             <TableColumn text="Rodzaj" fx:id="typeColumn2" />
@@ -594,6 +666,7 @@
                             <TableColumn text="Pasujące Narzędzia" fx:id="matchingTools" />
                             <TableColumn text="Ilość" fx:id="qtyColumn2" />
                             <TableColumn text="info" fx:id="infoColumn2" />
+                            <TableColumn text="Uwagi" fx:id="insertcomment" prefWidth="460"/>
                         </columns>
                     </TableView>
                 </VBox>
@@ -623,7 +696,7 @@
 
     <bottom>
         <HBox spacing="2" fx:id="EditButtons">
-            <MenuButton text="Dodaj" fx:id="actionsMenuButton">
+            <MenuButton text="Dodaj" fx:id="actionsMenuButton" >
                 <items>
                     <MenuItem text="Frez STAL" onAction="#showNewEmMet"/>
                     <MenuItem text="Frez ALU" onAction="#showNewNewEmAlu"/>
@@ -642,14 +715,16 @@
                     <MenuItem text="Nawiertak " onAction="#showNewSpotDrillWindow"/>
                     <MenuItem text="Rozwiertak " onAction="#showNewReamerWindow"/>
                     <MenuItem text="Głowica " onAction="#showNewFaceMillWindow"/>
+                    <MenuItem text="Inne " onAction="#showNewOtherToolWindow"/>
                 </items>
             </MenuButton>
-            <Button fx:id="newInsertBtn" text="Nowe Płytki" onAction="#showNewInsertWindow"  />
+            <Button fx:id="newInsertBtn" text="Nowe Płytki"  onAction="#showNewInsertWindow"  />
             <Button fx:id="dressedBtn" text="Naostrzone" onAction="#showBackFromSharpenWindow"   />
             <Button text="Odpisz Narzedzie" fx:id="editTool" onAction="#showEditToolWindow" />
             <Button  text="Odpisz Płytkę" fx:id="editInsert" onAction="#showEditInsertWindow" />
             <Button  text="Dodaj płytki do detalu" fx:id="addInsertsToPart" onAction="#showAddingInsertsToPart" />
             <Button  text="Dodaj numer detalu" fx:id="addPartNum" onAction="#showAddingPartNum" />
+            <Button  text="Dodaj Producenta" fx:id="addProducent" onAction="#showAddProducent" />
 
         </HBox>
     </bottom>

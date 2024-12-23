@@ -12,12 +12,15 @@ import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
 public class EditToolController {
 
     private ToolsController toolsController;
+
+    private LiveToolsViewController liveToolsViewController;
 
 
 
@@ -47,7 +50,7 @@ public class EditToolController {
 
 
     @FXML
-    private void handleConfirmButton() {
+    private void handleConfirmButton() throws SQLException {
         String index = indexTextField.getText();
         boolean toSharpen = sharpeningCheckBox.isSelected();
         String newStatus = toSharpen ? "W_OSTRZENIU" : "ZUZYTE";
@@ -61,6 +64,7 @@ public class EditToolController {
         indexTextField.clear();
         sharpeningCheckBox.setSelected(false);
         indexTextField.requestFocus();
+        toolsController.refreshToolTable(toolsController.getToolNameFromIndex(index));
     }
 
 
@@ -78,6 +82,9 @@ public class EditToolController {
     }
     public void setToolsController(ToolsController toolsController) {
         this.toolsController = toolsController;
+    }
+    public void setLiveToolsViewController(LiveToolsViewController liveToolsViewController) {
+        this.liveToolsViewController = liveToolsViewController;
     }
 
     private void checkToolExistence(String toolIndex) {
@@ -108,5 +115,9 @@ public class EditToolController {
             sharpeningCheckBox.setSelected(false); // Deselect if disabled
         }
     }
+
+
+
+
 
 }

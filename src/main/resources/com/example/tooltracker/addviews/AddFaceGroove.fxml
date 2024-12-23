@@ -17,37 +17,44 @@
 
         <Label text="Nazwa narzędzia" GridPane.columnIndex="0" GridPane.rowIndex="1" />
         <TextField fx:id="nameTextField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-        <Label text="Kierunek" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-        <HBox spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.columnSpan="2">
+        <Label text="Producent" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+        <ComboBox fx:id="producentCB" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                </FXCollections>
+            </items>
+        </ComboBox>
+        <Label text="Kierunek" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+        <HBox spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.columnSpan="2">
             <RadioButton text="R" fx:id="lDirection" toggleGroup="$directionToggleGroup" />
             <RadioButton text="L" fx:id="pDirection" toggleGroup="$directionToggleGroup" />
             <RadioButton text="N" fx:id="nDirection" toggleGroup="$directionToggleGroup" />
         </HBox>
-        <Label text="Min ø" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-        <TextField fx:id="minDiamTextField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-        <Label text="Max ø" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-        <TextField fx:id="maxDiamTextField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-        <Label text="Max głębokość rowka" GridPane.columnIndex="0" GridPane.rowIndex="5" />
-        <TextField fx:id="maxDepthTextField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-        <Label text="Pasujące płytki" GridPane.columnIndex="0" GridPane.rowIndex="6" />
-        <ComboBox fx:id="matchingInserts1CB" GridPane.columnIndex="1" GridPane.rowIndex="6">
-            <items>
-                <FXCollections fx:factory="observableArrayList">
-                </FXCollections>
-            </items>
-        </ComboBox>
+        <Label text="Min ø" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+        <TextField fx:id="minDiamTextField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+        <Label text="Max ø" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+        <TextField fx:id="maxDiamTextField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+        <Label text="Max głębokość rowka" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+        <TextField fx:id="maxDepthTextField" GridPane.columnIndex="1" GridPane.rowIndex="6" />
         <Label text="Pasujące płytki" GridPane.columnIndex="0" GridPane.rowIndex="7" />
-        <ComboBox fx:id="matchingInserts2CB" GridPane.columnIndex="1" GridPane.rowIndex="7">
+        <ComboBox fx:id="matchingInserts1CB" GridPane.columnIndex="1" GridPane.rowIndex="7">
             <items>
                 <FXCollections fx:factory="observableArrayList">
                 </FXCollections>
             </items>
         </ComboBox>
-        <Label text="Pasująca śrubka" GridPane.columnIndex="0" GridPane.rowIndex="8" />
-        <TextField fx:id="boltTextField" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-        <Label text="Cena" GridPane.columnIndex="0" GridPane.rowIndex="9" />
-        <TextField fx:id="priceTextField" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-        <VBox alignment="CENTER" spacing="10" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="10">
+        <Label text="Pasujące płytki" GridPane.columnIndex="0" GridPane.rowIndex="8" />
+        <ComboBox fx:id="matchingInserts2CB" GridPane.columnIndex="1" GridPane.rowIndex="8">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                </FXCollections>
+            </items>
+        </ComboBox>
+        <Label text="Pasująca śrubka" GridPane.columnIndex="0" GridPane.rowIndex="9" />
+        <TextField fx:id="boltTextField" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+        <Label text="Cena" GridPane.columnIndex="0" GridPane.rowIndex="10" />
+        <TextField fx:id="priceTextField" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+        <VBox alignment="CENTER" spacing="10" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="11">
             <Button fx:id="confirmButton" onAction="#handleConfirmButton" text="Zatwierdź" />
             <Button fx:id="cancelButton" onAction="#handleCancelButton" text="Anuluj" />
         </VBox>

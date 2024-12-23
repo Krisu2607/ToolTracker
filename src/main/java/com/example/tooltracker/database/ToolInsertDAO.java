@@ -2,6 +2,7 @@ package com.example.tooltracker.database;
 
 import com.example.tooltracker.model.ToolInsert;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,7 +13,7 @@ import java.util.List;
 public class ToolInsertDAO {
 
 
-    private static final String INSERT_TOOLINSERT = "INSERT INTO toolInserts (insertName, insertIndex, insertType, toolsMatch, additionalInfo, insertQty) VALUES (?, ?, ?, ?, ?, ?)";
+    private static final String ADD_TOOLINSERT = "INSERT INTO toolInserts (insertName, insertIndex, insertType, toolsMatch, additionalInfo, insertQty, price, expectedQty) VALUES (?, ?, ?, ?, ?, ?,?,?)";
     private static final String SELECT_ALL_TOOLSINSERT = "SELECT * FROM toolInserts";
     private static final String SELECT_ALL_INSERTS_FROM_PART = " SELECT toolInserts.* FROM toolinserts JOIN part_inserts ON toolinserts.insertIndex = part_inserts.insertIndex WHERE part_inserts.part_number = ?";
 
@@ -26,13 +27,15 @@ public class ToolInsertDAO {
 
     public void addInserts(ToolInsert toolInsert) {
         try (Connection connection = DatabaseUtil.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_TOOLINSERT)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(ADD_TOOLINSERT)) {
             preparedStatement.setString(1, toolInsert.getInsertName());
             preparedStatement.setString(2, toolInsert.getInsertIndex());
             preparedStatement.setString(3, toolInsert.getInsertType());
             preparedStatement.setString(4, toolInsert.getToolsMatch());
-            preparedStatement.setString(5, toolInsert.getAdditionalInfo());
+            preparedStatement.setString(5, toolInsert.getComment());
             preparedStatement.setInt(6, toolInsert.getInsertQty());
+            preparedStatement.setBigDecimal(7, toolInsert.getPrice());
+            preparedStatement.setInt(8, toolInsert.getExpectedQty());
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -61,13 +64,19 @@ public class ToolInsertDAO {
              ResultSet resultSet = preparedStatement.executeQuery()) {
 
             while (resultSet.next()) {
-                ToolInsert toolInsert = new ToolInsert();
-                toolInsert.setInsertName(resultSet.getString("insertName"));
-                toolInsert.setInsertIndex(resultSet.getString("insertIndex"));
-                toolInsert.setInsertType(resultSet.getString("insertType"));
-                toolInsert.setToolsMatch(resultSet.getString("toolsMatch"));
-                toolInsert.setAdditionalInfo(resultSet.getString("additionalInfo"));
-                toolInsert.setInsertQty(resultSet.getInt("insertQty"));
+
+                String insertName = resultSet.getString("insertName");
+                String insertIndex = resultSet.getString("insertIndex");
+                String insertType = resultSet.getString("insertType");
+                String toolsMatch = resultSet.getString("toolsMatch");
+                String additionalInfo = resultSet.getString("additionalInfo");
+                int insertQty = resultSet.getInt("insertQty");
+                int expectedQty = resultSet.getInt("expectedQty");
+                BigDecimal price = resultSet.getBigDecimal("price");
+
+                ToolInsert toolInsert = new ToolInsert(insertName, insertIndex, insertType,
+                        toolsMatch, additionalInfo, insertQty, expectedQty, price);
+
 
                 toolInserts.add(toolInsert);
             }
@@ -86,13 +95,18 @@ public class ToolInsertDAO {
              ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
-                ToolInsert toolInsert = new ToolInsert();
-                toolInsert.setInsertName(resultSet.getString("insertName"));
-                toolInsert.setInsertIndex(resultSet.getString("insertIndex"));
-                toolInsert.setInsertType(resultSet.getString("insertType"));
-                toolInsert.setToolsMatch(resultSet.getString("toolsMatch"));
-                toolInsert.setAdditionalInfo(resultSet.getString("additionalInfo"));
-                toolInsert.setInsertQty(resultSet.getInt("insertQty"));
+                String insertName = resultSet.getString("insertName");
+                String insertIndex = resultSet.getString("insertIndex");
+                String insertType = resultSet.getString("insertType");
+                String toolsMatch = resultSet.getString("toolsMatch");
+                String additionalInfo = resultSet.getString("additionalInfo");
+                int insertQty = resultSet.getInt("insertQty");
+                int expectedQty = resultSet.getInt("expectedQty");
+                BigDecimal price = resultSet.getBigDecimal("price");
+
+                ToolInsert toolInsert = new ToolInsert(insertName, insertIndex, insertType,
+                        toolsMatch, additionalInfo, insertQty, expectedQty,  price);
+
 
                 toolInserts.add(toolInsert);
             }
@@ -110,7 +124,7 @@ public class ToolInsertDAO {
             preparedStatement.setString(2, toolInsert.getInsertIndex());
             preparedStatement.setString(3, toolInsert.getInsertType());
             preparedStatement.setString(4, toolInsert.getToolsMatch());
-            preparedStatement.setString(5, toolInsert.getAdditionalInfo());
+            preparedStatement.setString(5, toolInsert.getComment());
             preparedStatement.setInt(6, toolInsert.getInsertQty());
             preparedStatement.setString(7, oldInsertIndex);
 
@@ -163,6 +177,38 @@ public class ToolInsertDAO {
         }
 
         return false;
+    }
+
+
+    public boolean isToolInsertWithIndexExists(String insertIndex) {
+        String query = "SELECT*FROM toolInserts WHERE insertIndex = ?";
+        try (Connection connection = DatabaseUtil.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, insertIndex);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    int count = resultSet.getInt(1);
+                    return count > 0;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+
+    public void updateToolInsertComment(ToolInsert toolInsert) {
+        String query = "UPDATE toolInserts SET additionalinfo = ? WHERE insertIndex = ?";
+        try (Connection connection = DatabaseUtil.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, toolInsert.getComment());
+            preparedStatement.setString(2, toolInsert.getInsertIndex());
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 

@@ -26,13 +26,40 @@
     <TextField fx:id="indexTextField" GridPane.columnIndex="1" GridPane.rowIndex="0" />
     <Label text="Nazwa płytek" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
     <TextField fx:id="nameTextField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-    <Label text="Ilość" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
-    <TextField fx:id="qtyTextField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+    <Label text="Pasujące narzędzie" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+    <ComboBox fx:id="matchingToolsCB" GridPane.columnIndex="1" GridPane.rowIndex="2">
+        <items>
+            <FXCollections fx:factory="observableArrayList">
+                <String  fx:value="Noże Tokarskie Zew" />
+                <String fx:value="Wytaczaki" />
+                <String fx:value="Listwy/Przecinaki" />
+                <String fx:value="Rowki Czołowe" />
+                <String fx:value="Głowice Szybkościowe" />
+                <String fx:value="Głowice Planistyczne" />
+                <String fx:value="Gwinty" />
+                <String fx:value="Inne" />
+            </FXCollections>
+        </items>
+    </ComboBox>
+    <Label text="Ilość" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+    <TextField fx:id="qtyTextField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+    <Label text="Cena (1szt.)" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+    <TextField fx:id="priceTextField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+
+    <Label text="Wymagana ilość na stanie" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+    <HBox spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="5" GridPane.columnSpan="2">
+        <RadioButton text="3" fx:id="qty3" toggleGroup="$quantityToggleGroup" />
+        <RadioButton text="5" fx:id="qty5" toggleGroup="$quantityToggleGroup" />
+        <RadioButton text="10" fx:id="qty10" toggleGroup="$quantityToggleGroup" />
+        <RadioButton text="15" fx:id="qty15" toggleGroup="$quantityToggleGroup" />
+        <RadioButton text="20" fx:id="qty20" toggleGroup="$quantityToggleGroup" />
+    </HBox>
 
 
 
 
-    <VBox spacing="10" alignment="CENTER" GridPane.columnIndex="0" GridPane.rowIndex="3" GridPane.columnSpan="2">
+    <VBox spacing="10" alignment="CENTER" GridPane.columnIndex="0" GridPane.rowIndex="6" GridPane.columnSpan="2">
         <Button text="Zatwierdź" fx:id="confirmButton" onAction="#handleConfirmButton" />
         <Button text="Anuluj"  fx:id="cancelButton" onAction="#handleCancelButton"/>
     </VBox>

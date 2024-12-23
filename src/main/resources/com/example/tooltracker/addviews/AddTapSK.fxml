@@ -17,12 +17,19 @@
 
         <Label text="Nazwa narzędzia" GridPane.columnIndex="0" GridPane.rowIndex="1" />
         <TextField fx:id="nameTextField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-        <Label text="M" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-        <TextField  fx:id="mFieldText" GridPane.columnIndex="1" GridPane.rowIndex="2"  maxWidth="60" />
-        <Label text="Skok" GridPane.columnIndex="0" GridPane.rowIndex="3" layoutX="20" />
-        <TextField fx:id="tapScroll" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-        <Label text="" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-        <ComboBox fx:id="threadClassCB" GridPane.columnIndex="1" GridPane.rowIndex="4">
+        <Label text="Producent" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+        <ComboBox fx:id="producentCB" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                </FXCollections>
+            </items>
+        </ComboBox>
+        <Label text="M" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+        <TextField  fx:id="mFieldText" GridPane.columnIndex="1" GridPane.rowIndex="3"  maxWidth="60" />
+        <Label text="Skok" GridPane.columnIndex="0" GridPane.rowIndex="4" layoutX="20" />
+        <TextField fx:id="tapScroll" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+        <Label text="" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+        <ComboBox fx:id="threadClassCB" GridPane.columnIndex="1" GridPane.rowIndex="5">
             <items>
                 <FXCollections fx:factory="observableArrayList">
                     <String fx:value="H" />
@@ -31,8 +38,8 @@
             </items>
         </ComboBox>
 
-        <Label text="Materiał" GridPane.columnIndex="0" GridPane.rowIndex="5" />
-        <ComboBox  fx:id="toolMatComboBox" GridPane.columnIndex="1" GridPane.rowIndex="5">
+        <Label text="Materiał" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+        <ComboBox  fx:id="toolMatComboBox" GridPane.columnIndex="1" GridPane.rowIndex="6">
             <items>
                 <FXCollections fx:factory="observableArrayList">
                     <String  fx:value="HSS" />
@@ -41,9 +48,9 @@
             </items>
         </ComboBox>
 
-        <Label text="Cena" GridPane.columnIndex="0" GridPane.rowIndex="6" />
-        <TextField fx:id="priceTextField" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-        <VBox alignment="CENTER" spacing="10" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="7">
+        <Label text="Cena" GridPane.columnIndex="0" GridPane.rowIndex="7" />
+        <TextField fx:id="priceTextField" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+        <VBox alignment="CENTER" spacing="10" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="8">
             <Button fx:id="confirmButton" onAction="#handleConfirmButton" text="Zatwierdź" />
             <Button fx:id="cancelButton" onAction="#handleCancelButton" text="Anuluj" />
         </VBox>

@@ -2,147 +2,81 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.geometry.*?>
-
-<?import javafx.scene.control.cell.PropertyValueFactory?>
-<?import javafx.util.Callback?>
-<?import com.example.tooltracker.model.tools.Tool?>
-<?import java.lang.String?>
-<?import javafx.collections.FXCollections?>
-<BorderPane xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.tooltracker.controller.ToolsController"
-            stylesheets="@tools.css" style="-fx-background-color: #555555" >
-    <center>
+<?import javafx.scene.text.*?>
 
 
 
-
-            <TabPane tabClosingPolicy="UNAVAILABLE">
-                <Tab text="Narzędzia">
-                    <VBox fx:id="mainContainer" alignment="CENTER" >
-                        <TextField promptText="Search" fx:id="toolSearch" />
-                        <!-- Przyciski na górze -->
-                        <HBox fx:id="types3" spacing="1.5">
-                            <Button text="Pokaż wszystkie" onAction="#allToolsButton" />
-                            <Button text="W ostrzeniu" onAction="#inSharpenButton" />
-
-                        </HBox>
-
-                        <Pane prefHeight="2.0" prefWidth="300.0" style="-fx-background-color: #383658;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-
-                        </Pane>
-
-
-                        <HBox fx:id="types" spacing="0.8">
-<!--                            <ComboBox fx:id="comboBox" >-->
-<!--                                <items>-->
-<!--                                    <FXCollections fx:factory="observableArrayList">-->
-<!--                                        <String fx:value="Opcja 1"/>-->
-<!--                                        <String fx:value="Opcja 2"/>-->
-<!--                                        <String fx:value="Opcja 3"/>-->
-<!--                                        <String fx:value="Pokaż wszystkie"/>-->
-<!--                                    </FXCollections>-->
-<!--                                </items>-->
-<!--                            </ComboBox>-->
-                            <Button text="Noże tokarskie" onAction="#handleKnivesButton" />
-                            <Button text="Głowice" onAction="#handleHeadsButton" />
-
-                            <Button text="Wiertła HSS" onAction="#handleHeadsButton" />
-                            <Button text="Wiertła VHM" onAction="#handleHeadsButton" />
-                            <Button text="Frezy wal STAL" onAction="#handleHeadsButton" />
-                            <Button text="Frezy wal ALU" onAction="#handleHeadsButton" />
-                            <Button text="Frezy wal z R" onAction="#handleHeadsButton" />
-
-
-
-
-                        </HBox>
-                        <Pane prefHeight="2.0" prefWidth="300.0" style="-fx-background-color: #383658;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-
-                        </Pane>
-                        <HBox fx:id="types2" spacing="0.8">
-                            <Button text="Fazery" onAction="#handleHeadsButton" />
-                            <Button text="Nawiertaki" onAction="#handleHeadsButton" />
-                            <Button text="Gwintowniki PR" onAction="#handleTapsButton" />
-                            <Button text="Gwintowniki SK" onAction="#handleTapsButton"/>
-                            <Button text="Narzynki" onAction="#handleHeadsButton" />
-                            <Button text="Rozwiertaki" onAction="#handleHeadsButton" />
-
-
-                        </HBox>
-
-
-
-                        <!-- Tabela na środku -->
-                        <TableView fx:id="toolTable">
-                            <columns>
-                                <TableColumn  fx:id="insertQty" />
-                                <TableColumn text="Nazwa" fx:id="nameColumn" />
-                                <TableColumn text="Indeks" fx:id="indexColumn" />
-                                <TableColumn text="Rodzaj" fx:id="typeColumn" />
-                                <TableColumn text="⌀" fx:id="diameterColumn" />
-                                <TableColumn text="info" fx:id="infoColumn" />
-                                <TableColumn text="L1/L2/D1/D2" fx:id="sizesColumn" prefWidth="130"/>
-                                <TableColumn text="Status" fx:id="statusColumn" />
-                                <TableColumn text="Uwagi" fx:id="commentColumn" prefWidth="460"/>
-
-
-                            </columns>
-                        </TableView>
-                    </VBox>
-                </Tab>
-                <Tab text="Płytki">
-                    <VBox fx:id="mainContainer2" alignment="CENTER" >
-                        <!-- Przyciski na górze -->
-                        <HBox fx:id="typesInserts" spacing="2">
-                            <Button text="Pokaż wszystkie" onAction="#allInsertButton" />
-                            <Button text="Noże tokarskie" onAction="#handleKnivesInsertButton" />
-                            <Button text="Głowice" onAction="#handleFaceMillButton" />
-                            <Button text="Wiertła płytkowe" onAction="#handleInsertDrillButton" />
-<!--                            <Button text="Powrót" onAction="#backToHomePage" />-->
-                        </HBox>
-
-                        <!-- Tabela na środku -->
-                        <TableView fx:id="insertTable">
-                            <columns>
-                                <TableColumn text="Nazwa" fx:id="nameColumn2"  />
-                                <TableColumn text="Indeks" fx:id="indexColumn2" />
-                                <TableColumn text="Rodzaj" fx:id="typeColumn2" />
-
-                                <TableColumn text="Pasujące Narzędzia" fx:id="matchingTools" />
-                                <TableColumn text="Ilość" fx:id="qtyColumn2" />
-                                <TableColumn text="info" fx:id="infoColumn2" />
-                            </columns>
-                        </TableView>
-                    </VBox>
-                </Tab>
-
-
-            </TabPane>
-
-</center>
+<BorderPane style="-fx-background-color: white" stylesheets="@start.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tooltracker.controller.StartController">
 
     <top>
-        <HBox  spacing="2">
-            <Button text="Powrót" fx:id="backButton" onAction="#backToHomePage" />
-            <Button text="Statystyka" />
-            <Button text="Historia" fx:id="historyBtn"  onAction="#actionsHistoryPage"/>
-        </HBox>
+        <Pane prefHeight="214.0" prefWidth="716.0" style="-fx-background-color: #383658;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <VBox prefHeight="208.0" prefWidth="479.0">
+                    <TextArea fx:id="chatArea" editable="false" prefHeight="143.0" prefWidth="479.0" />
+                    <HBox prefHeight="48.0" prefWidth="479.0">
+                        <TextField fx:id="messageField" prefHeight="51.0" prefWidth="211.0" />
+                        <Button fx:id="sendButton" onAction="#sendMessage" text="Send" />
+                    </HBox>
+                </VBox>
+
+
+
+
+                <!--                <Label layoutX="136.0" layoutY="105.0" text="Tools Menagment System " textFill="WHITE">-->
+                <!--                    <font>-->
+                <!--                        <Font size="15.0" />-->
+                <!--                    </font>-->
+                <!--                </Label>-->
+                <HBox fx:id="log" prefHeight="55.0" prefWidth="707.0" spacing="3">
+                    <Button fx:id="logoutbutt" minWidth="75" onAction="#showLogPage">Wyloguj</Button>
+
+
+                </HBox>
+
+
+            </children>
+
+        </Pane>
+
     </top>
+    <center>
+        <VBox fx:id="butts">
+
+
+            <!-- Dolne przyciski -->
+            <HBox fx:id="buttBottom" spacing="20">
+                <Button fx:id="narzedzia" onAction="#showToolsView" prefHeight="50.0" prefWidth="50.0" styleClass="custom-button" />
+                <Button fx:id="statystyka" onAction="#showUsageView" styleClass="custom-button" />
+                <Button fx:id="calculator" onAction="#showCalcView" styleClass="custom-button" />
+                <Button fx:id="LiveTools" onAction="#showLiveTools" styleClass="custom-button" />
+            </HBox>
+        </VBox>
+    </center>
 
 
 
 
     <bottom>
-        <HBox spacing="2" fx:id="EditButtons">
-            <Button fx:id="newToolBtn" text="Nowe Narzędzie"  onAction="#showNewToolWindow"  />
-            <Button fx:id="newInsertBtn" text="Nowe Płytki" onAction="#showNewInsertWindow"  />
-            <Button fx:id="dressedBtn" text="Naostrzone"  />
-            <Button text="Odpisz Narzedzie" fx:id="editTool" onAction="#showEditToolWindow" />
-            <Button  text="Odpisz Płytkę" fx:id="editInsert" onAction="#showEditInsertWindow" />
-            <Button  text="Dodaj płytki do detalu" fx:id="addInsertsToPart" onAction="#showAddingInsertsToPart" />
-            <Button  text="Dodaj numer detalu" fx:id="addPartNum" onAction="#showAddingPartNum" />
+        <Pane prefHeight="31.0" prefWidth="770.0" style="-fx-background-color: #383658;">
+            <children>
 
-        </HBox>
+                <Label layoutX="300.0" layoutY="0" text="Created by kris" textFill="WHITE">
+                    <font>
+                        <Font size="10.0" />
+                    </font>
+                </Label>
+
+
+
+            </children>
+
+        </Pane>
+
     </bottom>
+
+
+
+
+
+
 </BorderPane>

@@ -2,6 +2,8 @@
 
     -fx-table-cell-border-color: transparent;
     -fx-table-header-border-color: transparent;
+    -fx-background-radius: 30;
+    -fx-border-color: transparent;
 
 
     -fx-padding: 30 0 50 0 ; /* Dodaj margines 10px u góry (wartości: top, right, bottom, left) */
@@ -20,16 +22,174 @@
     -fx-alignment: center; /* Wyśrodkowanie tekstu tytułu */
     -fx-background-radius: 30;
     -fx-border-radius: 30;
+    -fx-border-color: lightblue;
 }
 
 .titled-pane .content {
     -fx-border-radius: 30;
     -fx-background-radius: 30;
+    -fx-background-color: lightblue;
+    -fx-border-width: 0;
+
+}
+.table-view .column-header {
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header-background{
+    -fx-background-color: white;
 
 }
 
+
+/*.table-view .column-header-background{*/
+/*    -fx-background-color: linear-gradient(to bottom, #1dbbdd44, #93f9b944);*/
+/*    -fx-background-radius: 7px 7px 0px 0px;*/
+/*    -fx-background-insets: 0 11px 0 0;*/
+/*    -fx-padding: 0 0 5px 0;*/
+/*}*/
+
+
+
+
+.tab-pane .tab-header-area .tab.hcnhqr-tab .tab-label {
+    -fx-font-weight: bold; /* Makes the text bold */
+    -fx-text-fill: white; /* Makes the text white */
+}
+
+.tab-pane .tab-header-area .tab.hcnhqr-tab .tab-container {
+    -fx-background-color: #FF6600; /* Sets the background color to orange */
+}
+
+
+
+.tab-pane .tab-header-area .tab.haas-tab .tab-label {
+    -fx-font-weight: bold; /* Makes the text bold */
+    -fx-text-fill: white; /* Makes the text white */
+}
+
+.tab-pane .tab-header-area .tab.haas-tab .tab-container {
+    -fx-background-color: #CF152D; /* Sets the background color to orange */
+}
+
+
+.tab-pane .tab-header-area .tab.doosan-tab .tab-label {
+    -fx-font-weight: bold; /* Makes the text bold */
+    -fx-text-fill: white; /* Makes the text white */
+}
+
+.tab-pane .tab-header-area .tab.doosan-tab .tab-container {
+    -fx-background-color: #0B50F3; /* Sets the background color to orange */
+}
+
+
+* {
+    -fx-primary-color: #007acc;
+    -fx-secondary-color: #86c5da;
+
+    -fx-focus-color: -fx-secondary-color;
+}
+
+
+
+
+
+
+.tab-header-area .tab-header-background {
+    -fx-background-color: lightblue;
+}
+.tab-pane .tab:selected {
+    -fx-background-color: -fx-secondary-color;
+    -fx-background-insets: 0 0 0 0;
+    -fx-background-radius: 0 0 0 0;
+}
+.tab .tab-label {
+    -fx-alignment: CENTER;
+    -fx-padding: 0 10 0 10;
+}
+.tab-pane:top *.tab-header-area {
+    -fx-padding: 0 0 0 30;
+
+    /* NO SPACE LEFT OF FIRST TAB */
+    /* -fx-padding: 0 0 0 30; */
+}
+.tab-pane {
+    -fx-background-color: transparent;
+    -fx-tab-min-width: 80px;
+    -fx-tab-min-height: 25px;
+    -fx-tab-max-height: 25px;
+}
+.tab-pane .tab {
+    -fx-background-color: transparent;
+}
+.tab-pane:focused .tab-header-area .headers-region .tab:selected .focus-indicator {
+
+    -fx-border-width: 0;
+    -fx-border-insets: 0 0 0 0;
+    -fx-border-radius: 5;
+}
+
+
+
+
+
+
+
+
+
 #partNum {
     -fx-padding: 10 0 0 0
+}
+
+
+
+.newOrderButton {
+    -fx-background-color:
+            linear-gradient(#f0ff35, #a9ff00),
+            radial-gradient(center 50% -40%, radius 200%, #b8ee36 45%, #80c800 50%);
+    -fx-background-radius: 6, 5;
+    -fx-background-insets: 0, 1;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.4) , 5, 0.0 , 0 , 1 );
+    -fx-text-fill: #395306;
+}
+.usedToolButton {
+
+
+
+    -fx-background-color:
+            linear-gradient(#ff5400, #be1d00);
+    -fx-background-radius: 6, 5;
+    -fx-background-insets: 0, 1;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.4) , 5, 0.0 , 0 , 1 );
+    -fx-text-fill: white;
+
+
+
+
+}
+
+.messageButton {
+    -fx-background-color:
+            linear-gradient(#bd37bd, #c98dc9);
+    -fx-background-radius: 6, 5;
+    -fx-background-insets: 0, 1;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.4) , 5, 0.0 , 0 , 1 );
+    -fx-text-fill: white;
+}
+
+.messageButton:hover {
+    -fx-background-color: #debfde; /* Kolor po najechaniu */
+    -fx-cursor: hand; /* Zmiana kursora na rączkę */
+}
+
+.newOrderButton:hover {
+    -fx-background-color: #d1ff78; /* Kolor po najechaniu */
+    -fx-cursor: hand; /* Zmiana kursora na rączkę */
+}
+
+.usedToolButton:hover {
+    -fx-background-color: #ff9400; /* Kolor po najechaniu */
+    -fx-cursor: hand; /* Zmiana kursora na rączkę */
 }
 
 

@@ -66,6 +66,7 @@ public class BackFromSharpenController {
                                 L2textfield.getText().isEmpty() ||
                                 D1textfield.getText().isEmpty() ||
                                 D2textfield.getText().isEmpty(),
+                indexTextField.textProperty(),
                 L1textfield.textProperty(),
                 L2textfield.textProperty(),
                 D1textfield.textProperty(),
@@ -108,27 +109,27 @@ public class BackFromSharpenController {
         String toolIndeks = indexTextField.getText();
 
         if(toolIndeks.startsWith("DR-VHM")) {
-            DrillVHM drillVHM = new DrillVHM("", indexName, ToolStatus.W_UZYCIU, "", BigDecimal.valueOf(0), D1, L1, L2, true );
+            DrillVHM drillVHM = new DrillVHM("", indexName, ToolStatus.W_UZYCIU, "", BigDecimal.valueOf(0),"", D1, L1, L2, true );
             drillvhmDAO.updatePostSharpen(drillVHM);
         } else if (toolIndeks.startsWith("DR-HSS")) {
-            DrillHSS drillHSS = new DrillHSS("", indexName,ToolType.DRILL_HSS, ToolStatus.W_UZYCIU, "", BigDecimal.valueOf(0), D1, L1, L2,0 );
+            DrillHSS drillHSS = new DrillHSS("", indexName,ToolType.DRILL_HSS, ToolStatus.W_UZYCIU, "", BigDecimal.valueOf(0),"", D1, L1, L2,0 );
 
             drillHssDAO.updatePostSharpen(drillHSS);
 
         }
         else if (toolIndeks.startsWith("EM-P")) {
-            EmMet emMet = new EmMet("", indexName, ToolStatus.W_UZYCIU, "",BigDecimal.valueOf(0), L1, L2, D1, D2, MaterialType.VHM, 0 );
+            EmMet emMet = new EmMet("", indexName, ToolStatus.W_UZYCIU, "",BigDecimal.valueOf(0),"", L1, L2, D1, D2, MaterialType.VHM, 0 );
             emMetDAO.updatePostSharpen(emMet);
 
         }
         else if (toolIndeks.startsWith("EM-N")) {
-            EmAlu emAlu = new EmAlu("", indexName, ToolStatus.W_UZYCIU, "",BigDecimal.valueOf(0), L1, L2, D1, D2, MaterialType.VHM, 0 );
+            EmAlu emAlu = new EmAlu("", indexName, ToolStatus.W_UZYCIU, "",BigDecimal.valueOf(0),"", L1, L2, D1, D2, MaterialType.VHM, 0 );
             emAluDAO.updatePostSharpen(emAlu);
 
         }
 
         else if (toolIndeks.startsWith("CM")) {
-            Chamfer chamfer = new Chamfer("", indexName, ToolStatus.W_UZYCIU, "",BigDecimal.valueOf(0),D1, D2, L1, L2,0,  MaterialType.VHM, 0 );
+            Chamfer chamfer = new Chamfer("", indexName, ToolStatus.W_UZYCIU, "",BigDecimal.valueOf(0),"",D1, D2, L1, L2,0,  MaterialType.VHM, 0 );
             chamferDAO.updatePostSharpen(chamfer);
         }
 
@@ -169,7 +170,7 @@ public class BackFromSharpenController {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue,
                                 String newValue) {
-                if (!newValue.matches("\\d{1,4}(\\.\\d{0,2})?")) {
+                if (!newValue.matches("\\d{0,4}(\\.\\d{0,2})?")) {
                     textField.setText(oldValue);
                 }
 
@@ -199,7 +200,7 @@ public class BackFromSharpenController {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue,
                                 String newValue) {
-                if (!newValue.matches("\\d{1,3}")) {
+                if (!newValue.matches("\\d{0,3}")) {
                     textField.setText(oldValue);
                 }
 

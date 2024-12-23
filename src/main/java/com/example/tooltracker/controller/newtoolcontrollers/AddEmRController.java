@@ -4,6 +4,7 @@ import com.example.tooltracker.controller.ToolsController;
 import com.example.tooltracker.database.ActionDAO;
 import com.example.tooltracker.database.EMRDAO;
 import com.example.tooltracker.database.EmAluDAO;
+import com.example.tooltracker.database.ProducentDAO;
 import com.example.tooltracker.model.ToolAction;
 import com.example.tooltracker.model.tools.*;
 import javafx.beans.binding.Bindings;
@@ -49,6 +50,8 @@ public class AddEmRController {
     @FXML
     private ComboBox toolMatComboBox;
     @FXML
+    private ComboBox producentCB;
+    @FXML
     private ListView<String> addedIndexesListView;
     @FXML
     private RadioButton ballYes;
@@ -71,10 +74,15 @@ public class AddEmRController {
 
     EMRDAO emrdao = new EMRDAO();
     private ActionDAO actionDAO = new ActionDAO();
+    private final ProducentDAO producentDA0 = new ProducentDAO();
     private ObservableList<String> addedIndexes = FXCollections.observableArrayList();
 
 
-    public void initialize() {
+    public void initialize() throws SQLException {
+        List<String> producentsList = producentDA0.getAllProducents();
+        ObservableList<String> allProducents = FXCollections.observableArrayList(producentsList);
+        producentCB.setItems(allProducents);
+
         addedIndexesListView.setItems(addedIndexes);
 
         ballToggleGroup = new ToggleGroup();
@@ -90,6 +98,7 @@ public class AddEmRController {
                                 toothsQtyTextField.getText().isEmpty() ||
                                 priceTextField.getText().isEmpty() ||
                                 L1textfield.getText().isEmpty() ||
+                                producentCB.getValue() == null ||
                                 L2textfield.getText().isEmpty() ||
                                 D1textfield.getText().isEmpty() ||
                                 D2textfield.getText().isEmpty() ||
@@ -165,6 +174,7 @@ public class AddEmRController {
         double D1 = Double.parseDouble(D1textfield.getText());
         double D2 = Double.parseDouble(D2textfield.getText());
         double radius = Double.parseDouble(emRadius.getText());
+        String prodName = producentCB.getValue().toString();
 
         RadioButton selectedBallOption = (RadioButton) ballToggleGroup.getSelectedToggle();
         boolean isBall = "Tak".equals(selectedBallOption.getText());
@@ -203,12 +213,13 @@ public class AddEmRController {
             newIndex = String.format("EM-R%.1f-%s-%d-%s", toolradius, materialCode, toothsQty, newSeqNumStr);
         }
 
-        EmR emR = new EmR(toolName, newIndex, ToolStatus.W_UZYCIU, "", price, isBall,radius, L1, L2, D1, D2, MaterialType.valueOf(toolMaterial), toothsQty, ToolDestinyMat.valueOf(selectedMaterialOption.getText()));
+        EmR emR = new EmR(toolName, newIndex, ToolStatus.W_UZYCIU, "", price,prodName, isBall,radius, L1, L2, D1, D2, MaterialType.valueOf(toolMaterial), toothsQty, ToolDestinyMat.valueOf(selectedMaterialOption.getText()));
         emrdao.addEmrTool(emR);
         ToolAction toolAction = new ToolAction();
         toolAction.settAction("Nowe narzędzie");
         toolAction.settIndex(newIndex);
         actionDAO.addAction(toolAction);
+        producentDA0.addCostByName(prodName, price);
 
 
 
@@ -275,7 +286,7 @@ public class AddEmRController {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue,
                                 String newValue) {
-                if (!newValue.matches("\\d{1,4}(\\.\\d{0,2})?")) {
+                if (!newValue.matches("\\d{0,4}(\\.\\d{0,2})?")) {
                     textField.setText(oldValue);
                 }
 
@@ -291,7 +302,7 @@ public class AddEmRController {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue,
                                 String newValue) {
-                if (!newValue.matches("\\d{1,2}")) {
+                if (!newValue.matches("\\d{0,2}")) {
                     textField.setText(oldValue);
                 }
 
@@ -301,17 +312,13 @@ public class AddEmRController {
     }
 
     private void setThreeNumsTextField(TextField textField) {
-        textField.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue,
-                                String newValue) {
-                if (!newValue.matches("\\d{1,3}")) {
-                    textField.setText(oldValue);
-                }
-
-
+        textField.setTextFormatter(new TextFormatter<>(change -> {
+            String newText = change.getControlNewText();
+            if (newText.matches("\\d{0,3}")) { // Akceptuj tylko cyfry i maksymalnie 5 znaków
+                return change;
             }
-        });
+            return null;
+        }));
     }
     private void setTextFieldLimit(TextField textField, int maxLength) {
         textField.textProperty().addListener(new ChangeListener<String>() {

@@ -109,7 +109,6 @@ public class NewToolController {
         indexTextField.requestFocus();
 
         toolsController.refreshInsertTable();
-        toolsController.refreshToolTable();
     }
 
 

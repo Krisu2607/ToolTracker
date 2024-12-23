@@ -12,9 +12,9 @@ public class Reamer extends Tool1 {
 
     private SimpleIntegerProperty length;
 
-    public Reamer(String toolName, String toolIndex, ToolStatus toolStatus, String comment, BigDecimal price,
+    public Reamer(String toolName, String toolIndex, ToolStatus toolStatus, String comment, BigDecimal price,String producent,
                   double diameter, MaterialType material, int length) {
-        super(toolName, toolIndex, ToolType.REAMER, toolStatus, comment, price);
+        super(toolName, toolIndex, ToolType.REAMER, toolStatus, comment, price, producent);
         this.diameter = new SimpleDoubleProperty(diameter);
         this.material = new SimpleObjectProperty<>(material);
         this.length = new SimpleIntegerProperty(length);

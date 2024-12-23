@@ -9,9 +9,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DrillvhmDAO {
+public class DrillvhmDAO implements Tool1Dao {
 
-//    private static final String UPDATE_COMMENT = "UPDATE drillvhm SET  comment=? WHERE toolIndex=?";
+    private static final String UPDATE_COMMENT = "UPDATE drillvhm SET  comment=? WHERE toolIndex=?";
 
 
     private static final String UPDATE_TOOL_POST_SHARP = "UPDATE drillvhm SET  toolStatus=?, diameter=?, length = ?, worklength=? WHERE toolIndex=?";
@@ -30,6 +30,7 @@ public class DrillvhmDAO {
                         ToolStatus.valueOf(resultSet.getString("toolStatus")),
                         resultSet.getString("comment"),
                         resultSet.getBigDecimal("price"),
+                        resultSet.getString("producent"),
                         resultSet.getDouble("diameter"),
                         resultSet.getInt("length"),
                         resultSet.getInt("worklength"),
@@ -43,7 +44,7 @@ public class DrillvhmDAO {
     }
 
     public void addDrillVHM(DrillVHM tool) throws SQLException {
-        String query = "INSERT INTO DrillVHM (toolName, toolIndex, toolStatus, comment,price,  diameter, length, worklength, isinternalcooled) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?)";
+        String query = "INSERT INTO DrillVHM (toolName, toolIndex, toolStatus, comment,price,  diameter, length, worklength, isinternalcooled, producent) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?,?)";
         try (  Connection connection = DatabaseUtil.getConnection();
                PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, tool.getToolName());
@@ -55,6 +56,8 @@ public class DrillvhmDAO {
             statement.setInt(7, tool.getLength());
             statement.setInt(8, tool.getWorkLength());
             statement.setBoolean(9, tool.isInternalCooled());
+            statement.setString(10, tool.getProducent());
+
             statement.executeUpdate();
         }
     }
@@ -64,9 +67,9 @@ public class DrillvhmDAO {
         try (Connection connection = DatabaseUtil.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_TOOL_POST_SHARP)) {
             preparedStatement.setString(1, "W_UZYCIU");
-            preparedStatement.setInt(2, drillVHM.getLength());
-            preparedStatement.setInt(3, drillVHM.getWorkLength());
-            preparedStatement.setDouble(4, drillVHM.getDiameter());
+            preparedStatement.setDouble(2, drillVHM.getDiameter());
+            preparedStatement.setInt(3, drillVHM.getLength());
+            preparedStatement.setInt(4, drillVHM.getWorkLength());
             preparedStatement.setString(5, drillVHM.getToolIndex());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -74,16 +77,16 @@ public class DrillvhmDAO {
         }
     }
 
-//    public void updateComment(Tool1 tool1) {
-//        try (Connection connection = DatabaseUtil.getConnection();
-//             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_COMMENT)) {
-//            preparedStatement.setString(1, tool1.getComment());
-//            preparedStatement.setString(2, tool1.getToolIndex());
-//            preparedStatement.executeUpdate();
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//    }
+    public void updateComment(Tool1 tool1) {
+        try (Connection connection = DatabaseUtil.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_COMMENT)) {
+            preparedStatement.setString(1, tool1.getComment());
+            preparedStatement.setString(2, tool1.getToolIndex());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
 
 

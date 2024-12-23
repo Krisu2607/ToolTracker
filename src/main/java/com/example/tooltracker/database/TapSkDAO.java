@@ -9,9 +9,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TapSkDAO{
+public class TapSkDAO implements Tool1Dao {
 
-//    private static final String UPDATE_COMMENT = "UPDATE tapsk SET  comment=? WHERE toolIndex=?";
+    private static final String UPDATE_COMMENT = "UPDATE tapsk SET  comment=? WHERE toolIndex=?";
 
 
 
@@ -29,6 +29,8 @@ public class TapSkDAO{
                         ToolStatus.valueOf(resultSet.getString("toolStatus")),
                         resultSet.getString("comment"),
                         resultSet.getBigDecimal("price"),
+                        resultSet.getString("producent"),
+
                         MaterialType.valueOf(resultSet.getString("MaterialType")),
                         resultSet.getString("threadClass"),
                         resultSet.getDouble("metricsize"),
@@ -44,7 +46,7 @@ public class TapSkDAO{
     }
 
     public void addTapSK(TapSK tool) throws SQLException {
-        String query = "INSERT INTO tapsk (toolName, toolIndex, toolStatus, comment,price, materialtype,  threadclass, metricsize,  tapscroll) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?)";
+        String query = "INSERT INTO tapsk (toolName, toolIndex, toolStatus, comment,price, materialtype,  threadclass, metricsize,  tapscroll, producent) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?, ?)";
         try (  Connection connection = DatabaseUtil.getConnection();
                PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, tool.getToolName());
@@ -56,20 +58,22 @@ public class TapSkDAO{
             statement.setString(7, tool.getThreadClass());
             statement.setDouble(8, tool.getMetricSize());
             statement.setDouble(9, tool.getTapScroll());
+            statement.setString(10, tool.getProducent());
+
             statement.executeUpdate();
         }
     }
 
-//    public void updateComment(Tool1 tool1) {
-//        try (Connection connection = DatabaseUtil.getConnection();
-//             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_COMMENT)) {
-//            preparedStatement.setString(1, tool1.getComment());
-//            preparedStatement.setString(2, tool1.getToolIndex());
-//            preparedStatement.executeUpdate();
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//    }
+    public void updateComment(Tool1 tool1) {
+        try (Connection connection = DatabaseUtil.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_COMMENT)) {
+            preparedStatement.setString(1, tool1.getComment());
+            preparedStatement.setString(2, tool1.getToolIndex());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
 
     public int getLastToolIndex() throws SQLException {

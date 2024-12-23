@@ -1,6 +1,9 @@
 package com.example.tooltracker.controller;
 
 import com.example.tooltracker.database.ActionDAO;
+import com.example.tooltracker.database.InsertActionDAO;
+import com.example.tooltracker.model.InsertAction;
+import com.example.tooltracker.model.LoggedUser;
 import com.example.tooltracker.model.ToolAction;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -35,12 +38,33 @@ public class ActionsHistoryController {
     private TableColumn<ToolAction, LocalDateTime> tactionTimeColumn;
 
 
+    @FXML
+    private TableView<InsertAction> insertActionTable;
+    @FXML
+    private TableColumn<InsertAction, String> IuserColumn;
+    @FXML
+    private TableColumn<InsertAction, String> Iindex;
+    @FXML
+    private TableColumn<InsertAction, String> IactionMadeColumn;
+    @FXML
+    private TableColumn<InsertAction, LocalDateTime> IactionTimeColumn;
+
+    private String username = LoggedUser.getUser().getUsername();
+
+
+
+
+
+
+
+
 
 
 
 
 
     private ActionDAO actionDAO = new ActionDAO();
+    private InsertActionDAO insertActionDAO = new InsertActionDAO();
 
 
     public void initialize() {
@@ -49,10 +73,20 @@ public class ActionsHistoryController {
         tactionMadeColumn.setCellValueFactory(new PropertyValueFactory<>("tAction"));
         tindexColumn.setCellValueFactory(new PropertyValueFactory<>("tIndex"));
         List<ToolAction> allActions1 = actionDAO.getAllActions();
-        System.out.println(allActions1);
+
+        IuserColumn.setCellValueFactory(new PropertyValueFactory<>("user"));
+        IactionTimeColumn.setCellValueFactory(new PropertyValueFactory<>("actionDateTime"));
+        IactionMadeColumn.setCellValueFactory(new PropertyValueFactory<>("InsertAction"));
+        Iindex.setCellValueFactory(new PropertyValueFactory<>("InsertIndex"));
+        List<InsertAction> allInsertActions = insertActionDAO.getAllActions();
+
+
+
         Platform.runLater(() -> {
             ObservableList<ToolAction> allActions = FXCollections.observableArrayList(actionDAO.getAllActions());
             toolActionTable.setItems(allActions);
+            ObservableList<InsertAction> allInsertActions2 = FXCollections.observableArrayList(insertActionDAO.getAllActions());
+            insertActionTable.setItems(allInsertActions2);
         });
 
 

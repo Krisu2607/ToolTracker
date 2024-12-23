@@ -1,10 +1,7 @@
 package com.example.tooltracker.controller.newtoolcontrollers;
 
 import com.example.tooltracker.controller.ToolsController;
-import com.example.tooltracker.database.ActionDAO;
-import com.example.tooltracker.database.FaceGrooveDAO;
-import com.example.tooltracker.database.IdTurningDAO;
-import com.example.tooltracker.database.ToolInsertDAO;
+import com.example.tooltracker.database.*;
 import com.example.tooltracker.model.ToolAction;
 import com.example.tooltracker.model.ToolInsert;
 import com.example.tooltracker.model.tools.FaceGroove;
@@ -56,6 +53,8 @@ public class AddFaceGrooveToolController {
     private ComboBox matchingInserts1CB;
     @FXML
     private ComboBox matchingInserts2CB;
+    @FXML
+    private ComboBox producentCB;
 
     @FXML
     private RadioButton nDirection;
@@ -72,11 +71,16 @@ public class AddFaceGrooveToolController {
 
     FaceGrooveDAO faceGrooveDAO = new FaceGrooveDAO();
     private ActionDAO actionDAO = new ActionDAO();
+    private final ProducentDAO producentDA0 = new ProducentDAO();
     private final ToolInsertDAO toolInsertDAO = new ToolInsertDAO();
     private ObservableList<String> addedIndexes = FXCollections.observableArrayList();
 
 
-    public void initialize() {
+    public void initialize() throws SQLException {
+        List<String> producentsList = producentDA0.getAllProducents();
+        ObservableList<String> allProducents = FXCollections.observableArrayList(producentsList);
+        producentCB.setItems(allProducents);
+
 
         directionToggleGroup = new ToggleGroup();
         nDirection.setToggleGroup(directionToggleGroup);
@@ -99,6 +103,7 @@ public class AddFaceGrooveToolController {
                         nameTextField.getText().isEmpty() ||
                                 priceTextField.getText().isEmpty() ||
                                 boltTextField.getText().isEmpty() ||
+                                producentCB.getValue() == null ||
                                 minDiamTextField.getText().isEmpty() ||
                                 maxDepthTextField.getText().isEmpty() ||
                                 maxDiamTextField.getText().isEmpty() ||
@@ -144,6 +149,7 @@ public class AddFaceGrooveToolController {
         Double minCutDiam = Double.valueOf(minDiamTextField.getText());
         Double maxCutDiam = Double.valueOf(maxDiamTextField.getText());
         Integer maxCutDepth = Integer.valueOf(maxDepthTextField.getText());
+        String prodName = producentCB.getValue().toString();
         BigDecimal price = new BigDecimal(priceTextField.getText());
         String matchingBolt = boltTextField.getText();
         RadioButton selectedRadioButton = (RadioButton) directionToggleGroup.getSelectedToggle();
@@ -175,13 +181,14 @@ public class AddFaceGrooveToolController {
 
         FaceGroove faceGroove = new FaceGroove(toolName, newIndex, ToolType.FACE_GROOVE,
                 ToolStatus.W_UZYCIU, "",
-                price, minCutDiam, maxCutDiam, maxCutDepth, matchingInsertsFromForm,
+                price, prodName,minCutDiam, maxCutDiam, maxCutDepth, matchingInsertsFromForm,
                 matchingBolt, workDirection);
 
 
 
         faceGrooveDAO.addFaceGrooveTools(faceGroove);
         addedIndexes.add(newIndex);
+        producentDA0.addCostByName(prodName, price);
 
         ToolAction toolAction = new ToolAction();
         toolAction.settAction("Nowe narzędzie");
@@ -223,7 +230,7 @@ public class AddFaceGrooveToolController {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue,
                                 String newValue) {
-                if (!newValue.matches("\\d{1,4}(\\.\\d{0,2})?")) {
+                if (!newValue.matches("\\d{0,4}(\\.\\d{0,2})?")) {
                     textField.setText(oldValue);
                 }
 
@@ -239,7 +246,7 @@ public class AddFaceGrooveToolController {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue,
                                 String newValue) {
-                if (!newValue.matches("\\d{1,2}")) {
+                if (!newValue.matches("\\d{0,2}")) {
                     textField.setText(oldValue);
                 }
 
@@ -253,7 +260,7 @@ public class AddFaceGrooveToolController {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue,
                                 String newValue) {
-                if (!newValue.matches("\\d{1,3}")) {
+                if (!newValue.matches("\\d{0,3}")) {
                     textField.setText(oldValue);
                 }
 

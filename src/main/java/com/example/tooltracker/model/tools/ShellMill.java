@@ -17,9 +17,9 @@ public class ShellMill extends Tool1 {
 
 
 
-    public ShellMill(String toolName, String toolIndex, ToolStatus toolStatus, String comment, BigDecimal price,
+    public ShellMill(String toolName, String toolIndex, ToolStatus toolStatus, String comment, BigDecimal price,String producent,
                      String matchingInserts, double diameter, int toothsQty, boolean isItIc, String shellMillType, String matchingBolt) {
-        super(toolName, toolIndex, ToolType.SHELL_MILL, toolStatus, comment, price);
+        super(toolName, toolIndex, ToolType.SHELL_MILL, toolStatus, comment, price, producent);
         this.matchingInserts = new SimpleStringProperty(matchingInserts);
         this.diameter = new SimpleDoubleProperty(diameter);
         this.toothsQty = new SimpleIntegerProperty(toothsQty);

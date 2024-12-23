@@ -11,9 +11,9 @@ public class DrillBlades extends Tool1 {
     private SimpleIntegerProperty length;
     private SimpleIntegerProperty toothsQty; // nowe pole
 
-    public DrillBlades(String toolName, String toolIndex, ToolStatus toolStatus, String comment, BigDecimal price,
+    public DrillBlades(String toolName, String toolIndex, ToolStatus toolStatus, String comment, BigDecimal price,String producent,
                        String matchingInserts, double diameter, int length, int toothsQty) {
-        super(toolName, toolIndex, ToolType.DRILL_BLADES, toolStatus, comment, price);
+        super(toolName, toolIndex, ToolType.DRILL_BLADES, toolStatus, comment, price, producent);
         this.matchingInserts = new SimpleStringProperty(matchingInserts);
         this.diameter = new SimpleDoubleProperty(diameter);
         this.length = new SimpleIntegerProperty(length);

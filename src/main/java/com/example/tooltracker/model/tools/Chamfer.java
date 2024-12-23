@@ -14,9 +14,9 @@ public class Chamfer extends Tool1 {
 
     private MaterialType materialType;
 
-    public Chamfer(String toolName, String toolIndex, ToolStatus toolStatus, String comment, BigDecimal price,
+    public Chamfer(String toolName, String toolIndex, ToolStatus toolStatus, String comment, BigDecimal price,String producent,
                    double d1, double d2, int l1,int l2, int toothsQty, MaterialType materialType, double angle) {
-        super(toolName, toolIndex, ToolType.CHAMFER, toolStatus, comment, price);
+        super(toolName, toolIndex, ToolType.CHAMFER, toolStatus, comment, price, producent);
         this.d1 = new SimpleDoubleProperty(d1);
         this.d2 = new SimpleDoubleProperty(d2);
         this.l1 = new SimpleIntegerProperty(l1);

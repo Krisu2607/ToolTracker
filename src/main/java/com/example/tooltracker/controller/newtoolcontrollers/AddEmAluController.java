@@ -4,6 +4,7 @@ import com.example.tooltracker.controller.ToolsController;
 import com.example.tooltracker.database.ActionDAO;
 import com.example.tooltracker.database.EmAluDAO;
 import com.example.tooltracker.database.EmMetDAO;
+import com.example.tooltracker.database.ProducentDAO;
 import com.example.tooltracker.model.ToolAction;
 import com.example.tooltracker.model.tools.EmAlu;
 import com.example.tooltracker.model.tools.EmMet;
@@ -16,10 +17,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.math.BigDecimal;
@@ -51,6 +49,8 @@ public class AddEmAluController {
     @FXML
     private ComboBox toolMatComboBox;
     @FXML
+    private ComboBox producentCB;
+    @FXML
     private ListView<String> addedIndexesListView;
 
 
@@ -60,30 +60,36 @@ public class AddEmAluController {
 
     EmAluDAO emAluDAO = new EmAluDAO();
     private ActionDAO actionDAO = new ActionDAO();
+    private final ProducentDAO producentDA0 = new ProducentDAO();
     private ObservableList<String> addedIndexes = FXCollections.observableArrayList();
 
 
-    public void initialize() {
+    public void initialize() throws SQLException {
+        List<String> producentsList = producentDA0.getAllProducents();
+        ObservableList<String> allProducents = FXCollections.observableArrayList(producentsList);
+        producentCB.setItems(allProducents);
+
         addedIndexesListView.setItems(addedIndexes);
         //DEZAKTYWACJA PRZYCISKU ZATWIERZ W ZALEZNOSCI CZY JEST JAKIS TEKST W POLU CZY NIE
-        BooleanBinding fieldsEmpty = Bindings.createBooleanBinding(() ->
-                        nameTextField.getText().isEmpty() ||
-                                toothsQtyTextField.getText().isEmpty() ||
-                                priceTextField.getText().isEmpty() ||
-                                L1textfield.getText().isEmpty() ||
-                                L2textfield.getText().isEmpty() ||
-                                D1textfield.getText().isEmpty() ||
-                                D2textfield.getText().isEmpty() ||
-                                toolMatComboBox.getValue() == null,
-                nameTextField.textProperty(),
-                toothsQtyTextField.textProperty(),
-                priceTextField.textProperty(),
-                L1textfield.textProperty(),
-                L2textfield.textProperty(),
-                D1textfield.textProperty(),
-                D2textfield.textProperty(),
-                toolMatComboBox.valueProperty()
-        );
+            BooleanBinding fieldsEmpty = Bindings.createBooleanBinding(() ->
+                            nameTextField.getText().isEmpty() ||
+                                    toothsQtyTextField.getText().isEmpty() ||
+                                    priceTextField.getText().isEmpty() ||
+                                    producentCB.getValue() == null ||
+                                    L1textfield.getText().isEmpty() ||
+                                    L2textfield.getText().isEmpty() ||
+                                    D1textfield.getText().isEmpty() ||
+                                    D2textfield.getText().isEmpty() ||
+                                    toolMatComboBox.getValue() == null,
+                    nameTextField.textProperty(),
+                    toothsQtyTextField.textProperty(),
+                    priceTextField.textProperty(),
+                    L1textfield.textProperty(),
+                    L2textfield.textProperty(),
+                    D1textfield.textProperty(),
+                    D2textfield.textProperty(),
+                    toolMatComboBox.valueProperty()
+            );
 
         confirmButton.disableProperty().bind(fieldsEmpty);
 
@@ -138,6 +144,7 @@ public class AddEmAluController {
         int L2 = Integer.valueOf(L2textfield.getText());
         double D1 = Double.valueOf(D1textfield.getText());
         double D2 = Double.valueOf(D2textfield.getText());
+        String prodName = producentCB.getValue().toString();
 
 
         List<String> toolIndexes = emAluDAO.getToolIndexesByToothsQty(toothsQty);
@@ -163,10 +170,11 @@ public class AddEmAluController {
 
 
 
-        EmAlu emAlu = new EmAlu(toolName, newIndex, ToolStatus.W_UZYCIU, "",price,L1, L2, D1, D2, MaterialType.valueOf(toolMaterial), toothsQty  );
+        EmAlu emAlu = new EmAlu(toolName, newIndex, ToolStatus.W_UZYCIU, "",price,prodName,L1, L2, D1, D2, MaterialType.valueOf(toolMaterial), toothsQty  );
 
         addedIndexes.add(newIndex);
         emAluDAO.addEmAluTool(emAlu);
+        producentDA0.addCostByName(prodName, price);
 
         ToolAction toolAction = new ToolAction();
         toolAction.settAction("Nowe narzędzie");
@@ -214,7 +222,7 @@ public class AddEmAluController {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue,
                                 String newValue) {
-                if (!newValue.matches("\\d{1,4}(\\.\\d{0,2})?")) {
+                if (!newValue.matches("\\d{0,4}(\\.\\d{0,2})?")) {
                     textField.setText(oldValue);
                 }
 
@@ -230,7 +238,7 @@ public class AddEmAluController {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue,
                                 String newValue) {
-                if (!newValue.matches("\\d{1,2}")) {
+                if (!newValue.matches("\\d{0,2}")) {
                     textField.setText(oldValue);
                 }
 
@@ -240,17 +248,13 @@ public class AddEmAluController {
     }
 
     private void setThreeNumsTextField(TextField textField) {
-        textField.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue,
-                                String newValue) {
-                if (!newValue.matches("\\d{1,3}")) {
-                    textField.setText(oldValue);
-                }
-
-
+        textField.setTextFormatter(new TextFormatter<>(change -> {
+            String newText = change.getControlNewText();
+            if (newText.matches("\\d{0,5}")) { // Akceptuj tylko cyfry i maksymalnie 5 znaków
+                return change;
             }
-        });
+            return null;
+        }));
     }
     private void setTextFieldLimit(TextField textField, int maxLength) {
         textField.textProperty().addListener(new ChangeListener<String>() {

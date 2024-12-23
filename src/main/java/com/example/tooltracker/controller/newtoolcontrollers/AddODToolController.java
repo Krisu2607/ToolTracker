@@ -1,10 +1,7 @@
 package com.example.tooltracker.controller.newtoolcontrollers;
 
 import com.example.tooltracker.controller.ToolsController;
-import com.example.tooltracker.database.ActionDAO;
-import com.example.tooltracker.database.DrillBladesDAO;
-import com.example.tooltracker.database.OdTurningDAO;
-import com.example.tooltracker.database.ToolInsertDAO;
+import com.example.tooltracker.database.*;
 import com.example.tooltracker.model.ToolAction;
 import com.example.tooltracker.model.ToolInsert;
 import com.example.tooltracker.model.tools.DrillBlades;
@@ -49,6 +46,8 @@ public class AddODToolController {
     private ComboBox matchingInserts2CB;
     @FXML
     private ComboBox workType;
+    @FXML
+    private ComboBox producentCB;
 
 
     @FXML
@@ -66,11 +65,16 @@ public class AddODToolController {
 
     OdTurningDAO odTurningDAO = new OdTurningDAO();
     private ActionDAO actionDAO = new ActionDAO();
+    private final ProducentDAO producentDA0 = new ProducentDAO();
     private final ToolInsertDAO toolInsertDAO = new ToolInsertDAO();
     private ObservableList<String> addedIndexes = FXCollections.observableArrayList();
 
 
-    public void initialize() {
+    public void initialize() throws SQLException {
+        List<String> producentsList = producentDA0.getAllProducents();
+        ObservableList<String> allProducents = FXCollections.observableArrayList(producentsList);
+        producentCB.setItems(allProducents);
+
 
         directionToggleGroup = new ToggleGroup();
         nDirection.setToggleGroup(directionToggleGroup);
@@ -93,6 +97,7 @@ public class AddODToolController {
                         nameTextField.getText().isEmpty() ||
                                 priceTextField.getText().isEmpty() ||
                                 boltTextField.getText().isEmpty() ||
+                                producentCB.getValue() == null ||
                                 workType.getValue() == null ||
                                 directionToggleGroup.getSelectedToggle() == null,
                 nameTextField.textProperty(),
@@ -129,6 +134,7 @@ public class AddODToolController {
         String workType1 = (String) workType.getValue();
 
         String toolName = nameTextField.getText();
+        String prodName = producentCB.getValue().toString();
         BigDecimal price = new BigDecimal(priceTextField.getText());
         String matchingBolt = boltTextField.getText();
         RadioButton selectedRadioButton = (RadioButton) directionToggleGroup.getSelectedToggle();
@@ -160,13 +166,14 @@ public class AddODToolController {
 
         TurningOD turningOD = new TurningOD(toolName, newIndex,
                 ToolStatus.W_UZYCIU, "",
-                price, matchingInsertsFromForm,
+                price,prodName, matchingInsertsFromForm,
                 workType1, workDirection, matchingBolt);
 
 
 
         odTurningDAO.addOdTools(turningOD);
         addedIndexes.add(newIndex);
+        producentDA0.addCostByName(prodName, price);
 
         ToolAction toolAction = new ToolAction();
         toolAction.settAction("Nowe narzędzie");
@@ -208,7 +215,7 @@ public class AddODToolController {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue,
                                 String newValue) {
-                if (!newValue.matches("\\d{1,4}(\\.\\d{0,2})?")) {
+                if (!newValue.matches("\\d{0,4}(\\.\\d{0,2})?")) {
                     textField.setText(oldValue);
                 }
 
@@ -224,7 +231,7 @@ public class AddODToolController {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue,
                                 String newValue) {
-                if (!newValue.matches("\\d{1,2}")) {
+                if (!newValue.matches("\\d{0,2}")) {
                     textField.setText(oldValue);
                 }
 
@@ -238,7 +245,7 @@ public class AddODToolController {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue,
                                 String newValue) {
-                if (!newValue.matches("\\d{1,3}")) {
+                if (!newValue.matches("\\d{0,3}")) {
                     textField.setText(oldValue);
                 }
 

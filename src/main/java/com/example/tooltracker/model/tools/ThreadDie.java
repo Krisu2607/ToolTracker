@@ -15,9 +15,9 @@ public class ThreadDie extends Tool1 {
     private SimpleStringProperty inchsize;
 
 
-    public ThreadDie(String toolName, String toolIndex, ToolStatus toolStatus, String comment, BigDecimal price,
+    public ThreadDie(String toolName, String toolIndex, ToolStatus toolStatus, String comment, BigDecimal price, String producent,
                      MaterialType materialType, String threadClass, double metricSize,  double tapScroll, String inchsize) {
-        super(toolName, toolIndex, ToolType.THREADDIE, toolStatus, comment, price);
+        super(toolName, toolIndex, ToolType.THREADDIE, toolStatus, comment, price, producent);
         this.materialType = new SimpleObjectProperty<>(materialType);
         this.threadClass = new SimpleStringProperty(threadClass);
         this.metricSize = new SimpleDoubleProperty(metricSize);

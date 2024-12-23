@@ -12,9 +12,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShellMillDAO {
+public class ShellMillDAO implements Tool1Dao {
 
-//    private static final String UPDATE_COMMENT = "UPDATE shellmill SET  comment=? WHERE toolIndex=?";
+    private static final String UPDATE_COMMENT = "UPDATE shellmill SET  comment=? WHERE toolIndex=?";
 
 
     public List<ShellMill> getAllFFShellMill() throws SQLException {
@@ -34,6 +34,8 @@ public class ShellMillDAO {
                             ToolStatus.valueOf(resultSet.getString("toolStatus")),
                             resultSet.getString("comment"),
                             resultSet.getBigDecimal("price"),
+                            resultSet.getString("producent"),
+
                             resultSet.getString("matchingInserts"),
                             resultSet.getDouble("diameter"),
                             resultSet.getInt("toothsqty"),
@@ -71,6 +73,8 @@ public class ShellMillDAO {
                             ToolStatus.valueOf(resultSet.getString("toolStatus")),
                             resultSet.getString("comment"),
                             resultSet.getBigDecimal("price"),
+                            resultSet.getString("producent"),
+
                             resultSet.getString("matchingInserts"),
                             resultSet.getDouble("diameter"),
                             resultSet.getInt("toothsqty"),
@@ -86,19 +90,19 @@ public class ShellMillDAO {
     }
 
 
-//    public void updateComment(Tool1 tool1) {
-//        try (Connection connection = DatabaseUtil.getConnection();
-//             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_COMMENT)) {
-//            preparedStatement.setString(1, tool1.getComment());
-//            preparedStatement.setString(2, tool1.getToolIndex());
-//            preparedStatement.executeUpdate();
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//    }
+    public void updateComment(Tool1 tool1) {
+        try (Connection connection = DatabaseUtil.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_COMMENT)) {
+            preparedStatement.setString(1, tool1.getComment());
+            preparedStatement.setString(2, tool1.getToolIndex());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void addShellMills(ShellMill tool) throws SQLException {
-        String query = "INSERT INTO Shellmill (toolName, toolIndex, toolStatus, comment,price, matchingInserts, diameter, toothsQty, isItIc, shellMillType, matchingBolt) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?,?,?)";
+        String query = "INSERT INTO Shellmill (toolName, toolIndex, toolStatus, comment,price, matchingInserts, diameter, toothsQty, isItIc, shellMillType, matchingBolt, producent) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?,?,?,?)";
         try (  Connection connection = DatabaseUtil.getConnection();
                PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, tool.getToolName());
@@ -112,6 +116,8 @@ public class ShellMillDAO {
             statement.setBoolean(9, tool.isIsItIc());
             statement.setString(10, tool.getShellMillType());
             statement.setString(11, tool.getMatchingBolt());
+            statement.setString(12, tool.getProducent());
+
             statement.executeUpdate();
         }
     }

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tooltracker.controller.NewWishController">
+
+    <GridPane alignment="CENTER" hgap="10" vgap="10" xmlns:fx="http://javafx.com/fxml">
+        <padding>
+            <Insets bottom="20" left="20" right="20" top="20" />
+        </padding>
+
+
+        <ComboBox fx:id="typeCB" GridPane.columnIndex="1" GridPane.rowIndex="0">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="SMARY" />
+                    <String fx:value="NARZĘDZIA CNC" />
+                    <String fx:value="AKCESORIA CNC" />
+                    <String fx:value="SZLIFOWANIE" />
+                    <String fx:value="MEBLE/REGAŁY" />
+                    <String fx:value="INNE" />
+                </FXCollections>
+            </items>
+        </ComboBox>
+
+        <ComboBox fx:id="machinesCB" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="HCN" />
+                    <String fx:value="HQR" />
+                    <String fx:value="VF2SS" />
+                    <String fx:value="VF4SS" />
+                    <String fx:value="DS30SSY" />
+                    <String fx:value="DOOSAN" />
+                    <String fx:value="SZLIFIERNIA" />
+                    <String fx:value="INNE" />
+                </FXCollections>
+            </items>
+        </ComboBox>
+        <Label text="Opis" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+        <TextArea fx:id="infoTextArea" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+        <Label text="Url" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+        <TextField fx:id="urlTextField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+
+
+
+
+
+        <VBox alignment="CENTER" spacing="10" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="4">
+            <Button fx:id="confirmButton" onAction="#handleConfirmButton" text="Zatwierdź" />
+            <Button fx:id="cancelButton" onAction="#handleCancelButton" text="Anuluj" />
+        </VBox>
+    </GridPane>
+
+
+</AnchorPane>

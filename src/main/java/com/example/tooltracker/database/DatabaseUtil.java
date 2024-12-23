@@ -14,7 +14,7 @@ public class DatabaseUtil {
             try {
                 return DriverManager.getConnection(URL, USER, PASSWORD);
             } catch (SQLException e) {
-                e.printStackTrace(); // Tutaj możesz obsłużyć błąd w odpowiedni sposób
+                e.printStackTrace(); // OBSLUZYC BLAD
                 throw new RuntimeException("Błąd podczas nawiązywania połączenia z bazą danych.");
             }
         }

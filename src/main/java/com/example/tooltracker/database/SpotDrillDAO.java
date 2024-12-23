@@ -9,9 +9,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SpotDrillDAO {
+public class SpotDrillDAO implements Tool1Dao {
 
-//    private static final String UPDATE_COMMENT = "UPDATE spotdrill SET  comment=? WHERE toolIndex=?";
+    private static final String UPDATE_COMMENT = "UPDATE spotdrill SET  comment=? WHERE toolIndex=?";
 
 
     private Connection connection;
@@ -31,6 +31,8 @@ public class SpotDrillDAO {
                         ToolStatus.valueOf(resultSet.getString("toolStatus")),
                         resultSet.getString("comment"),
                         resultSet.getBigDecimal("price"),
+                        resultSet.getString("producent"),
+
                         resultSet.getDouble("d1"),
                         resultSet.getDouble("d2"),
                         resultSet.getInt("length"),
@@ -44,20 +46,20 @@ public class SpotDrillDAO {
     }
 
 
-//    public void updateComment(Tool1 tool1) {
-//        try (Connection connection = DatabaseUtil.getConnection();
-//             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_COMMENT)) {
-//            preparedStatement.setString(1, tool1.getComment());
-//            preparedStatement.setString(2, tool1.getToolIndex());
-//            preparedStatement.executeUpdate();
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//    }
+    public void updateComment(Tool1 tool1) {
+        try (Connection connection = DatabaseUtil.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_COMMENT)) {
+            preparedStatement.setString(1, tool1.getComment());
+            preparedStatement.setString(2, tool1.getToolIndex());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
 
     public void addSpotDrill(SpotDrill tool) throws SQLException {
-        String query = "INSERT INTO Spotdrill (toolName, toolIndex, toolStatus, comment, price, d1, d2, MaterialType,length) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO Spotdrill (toolName, toolIndex, toolStatus, comment, price, d1, d2, MaterialType,length, producent) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (  Connection connection = DatabaseUtil.getConnection();
                PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, tool.getToolName());
@@ -69,6 +71,8 @@ public class SpotDrillDAO {
             statement.setDouble(7, tool.getD2());
             statement.setString(8, tool.getMaterialType().toString());
             statement.setInt(9, tool.getLength());
+            statement.setString(10, tool.getProducent());
+
 
             statement.executeUpdate();
         }
